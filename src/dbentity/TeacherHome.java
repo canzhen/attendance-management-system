@@ -1,4 +1,4 @@
-package entity;
+package dbentity;
 
 // Generated 2015-12-10 19:08:32 by Hibernate Tools 4.0.0
 
@@ -11,13 +11,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 
 /**
- * Home object for domain model class Student.
- * @see entity.Student
+ * Home object for domain model class Teacher.
+ * @see dbentity.Teacher
  * @author Hibernate Tools
  */
-public class StudentHome {
+public class TeacherHome {
 
-	private static final Log log = LogFactory.getLog(StudentHome.class);
+	private static final Log log = LogFactory.getLog(TeacherHome.class);
 
 	private final SessionFactory sessionFactory = getSessionFactory();
 
@@ -32,8 +32,8 @@ public class StudentHome {
 		}
 	}
 
-	public void persist(Student transientInstance) {
-		log.debug("persisting Student instance");
+	public void persist(Teacher transientInstance) {
+		log.debug("persisting Teacher instance");
 		try {
 			sessionFactory.getCurrentSession().persist(transientInstance);
 			log.debug("persist successful");
@@ -43,8 +43,8 @@ public class StudentHome {
 		}
 	}
 
-	public void attachDirty(Student instance) {
-		log.debug("attaching dirty Student instance");
+	public void attachDirty(Teacher instance) {
+		log.debug("attaching dirty Teacher instance");
 		try {
 			sessionFactory.getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -54,8 +54,8 @@ public class StudentHome {
 		}
 	}
 
-	public void attachClean(Student instance) {
-		log.debug("attaching clean Student instance");
+	public void attachClean(Teacher instance) {
+		log.debug("attaching clean Teacher instance");
 		try {
 			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
@@ -65,8 +65,8 @@ public class StudentHome {
 		}
 	}
 
-	public void delete(Student persistentInstance) {
-		log.debug("deleting Student instance");
+	public void delete(Teacher persistentInstance) {
+		log.debug("deleting Teacher instance");
 		try {
 			sessionFactory.getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -76,10 +76,10 @@ public class StudentHome {
 		}
 	}
 
-	public Student merge(Student detachedInstance) {
-		log.debug("merging Student instance");
+	public Teacher merge(Teacher detachedInstance) {
+		log.debug("merging Teacher instance");
 		try {
-			Student result = (Student) sessionFactory.getCurrentSession()
+			Teacher result = (Teacher) sessionFactory.getCurrentSession()
 					.merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
@@ -89,11 +89,11 @@ public class StudentHome {
 		}
 	}
 
-	public Student findById(java.lang.String id) {
-		log.debug("getting Student instance with id: " + id);
+	public Teacher findById(java.lang.String id) {
+		log.debug("getting Teacher instance with id: " + id);
 		try {
-			Student instance = (Student) sessionFactory.getCurrentSession()
-					.get("entity.Student", id);
+			Teacher instance = (Teacher) sessionFactory.getCurrentSession()
+					.get("entity.Teacher", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -106,11 +106,11 @@ public class StudentHome {
 		}
 	}
 
-	public List findByExample(Student instance) {
-		log.debug("finding Student instance by example");
+	public List findByExample(Teacher instance) {
+		log.debug("finding Teacher instance by example");
 		try {
 			List results = sessionFactory.getCurrentSession()
-					.createCriteria("entity.Student")
+					.createCriteria("entity.Teacher")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());

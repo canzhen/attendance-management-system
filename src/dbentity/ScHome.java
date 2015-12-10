@@ -1,4 +1,4 @@
-package entity;
+package dbentity;
 
 // Generated 2015-12-10 19:08:32 by Hibernate Tools 4.0.0
 
@@ -11,13 +11,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 
 /**
- * Home object for domain model class Course.
- * @see entity.Course
+ * Home object for domain model class Sc.
+ * @see dbentity.Sc
  * @author Hibernate Tools
  */
-public class CourseHome {
+public class ScHome {
 
-	private static final Log log = LogFactory.getLog(CourseHome.class);
+	private static final Log log = LogFactory.getLog(ScHome.class);
 
 	private final SessionFactory sessionFactory = getSessionFactory();
 
@@ -32,8 +32,8 @@ public class CourseHome {
 		}
 	}
 
-	public void persist(Course transientInstance) {
-		log.debug("persisting Course instance");
+	public void persist(Sc transientInstance) {
+		log.debug("persisting Sc instance");
 		try {
 			sessionFactory.getCurrentSession().persist(transientInstance);
 			log.debug("persist successful");
@@ -43,8 +43,8 @@ public class CourseHome {
 		}
 	}
 
-	public void attachDirty(Course instance) {
-		log.debug("attaching dirty Course instance");
+	public void attachDirty(Sc instance) {
+		log.debug("attaching dirty Sc instance");
 		try {
 			sessionFactory.getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -54,8 +54,8 @@ public class CourseHome {
 		}
 	}
 
-	public void attachClean(Course instance) {
-		log.debug("attaching clean Course instance");
+	public void attachClean(Sc instance) {
+		log.debug("attaching clean Sc instance");
 		try {
 			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
@@ -65,8 +65,8 @@ public class CourseHome {
 		}
 	}
 
-	public void delete(Course persistentInstance) {
-		log.debug("deleting Course instance");
+	public void delete(Sc persistentInstance) {
+		log.debug("deleting Sc instance");
 		try {
 			sessionFactory.getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -76,10 +76,10 @@ public class CourseHome {
 		}
 	}
 
-	public Course merge(Course detachedInstance) {
-		log.debug("merging Course instance");
+	public Sc merge(Sc detachedInstance) {
+		log.debug("merging Sc instance");
 		try {
-			Course result = (Course) sessionFactory.getCurrentSession().merge(
+			Sc result = (Sc) sessionFactory.getCurrentSession().merge(
 					detachedInstance);
 			log.debug("merge successful");
 			return result;
@@ -89,11 +89,11 @@ public class CourseHome {
 		}
 	}
 
-	public Course findById(java.lang.String id) {
-		log.debug("getting Course instance with id: " + id);
+	public Sc findById(dbentity.ScId id) {
+		log.debug("getting Sc instance with id: " + id);
 		try {
-			Course instance = (Course) sessionFactory.getCurrentSession().get(
-					"entity.Course", id);
+			Sc instance = (Sc) sessionFactory.getCurrentSession().get(
+					"entity.Sc", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -106,12 +106,12 @@ public class CourseHome {
 		}
 	}
 
-	public List findByExample(Course instance) {
-		log.debug("finding Course instance by example");
+	public List findByExample(Sc instance) {
+		log.debug("finding Sc instance by example");
 		try {
 			List results = sessionFactory.getCurrentSession()
-					.createCriteria("entity.Course")
-					.add(Example.create(instance)).list();
+					.createCriteria("entity.Sc").add(Example.create(instance))
+					.list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
 			return results;

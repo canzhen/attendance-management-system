@@ -1,4 +1,4 @@
-package entity;
+package dbentity;
 
 // Generated 2015-12-10 19:08:32 by Hibernate Tools 4.0.0
 
@@ -11,13 +11,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 
 /**
- * Home object for domain model class Teacher.
- * @see entity.Teacher
+ * Home object for domain model class Tc.
+ * @see dbentity.Tc
  * @author Hibernate Tools
  */
-public class TeacherHome {
+public class TcHome {
 
-	private static final Log log = LogFactory.getLog(TeacherHome.class);
+	private static final Log log = LogFactory.getLog(TcHome.class);
 
 	private final SessionFactory sessionFactory = getSessionFactory();
 
@@ -32,8 +32,8 @@ public class TeacherHome {
 		}
 	}
 
-	public void persist(Teacher transientInstance) {
-		log.debug("persisting Teacher instance");
+	public void persist(Tc transientInstance) {
+		log.debug("persisting Tc instance");
 		try {
 			sessionFactory.getCurrentSession().persist(transientInstance);
 			log.debug("persist successful");
@@ -43,8 +43,8 @@ public class TeacherHome {
 		}
 	}
 
-	public void attachDirty(Teacher instance) {
-		log.debug("attaching dirty Teacher instance");
+	public void attachDirty(Tc instance) {
+		log.debug("attaching dirty Tc instance");
 		try {
 			sessionFactory.getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -54,8 +54,8 @@ public class TeacherHome {
 		}
 	}
 
-	public void attachClean(Teacher instance) {
-		log.debug("attaching clean Teacher instance");
+	public void attachClean(Tc instance) {
+		log.debug("attaching clean Tc instance");
 		try {
 			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
@@ -65,8 +65,8 @@ public class TeacherHome {
 		}
 	}
 
-	public void delete(Teacher persistentInstance) {
-		log.debug("deleting Teacher instance");
+	public void delete(Tc persistentInstance) {
+		log.debug("deleting Tc instance");
 		try {
 			sessionFactory.getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -76,11 +76,11 @@ public class TeacherHome {
 		}
 	}
 
-	public Teacher merge(Teacher detachedInstance) {
-		log.debug("merging Teacher instance");
+	public Tc merge(Tc detachedInstance) {
+		log.debug("merging Tc instance");
 		try {
-			Teacher result = (Teacher) sessionFactory.getCurrentSession()
-					.merge(detachedInstance);
+			Tc result = (Tc) sessionFactory.getCurrentSession().merge(
+					detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -89,11 +89,11 @@ public class TeacherHome {
 		}
 	}
 
-	public Teacher findById(java.lang.String id) {
-		log.debug("getting Teacher instance with id: " + id);
+	public Tc findById(dbentity.TcId id) {
+		log.debug("getting Tc instance with id: " + id);
 		try {
-			Teacher instance = (Teacher) sessionFactory.getCurrentSession()
-					.get("entity.Teacher", id);
+			Tc instance = (Tc) sessionFactory.getCurrentSession().get(
+					"entity.Tc", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -106,12 +106,12 @@ public class TeacherHome {
 		}
 	}
 
-	public List findByExample(Teacher instance) {
-		log.debug("finding Teacher instance by example");
+	public List findByExample(Tc instance) {
+		log.debug("finding Tc instance by example");
 		try {
 			List results = sessionFactory.getCurrentSession()
-					.createCriteria("entity.Teacher")
-					.add(Example.create(instance)).list();
+					.createCriteria("entity.Tc").add(Example.create(instance))
+					.list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
 			return results;

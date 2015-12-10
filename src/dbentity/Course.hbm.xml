@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-12-10 19:08:32 by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="entity.Course" table="course" catalog="amdb">
+        <id name="cno" type="string">
+            <column name="cno" length="8" />
+            <generator class="assigned" />
+        </id>
+        <property name="cname" type="string">
+            <column name="cname" length="20" not-null="true" />
+        </property>
+        <property name="cweek" type="int">
+            <column name="cweek" not-null="true" />
+        </property>
+        <property name="cday" type="int">
+            <column name="cday" not-null="true" />
+        </property>
+        <property name="ctime" type="int">
+            <column name="ctime" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
