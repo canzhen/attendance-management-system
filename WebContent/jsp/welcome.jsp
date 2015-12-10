@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>欢迎页</title>
-<meta http-equiv="refresh" content="5; url=login_index" />
+<meta http-equiv="refresh" content="5; url=login_check" />
 </head>
 <body>
 欢迎来到超人点名系统

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-12-10 22:12:38 by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="dbentity.Sc" table="sc" catalog="amdb">
+        <composite-id name="id" class="dbentity.ScId">
+            <key-property name="sno" type="string">
+                <column name="sno" length="8" />
+            </key-property>
+            <key-property name="cno" type="string">
+                <column name="cno" length="8" />
+            </key-property>
+        </composite-id>
+        <property name="absenceNum" type="java.lang.Integer">
+            <column name="absence_num" />
+        </property>
+    </class>
+</hibernate-mapping>

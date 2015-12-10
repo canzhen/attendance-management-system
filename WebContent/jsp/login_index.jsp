@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="java.util.List"%> 
 <html>
 <head>
-
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>登录页</title>
 <!-- 
@@ -11,8 +11,14 @@
 	若登录成功则几分钟内自动跳转到	课程界面
 	若未登录则提示登录，若登录失败则用javascript写出用户名密码错误等等信息
  -->
+ <%
+ 	List test = (List)session.getAttribute("result");
+ %>
 </head>
 <body>
 登录界面首页
+<% for (int i = 0; i < test.size(); i++){ %>
+测试：<%= test.get(i) %>
+<%} %>
 </body>
 </html>

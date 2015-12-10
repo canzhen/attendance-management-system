@@ -1,13 +1,17 @@
 package dbentity;
 
-// Generated 2015-12-10 19:08:32 by Hibernate Tools 4.0.0
+// Generated 2015-12-10 22:12:38 by Hibernate Tools 4.0.0
 
 import java.util.List;
+
 import javax.naming.InitialContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Example;
 
 /**
@@ -23,13 +27,19 @@ public class TeacherHome {
 
 	protected SessionFactory getSessionFactory() {
 		try {
-			return (SessionFactory) new InitialContext()
-					.lookup("SessionFactory");
+			if(sessionFactory!=null)
+				return (SessionFactory) new InitialContext().lookup("SessionFactory");
+			else
+				return (SessionFactory) new Configuration().configure().buildSessionFactory();
 		} catch (Exception e) {
 			log.error("Could not locate SessionFactory in JNDI", e);
 			throw new IllegalStateException(
 					"Could not locate SessionFactory in JNDI");
 		}
+	}
+	
+	public Transaction createTransaction() {
+		return sessionFactory.getCurrentSession().beginTransaction();
 	}
 
 	public void persist(Teacher transientInstance) {
@@ -93,7 +103,7 @@ public class TeacherHome {
 		log.debug("getting Teacher instance with id: " + id);
 		try {
 			Teacher instance = (Teacher) sessionFactory.getCurrentSession()
-					.get("entity.Teacher", id);
+					.get("dbentity.Teacher", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -110,7 +120,7 @@ public class TeacherHome {
 		log.debug("finding Teacher instance by example");
 		try {
 			List results = sessionFactory.getCurrentSession()
-					.createCriteria("entity.Teacher")
+					.createCriteria("dbentity.Teacher")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());

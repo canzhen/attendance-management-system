@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 2015-12-10 19:08:32 by Hibernate Tools 4.0.0 -->
+<!-- Generated 2015-12-10 22:12:38 by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="entity.Student" table="student" catalog="amdb">
+    <class name="dbentity.Student" table="student" catalog="amdb">
         <id name="sno" type="string">
             <column name="sno" length="8" />
             <generator class="assigned" />

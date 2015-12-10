@@ -1,6 +1,6 @@
 package dbentity;
 
-// Generated 2015-12-10 19:08:32 by Hibernate Tools 4.0.0
+// Generated 2015-12-10 22:12:38 by Hibernate Tools 4.0.0
 
 import java.util.List;
 import javax.naming.InitialContext;
@@ -93,7 +93,7 @@ public class ScHome {
 		log.debug("getting Sc instance with id: " + id);
 		try {
 			Sc instance = (Sc) sessionFactory.getCurrentSession().get(
-					"entity.Sc", id);
+					"dbentity.Sc", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -110,8 +110,8 @@ public class ScHome {
 		log.debug("finding Sc instance by example");
 		try {
 			List results = sessionFactory.getCurrentSession()
-					.createCriteria("entity.Sc").add(Example.create(instance))
-					.list();
+					.createCriteria("dbentity.Sc")
+					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
 			return results;

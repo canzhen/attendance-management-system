@@ -1,6 +1,6 @@
 package dbentity;
 
-// Generated 2015-12-10 19:08:32 by Hibernate Tools 4.0.0
+// Generated 2015-12-10 22:12:38 by Hibernate Tools 4.0.0
 
 import java.util.List;
 import javax.naming.InitialContext;
@@ -93,7 +93,7 @@ public class CourseHome {
 		log.debug("getting Course instance with id: " + id);
 		try {
 			Course instance = (Course) sessionFactory.getCurrentSession().get(
-					"entity.Course", id);
+					"dbentity.Course", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -110,7 +110,7 @@ public class CourseHome {
 		log.debug("finding Course instance by example");
 		try {
 			List results = sessionFactory.getCurrentSession()
-					.createCriteria("entity.Course")
+					.createCriteria("dbentity.Course")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
