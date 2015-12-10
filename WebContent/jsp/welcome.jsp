@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>欢迎页</title>
+<meta http-equiv="refresh" content="5; url=login_index" />
 </head>
 <body>
-
+欢迎来到超人点名系统
 </body>
 </html>

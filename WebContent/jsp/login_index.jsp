@@ -4,7 +4,7 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Test</title>
+<title>登录页</title>
 <!-- 
 	由于我们默认每次都返回到该界面，所以在该界面上我们做一些简单的逻辑判断
 	可以通过session传递一些attribute来看是否登录成功
@@ -13,6 +13,6 @@
  -->
 </head>
 <body>
-测试成功与否
+登录界面首页
 </body>
 </html>
