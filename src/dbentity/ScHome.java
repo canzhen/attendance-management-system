@@ -131,59 +131,19 @@ public class ScHome {
 	}
 	
 	public List findBySno(String sno){
-		Configuration config=new Configuration().configure();
-        SessionFactory sessionFactory= config.buildSessionFactory();
-        Session session=null;
-        Transaction tr=null;
-        List list = null;
-        
-        try{
-            session= sessionFactory.openSession();
-            tr=session.beginTransaction();
-            String hql="from Sc sc where sc.id.sno=:sno";                          
-            Query query= session.createQuery(hql);
-            query.setParameter("sno", sno);
-            list = query.list();
-            tr.commit();
-        }catch(Exception e){
-            tr.rollback();
-        }finally{
-            if(session!=null){
-                session.close();
-            }
-            if(sessionFactory!=null){
-                sessionFactory.close();
-            }
-        }
-        return list;
+		ScId id=new ScId();
+		id.setSno(sno);
+		Sc sc=new Sc();
+		sc.setId(id);
+		return findByExample(sc);
 	}
 	
 	
 	public List findByCno(String cno){
-		Configuration config=new Configuration().configure();
-        SessionFactory sessionFactory= config.buildSessionFactory();
-        Session session=null;
-        Transaction tr=null;
-        List list = null;
-        
-        try{
-            session= sessionFactory.openSession();
-            tr=session.beginTransaction();
-            String hql="from Sc sc where sc.id.cno=:cno";                          
-            Query query= session.createQuery(hql);
-            query.setParameter("cno", cno);
-            list = query.list();                                                                               
-            tr.commit();
-        }catch(Exception e){
-            tr.rollback();
-        }finally{
-            if(session!=null){
-                session.close();
-            }
-            if(sessionFactory!=null){
-                sessionFactory.close();
-            }
-        }
-        return list;
+		ScId id=new ScId();
+		id.setCno(cno);
+		Sc sc=new Sc();
+		sc.setId(id);
+		return findByExample(sc);
 	}
 }

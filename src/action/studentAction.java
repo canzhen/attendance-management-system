@@ -1,8 +1,13 @@
 package action;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import org.hibernate.Transaction;
 
 import dbentity.Course;
 import dbentity.CourseHome;
@@ -43,7 +48,9 @@ public class studentAction extends MyActionSupport{
 	private List<String> getClasses(){
 		List<String> temp = new ArrayList<String>();
 		ScHome schome = new ScHome();
+		Transaction tran = schome.createTransaction();
 		List<Sc> result = (List<Sc>)schome.findBySno(sno);
+		tran.commit();
 		for (int i = 0; i < result.size(); i++){
 			temp.add(result.get(i).getId().getCno());
 		}
@@ -52,9 +59,10 @@ public class studentAction extends MyActionSupport{
 	
 	private boolean checkIfHasClass(List<String> classes){
 		int week=0,day=0,time=0;
-		int current_week = getCurrentWeek();
-		int current_day = getCurrentDay();
-		int current_time = getCurrentTime();
+		Date date = new Date();
+		String current_week = getCurrentWeek(date);
+		String current_day = getCurrentDay(date);
+		String current_time = getCurrentTime(date);
 		
 		/**
 		 * 记录符合当前时间段的课程的数量，若大于1，则报告错误，等于1则正常显示，0则显示所有的课程
@@ -80,16 +88,20 @@ public class studentAction extends MyActionSupport{
 		return false;
 	}
 	
-	private int getCurrentWeek(){
-		
+	private int getCurrentWeek(Date date){
+		return 0;
 	}
 	
-	private int getCurrentDay(){
-		
+	private int getCurrentDay(Date date){
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		return cal.get(Calendar.DAY_OF_WEEK);
 	}
 	
-	private int getCurrentTime(){
-		
+	private int getCurrentTime(Date date){
+//		SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
+//		Date now = df.parse(date), 
+		return 0;
 	}
 	
 }
