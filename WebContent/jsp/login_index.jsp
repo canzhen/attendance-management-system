@@ -13,14 +13,14 @@
 	若未登录则提示登录，若登录失败则用javascript写出用户名密码错误等等信息
  -->
  <%
- 	List test = (List)session.getAttribute("result");
+ 	List<String> test = (List<String>)session.getAttribute("result");
  %>
 </head>
 <body>
-登录界面首页</br>
+登录界面首页<br>
 教师姓名：
 <% for (int i = 0; i < test.size(); i++){ %>
-<%= ((Teacher)test.get(i)).getTname()%>
+<%= test.get(i) %>
 <%} %>
 </body>
 </html>

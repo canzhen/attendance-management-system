@@ -9,6 +9,8 @@ import javax.naming.InitialContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
@@ -126,5 +128,62 @@ public class ScHome {
 			log.error("find by example failed", re);
 			throw re;
 		}
+	}
+	
+	public List findBySno(String sno){
+		Configuration config=new Configuration().configure();
+        SessionFactory sessionFactory= config.buildSessionFactory();
+        Session session=null;
+        Transaction tr=null;
+        List list = null;
+        
+        try{
+            session= sessionFactory.openSession();
+            tr=session.beginTransaction();
+            String hql="from Sc sc where sc.id.sno=:sno";                          
+            Query query= session.createQuery(hql);
+            query.setParameter("sno", sno);
+            list = query.list();
+            tr.commit();
+        }catch(Exception e){
+            tr.rollback();
+        }finally{
+            if(session!=null){
+                session.close();
+            }
+            if(sessionFactory!=null){
+                sessionFactory.close();
+            }
+        }
+        return list;
+	}
+	
+	
+	public List findByCno(String cno){
+		Configuration config=new Configuration().configure();
+        SessionFactory sessionFactory= config.buildSessionFactory();
+        Session session=null;
+        Transaction tr=null;
+        List list = null;
+        
+        try{
+            session= sessionFactory.openSession();
+            tr=session.beginTransaction();
+            String hql="from Sc sc where cno=:cno";                          
+            Query query= session.createQuery(hql);
+            query.setParameter("cno", cno);
+            list = query.list();                                                                               
+            tr.commit();
+        }catch(Exception e){
+            tr.rollback();
+        }finally{
+            if(session!=null){
+                session.close();
+            }
+            if(sessionFactory!=null){
+                sessionFactory.close();
+            }
+        }
+        return list;
 	}
 }
