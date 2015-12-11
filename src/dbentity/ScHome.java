@@ -169,7 +169,7 @@ public class ScHome {
         try{
             session= sessionFactory.openSession();
             tr=session.beginTransaction();
-            String hql="from Sc sc where cno=:cno";                          
+            String hql="from Sc sc where sc.id.cno=:cno";                          
             Query query= session.createQuery(hql);
             query.setParameter("cno", cno);
             list = query.list();                                                                               

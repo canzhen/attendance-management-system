@@ -1,5 +1,6 @@
 package action;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -41,78 +42,56 @@ public class loginAction extends MyActionSupport{
 	 * @return
 	 */
 	public String check(){
-//		
-//		List<String> classes = null;
-//		ScHome schome = new ScHome();
-//		Sc sc = new Sc();
-//		ScId scid = new ScId();
-//		scid.setSno("13301085");
-//		sc.setId(scid);
-//		List<Sc> result = schome.findByExample(sc);
-//		for (int i = 0; i < result.size(); i++){
-//			classes.add(result.get(i).getId().getCno());
-//		}
-//		getSession().put("result", classes);
 		
-		List<String> classes = null;
-		ScHome schome = new ScHome();
-		List<Sc> result = schome.findBySno("13301085");
-		for (int i = 0; i < result.size(); i++){
-			classes.add(result.get(i).getId().getCno());
+		List result = null;
+		Transaction trans = null;
+		session = getSession();
+		/*
+		 * 根据老师或者学生身份的不同进行比对，
+		 * 并把老师或学生编号存入session
+		 */
+		if (identity.equals("teacher")){
+			
+			session.put("identity", "teacher");
+			
+			TeacherHome teacherHome = new TeacherHome();
+			trans = teacherHome.createTransaction();
+			Teacher teacher = new Teacher();
+			teacher.setTno(id);
+			teacher.setTpwd(pwd);
+			result = teacherHome.findByExample(teacher);
+			trans.commit();
+			
+		}else if (identity.equals("student")){
+			
+			session.put("identity", "student");
+			
+			StudentHome studentHome = new StudentHome();
+			trans = studentHome.createTransaction();
+			Student student = new Student();
+			student.setSno(id);
+			student.setSpwd(pwd);
+			result = studentHome.findByExample(student);
+			trans.commit();
 		}
-		getSession().put("result",classes);
 		
-		return SUCCESS;
+		/*
+		 * 保存id信息到session中
+		 */
+		session.put("id", identity);
 		
-//		List result = null;
-//		Transaction trans = null;
-//		session = getSession();
-//		/*
-//		 * 根据老师或者学生身份的不同进行比对，
-//		 * 并把老师或学生编号存入session
-//		 */
-//		if (identity.equals("teacher")){
-//			
-//			session.put("identity", "teacher");
-//			
-//			TeacherHome teacherHome = new TeacherHome();
-//			trans = teacherHome.createTransaction();
-//			Teacher teacher = new Teacher();
-//			teacher.setTno(id);
-//			teacher.setTpwd(pwd);
-//			result = teacherHome.findByExample(teacher);
-//			trans.commit();
-//			
-//		}else if (identity.equals("student")){
-//			
-//			session.put("identity", "student");
-//			
-//			StudentHome studentHome = new StudentHome();
-//			trans = studentHome.createTransaction();
-//			Student student = new Student();
-//			student.setSno(id);
-//			student.setSpwd(pwd);
-//			result = studentHome.findByExample(student);
-//			trans.commit();
-//		}
-//		
-//		/*
-//		 * 保存id信息到session中
-//		 */
-//		session.put("id", identity);
-//		
-//		/*
-//		 * 判断登录是否成功，并在session里放入"login_result"
-//		 * 以便界面判断是否登录成功
-//		 * 0代表登录成功，1代表登录失败
-//		 */
-//		if ( result.size() == 1 ){
-//			session.put("login_result",0);
-//			return SUCCESS;
-//		}else{
-//			session.put("login_result",1);
-//			return SUCCESS;
-//		}
-//		
+		/*
+		 * 判断登录是否成功，并在session里放入"login_result"
+		 * 以便界面判断是否登录成功
+		 * 0代表登录成功，1代表登录失败
+		 */
+		if ( result.size() == 1 ){
+			session.put("login_result",0);
+			return SUCCESS;
+		}else{
+			session.put("login_result",1);
+			return SUCCESS;
+		}
+		
 	}
 }
