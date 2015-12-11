@@ -41,9 +41,9 @@
         </action>
         
         <action name="*_*" class="action.{1}Action" method="{2}">
-            <result>/jsp/{1}_{2}.jsp</result>
-            <result name="index">/jsp/{1}_index.jsp</result>
-            <result name="error">/jsp/err/{1}_error.jsp</result>
+            <result>/jsp/{1}_index.jsp</result>
+            <!-- <result name="index">/jsp/{1}_index.jsp</result> -->
+            <result name="error">/jsp/err/error.jsp</result>
             <result name="no_current_class">/jsp/err/{1}_noCurrentClass.jsp</result>
         </action>
         
