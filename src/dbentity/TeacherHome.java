@@ -1,6 +1,6 @@
 package dbentity;
 
-// Generated 2015-12-10 22:12:38 by Hibernate Tools 4.0.0
+// Generated 2015-12-11 11:02:07 by Hibernate Tools 4.0.0
 
 import java.util.List;
 
@@ -27,10 +27,7 @@ public class TeacherHome {
 
 	protected SessionFactory getSessionFactory() {
 		try {
-			if(sessionFactory!=null)
-				return (SessionFactory) new InitialContext().lookup("SessionFactory");
-			else
-				return (SessionFactory) new Configuration().configure().buildSessionFactory();
+			return (SessionFactory) new Configuration().configure().buildSessionFactory();
 		} catch (Exception e) {
 			log.error("Could not locate SessionFactory in JNDI", e);
 			throw new IllegalStateException(

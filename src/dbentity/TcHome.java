@@ -1,13 +1,17 @@
 package dbentity;
 
-// Generated 2015-12-10 22:12:38 by Hibernate Tools 4.0.0
+// Generated 2015-12-11 11:02:07 by Hibernate Tools 4.0.0
 
 import java.util.List;
+
 import javax.naming.InitialContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Example;
 
 /**
@@ -23,13 +27,16 @@ public class TcHome {
 
 	protected SessionFactory getSessionFactory() {
 		try {
-			return (SessionFactory) new InitialContext()
-					.lookup("SessionFactory");
+			return (SessionFactory) new Configuration().configure().buildSessionFactory();
 		} catch (Exception e) {
 			log.error("Could not locate SessionFactory in JNDI", e);
 			throw new IllegalStateException(
 					"Could not locate SessionFactory in JNDI");
 		}
+	}
+	
+	public Transaction createTransaction() {
+		return sessionFactory.getCurrentSession().beginTransaction();
 	}
 
 	public void persist(Tc transientInstance) {
