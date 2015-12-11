@@ -14,6 +14,6 @@ public class teacherAction extends MyActionSupport{
 	public String index(){
 		request = getRequest();
 		request.put("test", new Integer(1));//绫讳技杩欐牱浼犲�艰繃鍘�
-		return SUCCESS;
+		return SUCCESS;	
 	}
 }
