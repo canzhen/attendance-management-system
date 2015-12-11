@@ -10,4 +10,7 @@ public class Values {
 		"19:00",//第六节课开始时间
 		"21:00",//第七节课开始时间
 	};
+	public static int[] BeginEndWeek={1,16};
+	public static int[] weekTypeOne={1,8};
+	public static int[] weekTypeTwo={9,16};
 }

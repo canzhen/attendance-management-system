@@ -43,7 +43,7 @@ public class loginAction extends MyActionSupport{
 	 */
 	public String check(){
 		
-		List result = null;
+		List result = new ArrayList();
 		Transaction trans = null;
 		session = getSession();
 		/*
