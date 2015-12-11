@@ -58,7 +58,7 @@ public class studentAction extends MyActionSupport{
 	}
 	
 	private boolean checkIfHasClass(List<String> classes){
-		int week=0,day=0,time=0;
+		String week,day,time;
 		Date date = new Date();
 		String current_week = getCurrentWeek(date);
 		String current_day = getCurrentDay(date);
@@ -74,9 +74,9 @@ public class studentAction extends MyActionSupport{
 		for (int i = 0; i < classes.size(); i++){
 			//获取学生每一个课的具体信息
 			course = courseHome.findById(classes.get(i));
-			week = course.getCweek();
-			day = course.getCday();
-			time = course.getCtime();
+			week = course.getCweek()+"";
+			day = course.getCday()+"";
+			time = course.getCtime()+"";
 			/*
 			 * 和当前时间进行比对，若符合，则在count上加一，
 			 * 最后判断count是否大于1，大于1则返回错误并且报告错误信息
@@ -88,20 +88,20 @@ public class studentAction extends MyActionSupport{
 		return false;
 	}
 	
-	private int getCurrentWeek(Date date){
-		return 0;
+	private String getCurrentWeek(Date date){
+		return "";
 	}
 	
-	private int getCurrentDay(Date date){
+	private String getCurrentDay(Date date){
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
-		return cal.get(Calendar.DAY_OF_WEEK);
+		return cal.get(Calendar.DAY_OF_WEEK)+"";
 	}
 	
-	private int getCurrentTime(Date date){
+	private String getCurrentTime(Date date){
 //		SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
 //		Date now = df.parse(date), 
-		return 0;
+		return "";
 	}
 	
 }
