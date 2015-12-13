@@ -14,9 +14,10 @@ import dbentity.Course;
 import dbentity.CourseHome;
 import dbentity.Sc;
 import dbentity.ScHome;
+import dbentity.ScId;
 
 public class studentAction extends MyActionSupport{
-	private Map session;
+	private Map session= getSession();//获取session
 	private String sno;//学号
 	private List<Course> courses;//课程链表，保存当前时间学生的课程信息
 	
@@ -29,10 +30,8 @@ public class studentAction extends MyActionSupport{
 	 */
 	@Override
 	public String index(){
-		session = getSession();//获取session
 		session.put("identity", "student");
 		sno = "13301085";
-		
 		
 		//sno = (String) session.get("id");//获取学号
 		int todayClass = 0;//此时的课程数目
@@ -219,5 +218,8 @@ public class studentAction extends MyActionSupport{
 		}
 		return "";
 	}
+	
+	
+	
 	
 }
