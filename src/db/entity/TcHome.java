@@ -4,8 +4,6 @@ package db.entity;
 
 import java.util.List;
 
-import javax.naming.InitialContext;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
@@ -28,7 +26,7 @@ public class TcHome {
 
 	protected SessionFactory getSessionFactory() {
 		try {
-			return (SessionFactory) new Configuration().configure().buildSessionFactory();
+			return new Configuration().configure().buildSessionFactory();
 		} catch (Exception e) {
 			log.error("Could not locate SessionFactory in JNDI", e);
 			throw new IllegalStateException(

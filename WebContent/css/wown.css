@@ -1,0 +1,143 @@
+@CHARSET "UTF-8";
+
+/*!
+kinney.css 
+主要包括王奕博写的css
+*/
+
+body {
+    text-align: center;
+    font-family: "微软雅黑";
+}
+
+.welcome_center {
+    padding-top: 30px;
+    text-align: center;
+}
+
+.welcome_centerbtn {
+    margin-left: auto;
+    margin-right: auto;
+    width: 168px;
+}
+
+.login_font_title {
+    font-family: 微软雅黑;
+    font-size: 20pt;
+    color: #8D8D8D;
+}
+
+.login_center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login_li {
+    padding: 0.5em 2em 0.5em 1em;
+    color: #8D8D8D;
+    font-size: 20px;
+}
+
+.studentnoclass_tx {
+    height: 27px;
+    width: 27px;
+}
+
+.table-c table {
+    width: 80%;
+    border-right: 1px solid #000;
+    border-top: 1px solid #000;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 15pt;
+}
+
+.table-c table td {
+    border-left: 1px solid #000;
+    border-bottom: 1px solid #000;
+    padding: 10px 10px 10px 10px;
+}
+
+.check_coursefont {
+    margin-top: 3em;
+    font-family: "微软雅黑";
+    font-size: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.check_tip {
+    margin-top: 1em;
+    font-family: "微软雅黑";
+    font-size: 20px;
+    color: red;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.check_peopleimg {
+    margin-top: 1em;
+    margin-bottom: 2em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.check_divsubmitall {
+    text-align: center;
+}
+
+.check_divsubmit {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.check_submit {
+    margin-left: 50px;
+    margin-right: 50px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 500;
+    outline: none;
+    font-family: "微软雅黑";
+    padding: 12px 10px;
+    width: 100px;
+    font-size: 18px;
+    background: #2a72bf;
+    border: 2px solid #2a72bf;
+    border-radius: 0.5em;
+    -webkit-border-radius: 0.5em;
+    -moz-border-radius: 0.5em;
+    -o-border-radius: 0.5em;
+}
+
+.check_submit:hover {
+    background: #fff;
+    color: #2a72bf;
+    border: 2px solid #2a72bf;
+}
+
+#gongao {
+    height: 30px;
+    overflow: hidden;
+    line-height: 30px;
+    font-size: 13px;
+    font-family: '宋     体';
+    background: #DDE5ED;
+    color: #0C77CF;
+    font-weight: bold;
+}
+
+#gongao #scroll_begin,
+#gongao #scroll_end {
+    display: inline
+}
+
+.studentname {
+    font-family: "微软雅黑";
+    font-size: 13pt;
+}
+
+.studentimg {
+    margin-right: 10px;
+}

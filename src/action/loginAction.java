@@ -1,11 +1,11 @@
 package action;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Transaction;
 
+<<<<<<< HEAD
 import db.entity.Sc;
 import db.entity.ScHome;
 import db.entity.ScId;
@@ -13,6 +13,12 @@ import db.entity.Student;
 import db.entity.StudentHome;
 import db.entity.Teacher;
 import db.entity.TeacherHome;
+=======
+import dbentity.Student;
+import dbentity.StudentHome;
+import dbentity.Teacher;
+import dbentity.TeacherHome;
+>>>>>>> 99a5b0172da7bbbdde0a29dbe3d614f4a1802764
 
 /**
  * 老师和学生的登录类，

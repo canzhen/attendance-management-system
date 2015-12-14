@@ -1,0 +1,60 @@
+.daohang{
+	float: left;
+	width: 30%;
+	margin-top: 10px;
+}
+ul.navigatoin li a.active {
+    padding-bottom: true;
+	font-family: 微软雅黑;
+	color: #8D8D8D;
+}
+.daohang{
+	float: left;
+	width: 30%;
+	margin-top: 10px;
+}
+.fileUpload {
+	position: relative;
+	overflow: hidden;
+	margin: 10px;
+}
+
+.fileUpload input.upload {	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+.btn-primary {
+    color: #FFF;
+    background-color: #1B242F;
+    border-color: #357EBD;
+}
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -moz-user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.btn-primary {
+    color: #FFF;
+}
+.login_font_title {
+    font-family: 微软雅黑;
+    font-size: 20pt;
+    color: #8D8D8D;
+}
