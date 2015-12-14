@@ -96,7 +96,9 @@ public class DBHelper {
 					&& day.contains(current_day)//符合天
 					&& time.contains(current_time)){//符合时间
 				courseInfo = new CourseInfo();
-				setCourseInfo(courseInfo,course,identity,id);
+				setCourseTime(courseInfo,week,day,time,
+						current_week,current_day,current_time);//设置时间信息
+				setCourseInfo(courseInfo,course,identity,id);//设置除了时间信息之外的其他信息
 				courses.add(courseInfo);
 			}
 		}
@@ -106,15 +108,62 @@ public class DBHelper {
 	}
 	
 	
+	/**
+	 * 通过课程类来设置课程的具体信息，如点名时间、最大缺席数等。
+	 * 老师和学生的课程信息不一样，学生还要加上已缺席数。
+	 * @param courseInfo 要设置的课程信息类
+	 * @param course 课程类
+	 * @param identity 身份，老师还是学生
+	 * @param id 如果是老师则为教工号，如果是学生则为学号
+	 */
 	private static void setCourseInfo(CourseInfo courseInfo,Course course,String identity,String id){
 		courseInfo.setCno(course.getCno());//设置课程编号
-		courseInfo.setCname(course.getCname());//设置课程
-		courseInfo.setTime(time);
-		if (identity.equals("teacher")){
-			
-		}else if (identity.equals("student")){
+		courseInfo.setCname(course.getCname());//设置课程名字
+		
+		if (identity.equals("student")){
 			
 		}
+	}
+	
+	
+	/**
+	 * 设置课程的具体时间信息
+	 * @param week 上课的周数
+	 * @param day 上课的天
+	 * @param time 上课的具体时间
+	 */
+	private static void setCourseTime(CourseInfo courseInfo,int week,String day,String time,
+			int current_week,String current_day,String current_time){
+		
+		String result="",weekInfo="上课时间为", dayInfo="星期",timeInfo="第";
+		/*
+		 * 处理week字符
+		 */
+		switch (week){
+		case 0: weekInfo += "1-16周";break;
+		case 1: weekInfo += "1-8周";break;
+		case 2: weekInfo += "9-16周";break;
+		}
+		
+		/*
+		 * 处理day字符
+		 */
+		for (int i = 0; i < day.length(); i++){
+			if ( i != (day.length()-1) )
+				dayInfo += (i+"和星期");
+			else dayInfo += i;
+		}
+		
+		/*
+		 * 处理time字符
+		 */
+		for (int i = 0; i < time.length(); i++){
+			if ( i != (time.length()-1) )
+				timeInfo += (i+"节和第");
+			else timeInfo += (i+"节");
+		}
+		//拼接星期、天、时间，形成时间信息
+		courseInfo.setTime(weekInfo+"的"+dayInfo+"的"+timeInfo);
 	}
 	
 	
