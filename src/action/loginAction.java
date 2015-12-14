@@ -1,14 +1,10 @@
 package action;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Transaction;
 
-import dbentity.Sc;
-import dbentity.ScHome;
-import dbentity.ScId;
 import dbentity.Student;
 import dbentity.StudentHome;
 import dbentity.Teacher;

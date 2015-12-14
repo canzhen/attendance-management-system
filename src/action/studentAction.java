@@ -1,6 +1,5 @@
 package action;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -49,7 +48,7 @@ public class studentAction extends MyActionSupport{
 		List<String> temp = new ArrayList<String>();
 		ScHome schome = new ScHome();
 		Transaction tran = schome.createTransaction();
-		List<Sc> result = (List<Sc>)schome.findBySno(sno);
+		List<Sc> result = schome.findBySno(sno);
 		tran.commit();
 		for (int i = 0; i < result.size(); i++){
 			temp.add(result.get(i).getId().getCno());
