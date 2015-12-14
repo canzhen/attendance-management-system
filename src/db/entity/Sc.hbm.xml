@@ -11,6 +11,9 @@
             <key-property name="cno" type="string">
                 <column name="cno" length="8" />
             </key-property>
+            <key-property name="tno" type="string">
+                <column name="tno" length="8" />
+            </key-property>
         </composite-id>
         <property name="absenceNum" type="java.lang.Integer">
             <column name="absence_num" />

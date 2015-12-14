@@ -37,7 +37,7 @@ public class teacherAction extends MyActionSupport{
 			 * -1为这周不属于上课周，放假或者为自习周，无课
 			 * 大于1为课程冲突
 			 */
-			courses = DBHelper.checkHasClasses(coursesno);
+			courses = DBHelper.checkHasClasses("teacher",tno,coursesno);
 			int count = -1;
 			if ( courses != null) 
 				count = courses.size();

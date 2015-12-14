@@ -64,9 +64,10 @@ public class DBHelper {
 	 * @param classesno 课程的id列表
 	 * @return 返回当前时间的课程
 	 */
-	public static ArrayList<CourseInfo> checkHasClasses(String identity,String id,List<String> classesno){
-		int week;
-		String day,time;
+	public static ArrayList<CourseInfo> checkHasClasses(
+			String identity,String id,List<String> classesno){
+		int week = 0;
+		String day="",time="";
 		Date date = new Date();//获取当前日期
 		int current_week = DateCalculator.getCurrentWeek(new Date(115,10,1),date);
 		String current_day = DateCalculator.getCurrentDay(date);
@@ -78,13 +79,38 @@ public class DBHelper {
 		Course course;
 		CourseInfo courseInfo;
 		
-				
+	
+		
+		Tc courseDetails;
 		for (int i = 0; i < classesno.size(); i++){
-			//获取每一个课的具体信息
+			courseDetails = new Tc();
+			/*
+			 * 找出tc表，得到每一个课的具体信息
+			 */
 			course = courseHome.findById(classesno.get(i));
-			week = course.getCweek();
-			day = course.getCday()+"";
-			time = course.getCtime()+"";
+			String cno = course.getCno();
+			if (identity.equals("student")){
+				/*
+				 * 根据sno和cno获得tno
+				 */
+				ScId scid = new ScId();
+				scid.setCno(course.getCno());
+				scid.setSno(id);
+				ScHome schome = new ScHome();
+				Transaction tran1 = schome.createTransaction();
+				Sc sc = schome.findById(scid);
+				tran1.commit();
+				String tno = sc.getId().getTno();
+				courseDetails = getCourseDetails(tno,cno);
+				
+			}else if (identity.equals("teacher")){
+				courseDetails = getCourseDetails(id,cno);
+			}
+			
+			week = courseDetails.getCweek();
+			day = courseDetails.getCday()+"";
+			time = courseDetails.getCday()+"";
+			
 			/*
 			 * 和当前时间进行比对，若符合，则在count上加一，
 			 * 最后判断count是否大于1，大于1则返回错误并且报告错误信息
@@ -92,19 +118,38 @@ public class DBHelper {
 			 */
 			if (current_week<Values.BeginEndWeek[0] || current_week>Values.BeginEndWeek[1] ) return null;
 			if(((week==1 && current_week>=Values.weekTypeOne[0] && current_week<=Values.weekTypeOne[1]) 
-					||( week==2 && current_week>=Values.weekTypeTwo[0] && current_week<=Values.weekTypeTwo[1]))//符合周
-					&& day.contains(current_day)//符合天
-					&& time.contains(current_time)){//符合时间
+				||( week==2 && current_week>=Values.weekTypeTwo[0] && current_week<=Values.weekTypeTwo[1]))//符合周
+				&& day.contains(current_day)//符合天
+				&& time.contains(current_time)){//符合时间
+				
 				courseInfo = new CourseInfo();
 				setCourseTime(courseInfo,week,day,time,
 						current_week,current_day,current_time);//设置时间信息
-				setCourseInfo(courseInfo,course,identity,id);//设置除了时间信息之外的其他信息
+				setCourseInfo(courseInfo,course,courseDetails,identity,id);//设置除了时间信息之外的其他信息
 				courses.add(courseInfo);
 			}
 		}
 		
 		tran.commit();
 		return courses;
+	}
+	
+	
+	
+	private static Tc getCourseDetails(String tno,String cno){
+		
+		/*
+		 * 根据tno和cno查询课程的具体信息
+		 */
+		TcHome tchome = new TcHome();
+		TcId tcid = new TcId();
+		tcid.setTno(id);
+		tcid.setCno(cno);
+		Transaction tran1 = tchome.createTransaction();
+		Tc courseDetails = tchome.findById(tcid);
+		tran1.commit();
+		
+		return courseDetails;
 	}
 	
 	
@@ -116,12 +161,21 @@ public class DBHelper {
 	 * @param identity 身份，老师还是学生
 	 * @param id 如果是老师则为教工号，如果是学生则为学号
 	 */
-	private static void setCourseInfo(CourseInfo courseInfo,Course course,String identity,String id){
-		courseInfo.setCno(course.getCno());//设置课程编号
+	private static void setCourseInfo(CourseInfo courseInfo,
+			Course course,Tc courseDetails,String identity,String id){
+		courseInfo.setCno(courseDetails.getId().getCno());//设置课程编号
 		courseInfo.setCname(course.getCname());//设置课程名字
-		
+		courseInfo.setCheckTime(courseDetails.getCheckTime());
+		courseInfo.setMaxAbsence(courseDetails.getMaxAbsence());
 		if (identity.equals("student")){
-			
+			String cno = course.getCno(),sno = id;
+			ScHome schome = new ScHome();
+			Transaction tran = schome.createTransaction();
+			ScId scid = new ScId();
+			scid.setCno(cno);
+			scid.setSno(sno);
+			Sc result = schome.findById(scid);
+			courseInfo.setAbsenceNum(result.getAbsenceNum());
 		}
 	}
 	

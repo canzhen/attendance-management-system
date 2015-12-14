@@ -8,6 +8,9 @@ package db.entity;
 public class Tc implements java.io.Serializable {
 
 	private TcId id;
+	private Integer cweek;
+	private Integer cday;
+	private Integer ctime;
 	private Integer checkTime;
 	private Integer maxAbsence;
 
@@ -30,6 +33,30 @@ public class Tc implements java.io.Serializable {
 
 	public void setId(TcId id) {
 		this.id = id;
+	}
+
+	public Integer getCweek() {
+		return cweek;
+	}
+
+	public void setCweek(Integer cweek) {
+		this.cweek = cweek;
+	}
+
+	public Integer getCday() {
+		return cday;
+	}
+
+	public void setCday(Integer cday) {
+		this.cday = cday;
+	}
+
+	public Integer getCtime() {
+		return ctime;
+	}
+
+	public void setCtime(Integer ctime) {
+		this.ctime = ctime;
 	}
 
 	public Integer getCheckTime() {

@@ -12,6 +12,15 @@
                 <column name="cno" length="8" />
             </key-property>
         </composite-id>
+        <property name="cweek" type="java.lang.Integer">
+            <column name="cweek" />
+        </property>
+        <property name="cday" type="java.lang.Integer">
+            <column name="cday" />
+        </property>
+        <property name="ctime" type="java.lang.Integer">
+            <column name="ctime" />
+        </property>
         <property name="checkTime" type="java.lang.Integer">
             <column name="check_time" />
         </property>

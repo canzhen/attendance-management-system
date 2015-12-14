@@ -16,19 +16,13 @@ public class Course implements java.io.Serializable {
 
 	private String cno;
 	private String cname;
-	private int cweek;
-	private int cday;
-	private int ctime;
 
 	public Course() {
 	}
 
-	public Course(String cno, String cname, int cweek, int cday, int ctime) {
+	public Course(String cno, String cname) {
 		this.cno = cno;
 		this.cname = cname;
-		this.cweek = cweek;
-		this.cday = cday;
-		this.ctime = ctime;
 	}
 
 	public String getCno() {
@@ -45,30 +39,6 @@ public class Course implements java.io.Serializable {
 
 	public void setCname(String cname) {
 		this.cname = cname;
-	}
-
-	public int getCweek() {
-		return this.cweek;
-	}
-
-	public void setCweek(int cweek) {
-		this.cweek = cweek;
-	}
-
-	public int getCday() {
-		return this.cday;
-	}
-
-	public void setCday(int cday) {
-		this.cday = cday;
-	}
-
-	public int getCtime() {
-		return this.ctime;
-	}
-
-	public void setCtime(int ctime) {
-		this.ctime = ctime;
 	}
 
 }

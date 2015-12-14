@@ -9,13 +9,15 @@ public class ScId implements java.io.Serializable {
 
 	private String sno;
 	private String cno;
+	private String tno;
 
 	public ScId() {
 	}
 
-	public ScId(String sno, String cno) {
+	public ScId(String sno, String cno, String tno) {
 		this.sno = sno;
 		this.cno = cno;
+		this.tno = tno;
 	}
 
 	public String getSno() {
@@ -33,6 +35,15 @@ public class ScId implements java.io.Serializable {
 	public void setCno(String cno) {
 		this.cno = cno;
 	}
+	
+	public String getTno() {
+		return this.tno;
+	}
+
+	public void setTno(String tno) {
+		this.tno = tno;
+	}
+
 
 	@Override
 	public boolean equals(Object other) {

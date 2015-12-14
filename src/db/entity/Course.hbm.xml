@@ -11,14 +11,5 @@
         <property name="cname" type="string">
             <column name="cname" length="20" not-null="true" />
         </property>
-        <property name="cweek" type="int">
-            <column name="cweek" not-null="true" />
-        </property>
-        <property name="cday" type="int">
-            <column name="cday" not-null="true" />
-        </property>
-        <property name="ctime" type="int">
-            <column name="ctime" not-null="true" />
-        </property>
     </class>
 </hibernate-mapping>
