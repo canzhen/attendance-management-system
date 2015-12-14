@@ -12,6 +12,8 @@
 	若该时间段有课，那么显示该节课的各种信息。
 	如果正在点名并且老师已经上传图片，那么显示图片供学生签到。
  -->
+ 
+ <%= (int)session.getAttribute("classNum")%>
 </head>
 <script>
 	function ScrollImgLeft() {
