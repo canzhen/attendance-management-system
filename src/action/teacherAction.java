@@ -1,22 +1,13 @@
 package action;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-
-import org.hibernate.Transaction;
-
-import utils.Values;
 import db.entity.Course;
-import db.entity.CourseHome;
-import db.entity.Sc;
-import db.entity.ScHome;
 import db.util.DBHelper;
 
 public class teacherAction extends MyActionSupport{
-	private Map request = getRequest();//获取request
+	private Map session = getSession();//获取session
 	private String tno;//教工号
 	private List<Course> courses = new ArrayList<Course>();//课程链表，保存当前时间老师的课程信息
 	/**
@@ -29,15 +20,14 @@ public class teacherAction extends MyActionSupport{
 		/*
 		 * --------测试部分----------
 		 */
-		request.put("identity", "teacher");
+		session.put("identity", "teacher");
 		tno = "11111111";
 		/*
 		 * --------测试部分----------
 		 */
+		//tno = (String) session.get("id");//获取教工号
 		
-		
-		int todayClass = 0;//此时该老师的课程数目
-		if ( !request.get("identity").equals("teacher") ){
+		if ( !session.get("identity").equals("teacher") ){
 			return ERROR;
 		}else{
 			List<String> coursesno = DBHelper.getCoursesno("teacher",tno);
@@ -51,23 +41,29 @@ public class teacherAction extends MyActionSupport{
 			int count = -1;
 			if ( courses != null) 
 				count = courses.size();
-			request.put("classNum", count);
+			session.put("classNum", count);
 			if ( count == 0 ){//当天无课，返回NOCURRENTCLASS
-				request.put("coursesInfo", coursesno);//传入所有课程编号
+				session.put("coursesInfo", coursesno);//传入所有课程编号
 				return NOCURRENTCLASS;
 			}else if ( count == 1 ){//当天有一节课，返回SUCCESS
-				request.put("coursesInfo", courses.get(0));//传入当前课程的类，包含具体信息
+				session.put("coursesInfo", courses.get(0));//传入当前课程的类，包含具体信息
 				return SUCCESS;
 			}else if ( count > 1){//课程冲突，返回SUCCESS，由界面判断处理
-				request.put("coursesInfo", courses);//课程冲突，将所有课传入，便于页面显示
+				session.put("coursesInfo", courses);//课程冲突，将所有课传入，便于页面显示
 				return SUCCESS;
 			}else if ( count == -1 ){//当天无课，返回SUCCESS，由界面判断处理
-				request.put("coursesInfo", "这周不属于上课周，放假或者为自习周，无课");
+				session.put("coursesInfo", "这周不属于上课周，放假或者为自习周，无课");
 				return SUCCESS;
 			}
 			
-			
 			return SUCCESS;
-		}	
+		}
 	}
+	
+	
+	public String editChecktime(){
+		DBHelper.editTcValue("11111111", "cs002", "checktime", 11);
+		return SUCCESS;
+	}
+	
 }

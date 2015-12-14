@@ -7,7 +7,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 /**
  * 自定义的一些通用的变量和方法
- * @author lenovo
+ * @author 周灿桢
  *
  */
 public class MyActionSupport extends ActionSupport{

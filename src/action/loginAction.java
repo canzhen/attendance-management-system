@@ -44,14 +44,14 @@ public class loginAction extends MyActionSupport{
 	public String check(){
 		
 		List result = new ArrayList();
-		Transaction trans = null;
+		Transaction trans;
 		session = getSession();
 		/*
 		 * 根据老师或者学生身份的不同进行比对，
 		 * 并把老师或学生编号存入session
 		 */
 		if (identity.equals("teacher")){
-			
+			//往session里设置identity
 			session.put("identity", "teacher");
 			
 			TeacherHome teacherHome = new TeacherHome();
@@ -63,7 +63,7 @@ public class loginAction extends MyActionSupport{
 			trans.commit();
 			
 		}else if (identity.equals("student")){
-			
+			//往session里设置identity
 			session.put("identity", "student");
 			
 			StudentHome studentHome = new StudentHome();
@@ -74,6 +74,7 @@ public class loginAction extends MyActionSupport{
 			result = studentHome.findByExample(student);
 			trans.commit();
 		}
+		
 		
 		/*
 		 * 保存id信息到session中
