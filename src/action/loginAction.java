@@ -1,24 +1,15 @@
 package action;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Transaction;
 
-<<<<<<< HEAD
-import db.entity.Sc;
-import db.entity.ScHome;
-import db.entity.ScId;
 import db.entity.Student;
 import db.entity.StudentHome;
 import db.entity.Teacher;
 import db.entity.TeacherHome;
-=======
-import dbentity.Student;
-import dbentity.StudentHome;
-import dbentity.Teacher;
-import dbentity.TeacherHome;
->>>>>>> 99a5b0172da7bbbdde0a29dbe3d614f4a1802764
 
 /**
  * 老师和学生的登录类，
@@ -50,6 +41,7 @@ public class loginAction extends MyActionSupport{
 	public String check(){
 		
 		List result = new ArrayList();
+		String name = "";
 		Transaction trans;
 		session = getSession();
 		/*
@@ -66,6 +58,7 @@ public class loginAction extends MyActionSupport{
 			teacher.setTno(id);
 			teacher.setTpwd(pwd);
 			result = teacherHome.findByExample(teacher);
+			name = ((Teacher)result).getTname();
 			trans.commit();
 			
 		}else if (identity.equals("student")){
@@ -78,6 +71,7 @@ public class loginAction extends MyActionSupport{
 			student.setSno(id);
 			student.setSpwd(pwd);
 			result = studentHome.findByExample(student);
+			name = ((Student)result).getSname();
 			trans.commit();
 		}
 		
@@ -85,7 +79,7 @@ public class loginAction extends MyActionSupport{
 		/*
 		 * 保存id信息到session中
 		 */
-		session.put("id", identity);
+		session.put("identity", identity);
 		
 		/*
 		 * 判断登录是否成功，并在session里放入"login_result"
@@ -94,6 +88,8 @@ public class loginAction extends MyActionSupport{
 		 */
 		if ( result.size() == 1 ){
 			session.put("login_result",0);
+			session.put("id", id);
+			session.put("name", result);
 			return SUCCESS;
 		}else{
 			session.put("login_result",1);
