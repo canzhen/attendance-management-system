@@ -6,13 +6,13 @@ import java.util.Map;
 
 import org.hibernate.Transaction;
 
-import dbentity.Sc;
-import dbentity.ScHome;
-import dbentity.ScId;
-import dbentity.Student;
-import dbentity.StudentHome;
-import dbentity.Teacher;
-import dbentity.TeacherHome;
+import db.entity.Sc;
+import db.entity.ScHome;
+import db.entity.ScId;
+import db.entity.Student;
+import db.entity.StudentHome;
+import db.entity.Teacher;
+import db.entity.TeacherHome;
 
 /**
  * 老师和学生的登录类，

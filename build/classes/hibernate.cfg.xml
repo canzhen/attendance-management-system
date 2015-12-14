@@ -11,10 +11,10 @@
         <property name="current_session_context_class">thread</property>
 
         <!-- List of XML mapping files -->
-		<mapping resource="dbentity/Course.hbm.xml"/>
-		<mapping resource="dbentity/Sc.hbm.xml"/>
-		<mapping resource="dbentity/Student.hbm.xml"/>
-		<mapping resource="dbentity/Tc.hbm.xml"/>
-		<mapping resource="dbentity/Teacher.hbm.xml"/>
+		<mapping resource="db/entity/Course.hbm.xml"/>
+		<mapping resource="db/entity/Sc.hbm.xml"/>
+		<mapping resource="db/entity/Student.hbm.xml"/>
+		<mapping resource="db/entity/Tc.hbm.xml"/>
+		<mapping resource="db/entity/Teacher.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

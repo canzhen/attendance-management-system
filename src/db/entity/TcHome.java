@@ -1,4 +1,4 @@
-package dbentity;
+package db.entity;
 
 // Generated 2015-12-11 11:02:07 by Hibernate Tools 4.0.0
 
@@ -10,20 +10,19 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Example;
 
 /**
- * Home object for domain model class Sc.
- * @see dbentity.Sc
+ * Home object for domain model class Tc.
+ * @see db.entity.Tc
  * @author Hibernate Tools
  */
-public class ScHome {
+public class TcHome {
 
-	private static final Log log = LogFactory.getLog(ScHome.class);
+	private static final Log log = LogFactory.getLog(TcHome.class);
 
 	private final SessionFactory sessionFactory = getSessionFactory();
 
@@ -41,8 +40,8 @@ public class ScHome {
 		return sessionFactory.getCurrentSession().beginTransaction();
 	}
 
-	public void persist(Sc transientInstance) {
-		log.debug("persisting Sc instance");
+	public void persist(Tc transientInstance) {
+		log.debug("persisting Tc instance");
 		try {
 			sessionFactory.getCurrentSession().persist(transientInstance);
 			log.debug("persist successful");
@@ -52,8 +51,8 @@ public class ScHome {
 		}
 	}
 
-	public void attachDirty(Sc instance) {
-		log.debug("attaching dirty Sc instance");
+	public void attachDirty(Tc instance) {
+		log.debug("attaching dirty Tc instance");
 		try {
 			sessionFactory.getCurrentSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -63,8 +62,8 @@ public class ScHome {
 		}
 	}
 
-	public void attachClean(Sc instance) {
-		log.debug("attaching clean Sc instance");
+	public void attachClean(Tc instance) {
+		log.debug("attaching clean Tc instance");
 		try {
 			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
@@ -74,8 +73,8 @@ public class ScHome {
 		}
 	}
 
-	public void delete(Sc persistentInstance) {
-		log.debug("deleting Sc instance");
+	public void delete(Tc persistentInstance) {
+		log.debug("deleting Tc instance");
 		try {
 			sessionFactory.getCurrentSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -85,10 +84,10 @@ public class ScHome {
 		}
 	}
 
-	public Sc merge(Sc detachedInstance) {
-		log.debug("merging Sc instance");
+	public Tc merge(Tc detachedInstance) {
+		log.debug("merging Tc instance");
 		try {
-			Sc result = (Sc) sessionFactory.getCurrentSession().merge(
+			Tc result = (Tc) sessionFactory.getCurrentSession().merge(
 					detachedInstance);
 			log.debug("merge successful");
 			return result;
@@ -98,11 +97,11 @@ public class ScHome {
 		}
 	}
 
-	public Sc findById(dbentity.ScId id) {
-		log.debug("getting Sc instance with id: " + id);
+	public Tc findById(db.entity.TcId id) {
+		log.debug("getting Tc instance with id: " + id);
 		try {
-			Sc instance = (Sc) sessionFactory.getCurrentSession().get(
-					"dbentity.Sc", id);
+			Tc instance = (Tc) sessionFactory.getCurrentSession().get(
+					"db.entity.Tc", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -115,11 +114,11 @@ public class ScHome {
 		}
 	}
 
-	public List findByExample(Sc instance) {
-		log.debug("finding Sc instance by example");
+	public List findByExample(Tc instance) {
+		log.debug("finding Tc instance by example");
 		try {
 			List results = sessionFactory.getCurrentSession()
-					.createCriteria("dbentity.Sc")
+					.createCriteria("db.entity.Tc")
 					.add(Example.create(instance)).list();
 			log.debug("find by example successful, result size: "
 					+ results.size());
@@ -130,20 +129,28 @@ public class ScHome {
 		}
 	}
 	
-	public List findBySno(String sno){
-		ScId id=new ScId();
-		id.setSno(sno);
-		Sc sc=new Sc();
-		sc.setId(id);
-		return findByExample(sc);
-	}
-	
-	
-	public List findByCno(String cno){
-		ScId id=new ScId();
-		id.setCno(cno);
-		Sc sc=new Sc();
-		sc.setId(id);
-		return findByExample(sc);
+	/**
+	 * 根据主键中的某一个键值来查询
+	 * @param idName 键值对名称
+	 * @param idValue 键值对的值
+	 * @return 查询出符合要求的List
+	 */
+	public List findByNo(String idName,String idValue){
+		String hql = "";
+		if (idName.equals("tno")){
+			hql = "from Tc tc where tc.id.tno=:id";
+		}else if (idName.equals("cno")){
+			hql = "from Tc tc where tc.id.cno=:id";
+		}
+		Query query = sessionFactory.getCurrentSession().
+				createQuery(hql);
+		query.setParameter("id", idValue);
+		List result = query.list();
+		if (result == null){
+			log.debug("get successful, no instance found");
+		} else {
+			log.debug("get successful, instance found");
+		}
+		return result;
 	}
 }

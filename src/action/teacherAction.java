@@ -1,19 +1,73 @@
 package action;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 
-public class teacherAction extends MyActionSupport{
-	private Map request;
-	/**
-	 * 鍦ㄨ繑鍥為〉闈箣鍓嶏紝闇�瑕佷粠鏁版嵁搴撲腑姣斿锛屾煡鎵惧綋鍓嶈涓婄殑璇撅紝
-	 * 鐒跺悗鎶婅绋嬩俊鎭斁鍒皉equest閲屼紶閫掕繃鍘汇��
-	 * 鑻ュ綋鍓嶆椂闂存娌℃湁璇撅紝閭ｄ箞灏辫繑鍥濶OCURRENTCLASS锛岃烦杞埌鏃犺椤甸潰銆�
-	 */
+import org.hibernate.Transaction;
 
+import utils.Values;
+import db.entity.Course;
+import db.entity.CourseHome;
+import db.entity.Sc;
+import db.entity.ScHome;
+import db.util.DBHelper;
+
+public class teacherAction extends MyActionSupport{
+	private Map request = getRequest();//获取request
+	private String tno;//教工号
+	private List<Course> courses = new ArrayList<Course>();//课程链表，保存当前时间老师的课程信息
+	/**
+	 * 在返回页面之前，需要从数据库中比对，查找当前要上的课，
+	 * 然后把课程信息放到request里传递过去。
+	 * 若当前时间段没有课，那么就返回NOCURRENTCLASS，跳转到无课页面。
+	 */
 	@Override
 	public String index(){
-		request = getRequest();
-		request.put("test", new Integer(1));//绫讳技杩欐牱浼犲�艰繃鍘�
-		return SUCCESS;	
+		/*
+		 * --------测试部分----------
+		 */
+		request.put("identity", "teacher");
+		tno = "11111111";
+		/*
+		 * --------测试部分----------
+		 */
+		
+		
+		int todayClass = 0;//此时该老师的课程数目
+		if ( !request.get("identity").equals("teacher") ){
+			return ERROR;
+		}else{
+			List<String> coursesno = DBHelper.getCoursesno("teacher",tno);
+			/*
+			 * 0为显示所有课程和信息
+			 * 1为显示当前课程信息
+			 * -1为这周不属于上课周，放假或者为自习周，无课
+			 * 大于1为课程冲突
+			 */
+			courses = DBHelper.checkHasClasses(coursesno);
+			int count = -1;
+			if ( courses != null) 
+				count = courses.size();
+			request.put("classNum", count);
+			if ( count == 0 ){//当天无课，返回NOCURRENTCLASS
+				request.put("coursesInfo", coursesno);//传入所有课程编号
+				return NOCURRENTCLASS;
+			}else if ( count == 1 ){//当天有一节课，返回SUCCESS
+				request.put("coursesInfo", courses.get(0));//传入当前课程的类，包含具体信息
+				return SUCCESS;
+			}else if ( count > 1){//课程冲突，返回SUCCESS，由界面判断处理
+				request.put("coursesInfo", courses);//课程冲突，将所有课传入，便于页面显示
+				return SUCCESS;
+			}else if ( count == -1 ){//当天无课，返回SUCCESS，由界面判断处理
+				request.put("coursesInfo", "这周不属于上课周，放假或者为自习周，无课");
+				return SUCCESS;
+			}
+			
+			
+			return SUCCESS;
+		}	
 	}
 }

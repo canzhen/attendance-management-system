@@ -3,17 +3,20 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 2015-12-11 11:02:07 by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="dbentity.Sc" table="sc" catalog="amdb">
-        <composite-id name="id" class="dbentity.ScId">
-            <key-property name="sno" type="string">
-                <column name="sno" length="8" />
+    <class name="db.entity.Tc" table="tc" catalog="amdb">
+        <composite-id name="id" class="db.entity.TcId">
+            <key-property name="tno" type="string">
+                <column name="tno" length="8" />
             </key-property>
             <key-property name="cno" type="string">
                 <column name="cno" length="8" />
             </key-property>
         </composite-id>
-        <property name="absenceNum" type="java.lang.Integer">
-            <column name="absence_num" />
+        <property name="checkTime" type="java.lang.Integer">
+            <column name="check_time" />
+        </property>
+        <property name="maxAbsence" type="java.lang.Integer">
+            <column name="max_absence" />
         </property>
     </class>
 </hibernate-mapping>

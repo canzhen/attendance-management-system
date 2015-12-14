@@ -3,8 +3,8 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 2015-12-11 11:02:07 by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="dbentity.Sc" table="sc" catalog="amdb">
-        <composite-id name="id" class="dbentity.ScId">
+    <class name="db.entity.Sc" table="sc" catalog="amdb">
+        <composite-id name="id" class="db.entity.ScId">
             <key-property name="sno" type="string">
                 <column name="sno" length="8" />
             </key-property>

@@ -21,7 +21,7 @@ public class MyActionSupport extends ActionSupport{
 	public static String NOCURRENTCLASS="no_current_class";
 	private ActionContext context = ActionContext.getContext();
 	
-		/**
+	/**
 	 * 直接返回显示主界面
 	 */
 	public String index(){

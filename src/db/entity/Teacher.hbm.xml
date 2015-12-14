@@ -3,16 +3,16 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 2015-12-11 11:02:07 by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="dbentity.Student" table="student" catalog="amdb">
-        <id name="sno" type="string">
-            <column name="sno" length="8" />
+    <class name="db.entity.Teacher" table="teacher" catalog="amdb">
+        <id name="tno" type="string">
+            <column name="tno" length="8" />
             <generator class="assigned" />
         </id>
-        <property name="sname" type="string">
-            <column name="sname" length="20" not-null="true" />
+        <property name="tname" type="string">
+            <column name="tname" length="20" not-null="true" />
         </property>
-        <property name="spwd" type="string">
-            <column name="spwd" length="20" not-null="true" />
+        <property name="tpwd" type="string">
+            <column name="tpwd" length="20" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>

@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 2015-12-11 11:02:07 by Hibernate Tools 4.0.0 -->
 <hibernate-mapping>
-    <class name="dbentity.Student" table="student" catalog="amdb">
+    <class name="db.entity.Student" table="student" catalog="amdb">
         <id name="sno" type="string">
             <column name="sno" length="8" />
             <generator class="assigned" />

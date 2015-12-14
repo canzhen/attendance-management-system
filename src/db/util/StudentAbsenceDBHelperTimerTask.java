@@ -1,24 +1,31 @@
-package utils;
+package db.util;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.hibernate.Transaction;
 
-import dbentity.Sc;
-import dbentity.ScHome;
-import dbentity.ScId;
+import db.entity.Sc;
+import db.entity.ScHome;
+import db.entity.ScId;
 
-public class Helper {
+public class StudentAbsenceDBHelperTimerTask extends TimerTask{
+	private String sno = "", cno = "";
+	
+	public StudentAbsenceDBHelperTimerTask(String sno,String cno){
+		this.sno = sno;
+		this.cno = cno;
+	}
+	
 	/**
 	 * 学生该节课缺席，更新相应的数据库数据
-	 * @param sno 学生学号
-	 * @param cno 课程号
 	 */
-	public void studentAbsence(String sno,String cno){
+	public void addNum(){
+		
 		//查询以sno和cno为主键的sc信息
 		ScId scid = new ScId();
-//		scid.setSno(sno);
-//		scid.setCno(cno);
-		scid.setSno("13301085");
-		scid.setCno("cs001");
+		scid.setSno(sno);
+		scid.setCno(cno);
 		Sc sc = new Sc();
 		sc.setId(scid);
 		
@@ -29,5 +36,10 @@ public class Helper {
 		result.setAbsenceNum(result.getAbsenceNum()+1);//在缺席数量上加一
 		schome.merge(result);//更新数据库信息
 		tran.commit();//commit，结束
+	}
+	
+	@Override
+	public void run() {
+		addNum();
 	}
 }
