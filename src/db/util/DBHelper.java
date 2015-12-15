@@ -143,7 +143,7 @@ public class DBHelper {
 		 */
 		TcHome tchome = new TcHome();
 		TcId tcid = new TcId();
-		tcid.setTno(id);
+		tcid.setTno(tno);
 		tcid.setCno(cno);
 		Transaction tran1 = tchome.createTransaction();
 		Tc courseDetails = tchome.findById(tcid);

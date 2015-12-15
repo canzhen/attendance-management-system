@@ -14,6 +14,7 @@ import utils.TimerHelper;
 import utils.Values;
 import db.entity.Course;
 import db.entity.CourseHome;
+import db.entity.CourseInfo;
 import db.entity.Sc;
 import db.entity.ScHome;
 import db.entity.ScId;
@@ -22,7 +23,7 @@ import db.util.DBHelper;
 public class studentAction extends MyActionSupport{
 	private Map session = getSession();//获取session
 	private String sno;//学号
-	private List<Course> courses = new ArrayList<Course>();//课程链表，保存当前时间学生的课程信息
+	private List<CourseInfo> courses = new ArrayList<CourseInfo>();//课程链表，保存当前时间学生的课程信息
 	
 	/**
 	 * 在返回页面之前，需要从数据库中比对，查找当前要上的课，
@@ -53,7 +54,7 @@ public class studentAction extends MyActionSupport{
 			 * -1为这周不属于上课周，放假或者为自习周，无课
 			 * 大于1为课程冲突
 			 */
-			courses = DBHelper.checkHasClasses(coursesno);
+			courses = DBHelper.checkHasClasses("student",sno,coursesno);
 			int count = -1;
 			if ( courses != null) 
 				count = courses.size();
