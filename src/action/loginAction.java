@@ -62,11 +62,11 @@ public class loginAction extends MyActionSupport{
 			teacher = teacherHome.findById(id);
 			if(teacher==null){
 				msg="该账号不存在";
-				return "failed";
+				return "indexPage";
 			}
 			if(!pwd.equals(teacher.getTpwd())){
 				msg="密码错误";
-				return "failed";
+				return "indexPage";
 			}
 			name = teacher.getTname();
 			trans.commit();
@@ -81,11 +81,11 @@ public class loginAction extends MyActionSupport{
 			student=studentHome.findById(id);
 			if(student==null){
 				msg="该账号不存在";
-				return "failed";
+				return "indexPage";
 			}
 			if(!pwd.equals(student.getSpwd())){
 				msg="密码错误";
-				return "failed";
+				return "indexPage";
 			}
 			name = student.getSname();
 			trans.commit();

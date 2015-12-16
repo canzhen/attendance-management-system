@@ -1,9 +1,8 @@
 package db.entity;
-
-// Generated 2015-12-11 11:02:07 by Hibernate Tools 4.0.0
+// Generated 2015-12-16 20:34:33 by Hibernate Tools 4.3.1.Final
 
 import java.util.List;
-
+import javax.naming.InitialContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
@@ -25,18 +24,20 @@ public class StudentHome {
 
 	protected SessionFactory getSessionFactory() {
 		try {
-			return new Configuration().configure().buildSessionFactory();
+			if(sessionFactory!=null)
+				return (SessionFactory) new InitialContext().lookup("SessionFactory");
+			else
+				return (SessionFactory) new Configuration().configure().buildSessionFactory();
 		} catch (Exception e) {
 			log.error("Could not locate SessionFactory in JNDI", e);
-			throw new IllegalStateException(
-					"Could not locate SessionFactory in JNDI");
+			throw new IllegalStateException("Could not locate SessionFactory in JNDI");
 		}
 	}
-	
-	public Transaction createTransaction() {
-		return sessionFactory.getCurrentSession().beginTransaction();
-	}
 
+	  public Transaction createTransaction() {
+	        return sessionFactory.getCurrentSession().beginTransaction();
+	    }
+	  
 	public void persist(Student transientInstance) {
 		log.debug("persisting Student instance");
 		try {
@@ -84,8 +85,7 @@ public class StudentHome {
 	public Student merge(Student detachedInstance) {
 		log.debug("merging Student instance");
 		try {
-			Student result = (Student) sessionFactory.getCurrentSession()
-					.merge(detachedInstance);
+			Student result = (Student) sessionFactory.getCurrentSession().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -97,8 +97,7 @@ public class StudentHome {
 	public Student findById(java.lang.String id) {
 		log.debug("getting Student instance with id: " + id);
 		try {
-			Student instance = (Student) sessionFactory.getCurrentSession()
-					.get("db.entity.Student", id);
+			Student instance = (Student) sessionFactory.getCurrentSession().get("db.entity.Student", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -114,11 +113,9 @@ public class StudentHome {
 	public List findByExample(Student instance) {
 		log.debug("finding Student instance by example");
 		try {
-			List results = sessionFactory.getCurrentSession()
-					.createCriteria("db.entity.Student")
+			List results = sessionFactory.getCurrentSession().createCriteria("db.entity.Student")
 					.add(Example.create(instance)).list();
-			log.debug("find by example successful, result size: "
-					+ results.size());
+			log.debug("find by example successful, result size: " + results.size());
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);

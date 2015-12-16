@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 2015-12-15 23:14:26 by Hibernate Tools 4.3.1.Final -->
+<!-- Generated 2015-12-16 20:34:33 by Hibernate Tools 4.3.1.Final -->
 <hibernate-mapping>
     <class name="db.entity.Sc" table="sc" catalog="amdb" optimistic-lock="version">
         <composite-id name="id" class="db.entity.ScId">
@@ -11,10 +11,10 @@
             <key-property name="cno" type="string">
                 <column name="cno" length="8" />
             </key-property>
-            <key-property name="tno" type="string">
-                <column name="tno" length="8" />
-            </key-property>
         </composite-id>
+        <property name="tno" type="string">
+            <column name="tno" length="8" not-null="true" />
+        </property>
         <property name="absenceNum" type="java.lang.Integer">
             <column name="absence_num" />
         </property>

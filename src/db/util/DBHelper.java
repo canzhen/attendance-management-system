@@ -26,6 +26,7 @@ public class DBHelper {
 	 * @param id 当前编号
 	 * @return 课程编号 String的列表List
 	 */
+	@SuppressWarnings("unchecked")
 	public static List<String> getCoursesno(String identity,String id){
 		List result = new ArrayList();
 		List<String> coursenoList = new ArrayList<String>();
@@ -75,7 +76,7 @@ public class DBHelper {
 		//记录当天的课程
 		ArrayList<CourseInfo> courses = new ArrayList<CourseInfo>();
 		CourseHome courseHome = new CourseHome();
-		Transaction tran = courseHome.createTransaction();
+		
 		Course course;
 		CourseInfo courseInfo;
 		
@@ -87,7 +88,9 @@ public class DBHelper {
 			/*
 			 * 找出tc表，得到每一个课的具体信息
 			 */
+			Transaction tran = courseHome.createTransaction();
 			course = courseHome.findById(classesno.get(i));
+			tran.commit();
 			String cno = course.getCno();
 			if (identity.equals("student")){
 				/*
@@ -100,7 +103,7 @@ public class DBHelper {
 				Transaction tran1 = schome.createTransaction();
 				Sc sc = schome.findById(scid);
 				tran1.commit();
-				String tno = sc.getId().getTno();
+				String tno = sc.getTno();
 				courseDetails = getCourseDetails(tno,cno);
 				
 			}else if (identity.equals("teacher")){
@@ -116,8 +119,10 @@ public class DBHelper {
 			 * 最后判断count是否大于1，大于1则返回错误并且报告错误信息
 			 * 0表示1-16周，1表示1-8周，2表示9-16周
 			 */
-			if (current_week<Values.BeginEndWeek[0] || current_week>Values.BeginEndWeek[1] ) return null;
-			if(((week==1 && current_week>=Values.weekTypeOne[0] && current_week<=Values.weekTypeOne[1]) 
+			if (current_week<Values.BeginEndWeek[0] || current_week>Values.BeginEndWeek[1] )
+				return courses;
+			
+			if(((week==0)||(week==1 && current_week>=Values.weekTypeOne[0] && current_week<=Values.weekTypeOne[1]) 
 				||( week==2 && current_week>=Values.weekTypeTwo[0] && current_week<=Values.weekTypeTwo[1]))//符合周
 				&& day.contains(current_day)//符合天
 				&& time.contains(current_time)){//符合时间
@@ -130,7 +135,7 @@ public class DBHelper {
 			}
 		}
 		
-		tran.commit();
+		
 		return courses;
 	}
 	
@@ -176,6 +181,7 @@ public class DBHelper {
 			scid.setSno(sno);
 			Sc result = schome.findById(scid);
 			courseInfo.setAbsenceNum(result.getAbsenceNum());
+			tran.commit();
 		}
 	}
 	
