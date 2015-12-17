@@ -41,11 +41,14 @@
         </action>
                 
         <action name="*_*" class="action.{1}Action" method="{2}">
-            <result>/jsp/{1}_index.jsp</result>
+            <result name="indexPage">/jsp/{1}_index.jsp</result>
             <!-- <result name="index">/jsp/{1}_index.jsp</result> -->
             <result name="error">/jsp/err/error.jsp</result>
+            <result name="success">/jsp/welcome.jsp</result>
             <result name="no_current_class">/jsp/err/{1}_noCurrentClass.jsp</result>
         </action>
+        
+        
         
     </package>
 </struts>

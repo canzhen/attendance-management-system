@@ -54,11 +54,15 @@ public class DateCalculator {
 	 * @param date 当前日期
 	 * @return 当前时间是第几节课
 	 */
+	@SuppressWarnings({ "static-access", "deprecation" })
 	public static String getCurrentTime(Date date){
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
-		int hour=cal.HOUR_OF_DAY;
-		int min=cal.MINUTE;
+//		Calendar cal = Calendar.getInstance();
+//		cal.setTime(date);
+//		
+  	    int hour;
+		hour=date.getHours();
+		int min;
+		min=date.getMinutes();
 		if(hour>=8&&hour<10){
 			if(hour==9&&min>50)
 				return "";

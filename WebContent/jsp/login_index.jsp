@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
 <%@page import="db.entity.Teacher"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -65,7 +66,6 @@
 		<div class="clearfix"></div>
 	</div>
 	<div class="login_center">
-		<form>
 
 			<div class="message warning">
 				<div class="inset">
@@ -73,11 +73,12 @@
 						<h1>用户登录</h1>
 
 					</div>
+					<s:form action="login_check.action">
 					<li>
-						<div class="login_li">
-							<input type="radio" name="student" value="学生" checked="true">学生
-							<input type="radio" name="student" value="教师">教师 <input
-								type="radio" name="student" value="管理员">管理员
+				   	<div class="login_li">
+							<input type="radio" name="identity" value="学生" checked="true">学生
+							<input type="radio" name="identity" value="教师">教师 <input
+								type="radio" name="identity" value="管理员">管理员
 						</div>
 
 					</li>
@@ -88,18 +89,25 @@
 						href="#" class="icon lock"></a></li>
 					<div class="clear"></div>
 					<div class="submit">
-						<input type="submit" onclick="myFunction()" value="登    录">
+						<s:submit  onclick="myFunction()" value="登录" />
 						<div class="clear"></div>
 					</div>
+					</s:form>
 				</div>
+				
 			</div>
+			
 	</div>
 	<div class="clear"></div>
 
+<<<<<<< HEAD
 	<div style="display: none"><</div>
 	</form>
 	</div>
 	 -->
+=======
+	<div style="display: none"></div>
+>>>>>>> a8067eebb9441ef1662600fcd3ea18cd4210d326
 </body>
 
 </html>
