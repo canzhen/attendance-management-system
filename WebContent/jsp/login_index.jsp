@@ -21,7 +21,12 @@
 %>
 
 </head>
+
 <body>
+
+<h1><?php echo "Hello Word"; ?></h1>
+
+<!-- 
 	<%
 		//for (int i = 0; i < test.size(); i++){
 	%>
@@ -94,6 +99,7 @@
 	<div style="display: none"><</div>
 	</form>
 	</div>
+	 -->
 </body>
 
 </html>
