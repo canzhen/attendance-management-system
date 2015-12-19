@@ -20,7 +20,7 @@ public class Pic{
 	static HttpRequests httpRequests= new HttpRequests("626d88a706ecc8f5f3a7b6dca2e8c006", "AuhwhMiAX1xUtt49sX-6_lq9dz_4xvM2", true, true);
 	private JSONObject result ;
 
-	public void setResult(String url){
+	public Pic(String url){
 		Charset.forName("UTF-8").name();
 		try {
 			result = httpRequests.detectionDetect(new PostParameters().setUrl(url));
@@ -29,43 +29,55 @@ public class Pic{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(result);
 	}
 
 	//获得所有图片的中心点的X坐标
-	public List getAllX(){
-		List<Double> xList=new ArrayList<Double>();
+	public List getAllCenter(){
+		List<List<Double>> list=new ArrayList<List<Double>>();
 		Double x;
-		try {
-			for (int i = 0; i < result.getJSONArray("face").length(); ++i){
-				x=(Double) result.getJSONArray("face").getJSONObject(i).getJSONObject("position").getJSONObject("center").get("x");
-				xList.add(x);
-			}
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return xList;
-	}
-
-	//获得所有图片的中心点的Y坐标
-	public List getAllY(){
-		List<Double> yList=new ArrayList<Double>();
 		Double y;
 		try {
 			for (int i = 0; i < result.getJSONArray("face").length(); ++i){
+				List<Double> sList=new ArrayList<Double>();
+				x=(Double) result.getJSONArray("face").getJSONObject(i).getJSONObject("position").getJSONObject("center").get("x");
+				sList.add(x);
 				y=(Double) result.getJSONArray("face").getJSONObject(i).getJSONObject("position").getJSONObject("center").get("y");
-				yList.add(y);
+				sList.add(y);
+				list.add(sList);
 			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return yList;
+		return list;
+	}
+	
+	//根据中心点返回左上角坐标
+	public List getAllLeft(double x,double y){
+		Double width;
+		Double hight;
+		List<Double> size=new ArrayList<Double>();
+		try {
+			for (int i = 0; i < result.getJSONArray("face").length(); ++i){
+				Double sx=(Double) result.getJSONArray("face").getJSONObject(i).getJSONObject("position").getJSONObject("center").get("x");
+				Double sy=(Double) result.getJSONArray("face").getJSONObject(i).getJSONObject("position").getJSONObject("center").get("y");
+				if(sx.equals(x)&&sy.equals(y)){
+					width= (Double) result.getJSONArray("face").getJSONObject(i).getJSONObject("position").get("width");
+					hight= (Double) result.getJSONArray("face").getJSONObject(i).getJSONObject("position").get("height");
+					size.add(x-width/2);
+					size.add(y-hight/2);
+					break;
+				}
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return size;
 	}
 
+
 	//根据中心点获得脸的宽和高
-	@SuppressWarnings("unchecked")
 	public List getWidthHigth(Double x,Double y){
 		Double width;
 		Double hight;
