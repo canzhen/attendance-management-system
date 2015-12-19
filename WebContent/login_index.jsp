@@ -10,30 +10,16 @@
 <link rel="stylesheet" type="text/css" href="css/wown.css" />
 <link href="css/login.css" rel="stylesheet" type="text/css" media="all" />
 <title>登录页</title>
-<meta http-equiv="refresh" content="5; url=login_check" />
 <!-- 
+<meta http-equiv="refresh" content="5; url=login_check" />
+
 	由于我们默认每次都返回到该界面，所以在该界面上我们做一些简单的逻辑判断
 	可以通过session传递一些attribute来看是否登录成功
 	若登录成功则几分钟内自动跳转到	课程界面
 	若未登录则提示登录，若登录失败则用javascript写出用户名密码错误等等信息
  -->
-
-<%
-	//List<String> test = (List<String>)session.getAttribute("result");
-%>
-<script type="text/javascript"></script>
 </head>
 <body>
-	<%
-		//for (int i = 0; i < test.size(); i++){
-	%>
-	<%
-		//= test.get(i)
-	%>
-	<%
-		//}
-	%>
-
 	<div class="header">
 		<div class="header-top">
 			<div class="container">
@@ -69,7 +55,7 @@
 					<h1>用户登录</h1>
 
 				</div>
-				<form action="login_check.action">
+				<s:form action="login_check.action">
 					<li>
 						<div class="login_li">
 							<input type="radio" name="identity" value="学生" checked="true">学生
@@ -78,17 +64,17 @@
 						</div>
 
 					</li>
-					<li><input type="text" class="text" placeholder="用户名"><a
+					<li><input type="text" class="text" placeholder="用户名" ><a
 						href="#" class=" icon user"></a></li>
 					<div class="clear"></div>
 					<li><input type="password" placeholder="密码"> <a
 						href="#" class="icon lock"></a></li>
 					<div class="clear"></div>
 					<div class="submit">
-						<submit onclick="myFunction()" value="登录" class="inputSubmit"/>
+						<s:submit onclick="myFunction()" value="登录" cssClass="inputSubmit"/>
 						<div class="clear"></div>
 					</div>
-				</form>
+				</s:form>
 			</div>
 
 		</div>

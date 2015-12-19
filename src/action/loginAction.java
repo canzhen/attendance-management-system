@@ -53,8 +53,6 @@ public class loginAction extends MyActionSupport{
 		 * 并把老师或学生编号存入session
 		 */
 		if (identity.equals("teacher")){
-			//往session里设置identity
-			session.put("identity", "teacher");
 
 			TeacherHome teacherHome = new TeacherHome();
 			trans = teacherHome.createTransaction();
@@ -62,18 +60,16 @@ public class loginAction extends MyActionSupport{
 			teacher = teacherHome.findById(id);
 			if(teacher==null){
 				msg="该账号不存在";
-				return "indexPage";
+				return SUCCESS;
 			}
 			if(!pwd.equals(teacher.getTpwd())){
 				msg="密码错误";
-				return "indexPage";
+				return SUCCESS;
 			}
 			name = teacher.getTname();
 			trans.commit();
 
 		}else if (identity.equals("student")){
-			//往session里设置identity
-			session.put("identity", "student");
 
 			StudentHome studentHome = new StudentHome();
 			trans = studentHome.createTransaction();
@@ -81,11 +77,11 @@ public class loginAction extends MyActionSupport{
 			student=studentHome.findById(id);
 			if(student==null){
 				msg="该账号不存在";
-				return "indexPage";
+				return SUCCESS;
 			}
 			if(!pwd.equals(student.getSpwd())){
 				msg="密码错误";
-				return "indexPage";
+				return SUCCESS;
 			}
 			name = student.getSname();
 			trans.commit();
@@ -96,7 +92,6 @@ public class loginAction extends MyActionSupport{
 		 * 保存信息到session中
 		 */
 		session.put("identity", identity);
-		session.put("login_result",0);
 		session.put("id", id);
 		session.put("name", name);
 		return SUCCESS;
