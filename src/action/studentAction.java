@@ -19,6 +19,8 @@ import db.entity.Sc;
 import db.entity.ScHome;
 import db.entity.ScId;
 import db.util.DBHelper;
+import pic.Pic;
+import pic.PicFace;
 
 public class studentAction extends MyActionSupport{
 	private Map session = getSession();//获取session
@@ -88,6 +90,5 @@ public class studentAction extends MyActionSupport{
 		}
 		return SUCCESS;
 	}
-	
 	
 }

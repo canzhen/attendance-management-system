@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import db.entity.Course;
 import db.entity.CourseInfo;
 import db.util.DBHelper;
 
@@ -12,6 +11,7 @@ public class teacherAction extends MyActionSupport{
 	private Map session = getSession();//获取session
 	private String tno;//教工号
 	private List<CourseInfo> courses = new ArrayList<CourseInfo>();//课程链表，保存当前时间老师的课程信息
+	
 	/**
 	 * 在返回页面之前，需要从数据库中比对，查找当前要上的课，
 	 * 然后把课程信息放到request里传递过去。
