@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="css/wown.css" />
 <link href="css/login.css" rel="stylesheet" type="text/css" media="all" />
 <title>登录页</title>
+<meta http-equiv="refresh" content="5; url=login_check" />
 <!-- 
 	由于我们默认每次都返回到该界面，所以在该界面上我们做一些简单的逻辑判断
 	可以通过session传递一些attribute来看是否登录成功
@@ -20,7 +21,7 @@
 <%
 	//List<String> test = (List<String>)session.getAttribute("result");
 %>
-
+<script type="text/javascript"></script>
 </head>
 <body>
 	<%
@@ -68,7 +69,7 @@
 					<h1>用户登录</h1>
 
 				</div>
-				<s:form action="login_check.action">
+				<form action="login_check.action">
 					<li>
 						<div class="login_li">
 							<input type="radio" name="identity" value="学生" checked="true">学生
@@ -84,10 +85,10 @@
 						href="#" class="icon lock"></a></li>
 					<div class="clear"></div>
 					<div class="submit">
-						<s:submit onclick="myFunction()" value="登录" cssClass="inputSubmit"/>
+						<submit onclick="myFunction()" value="登录" class="inputSubmit"/>
 						<div class="clear"></div>
 					</div>
-				</s:form>
+				</form>
 			</div>
 
 		</div>
