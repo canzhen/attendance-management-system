@@ -77,19 +77,22 @@ body {
 }
 
 .check_peopleimg {
-    margin-top: 1em;
-    margin-bottom: 2em;
+    width: 800px;
+    height: 370px;
+    margin-top: 16px;
+    margin-bottom: 32px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.check_divsubmitall {
-    text-align: center;
-}
 
 .check_divsubmit {
     margin-left: 20px;
     margin-right: 20px;
+}
+
+.check_divsubmitall {
+    text-align: center;
 }
 
 .check_submit {

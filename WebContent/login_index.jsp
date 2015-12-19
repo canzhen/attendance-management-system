@@ -6,8 +6,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet"  type="text/css"  href="css/header.css"/>
-<link rel="stylesheet"  type="text/css"  href="css/wown.css"/>
+<link rel="stylesheet" type="text/css" href="css/header.css" />
+<link rel="stylesheet" type="text/css" href="css/wown.css" />
 <link href="css/login.css" rel="stylesheet" type="text/css" media="all" />
 <title>登录页</title>
 <!-- 
@@ -22,12 +22,7 @@
 %>
 
 </head>
-
 <body>
-
-<h1><?php echo "Hello Word"; ?></h1>
-
-<!-- 
 	<%
 		//for (int i = 0; i < test.size(); i++){
 	%>
@@ -67,15 +62,15 @@
 	</div>
 	<div class="login_center">
 
-			<div class="message warning">
-				<div class="inset">
-					<div class="login-head">
-						<h1>用户登录</h1>
+		<div class="message warning">
+			<div class="inset">
+				<div class="login-head">
+					<h1>用户登录</h1>
 
-					</div>
-					<s:form action="login_check.action">
+				</div>
+				<s:form action="login_check.action">
 					<li>
-				   	<div class="login_li">
+						<div class="login_li">
 							<input type="radio" name="identity" value="学生" checked="true">学生
 							<input type="radio" name="identity" value="教师">教师 <input
 								type="radio" name="identity" value="管理员">管理员
@@ -89,25 +84,18 @@
 						href="#" class="icon lock"></a></li>
 					<div class="clear"></div>
 					<div class="submit">
-						<s:submit  onclick="myFunction()" value="登录" />
+						<s:submit onclick="myFunction()" value="登录" cssClass="inputSubmit"/>
 						<div class="clear"></div>
 					</div>
-					</s:form>
-				</div>
-				
+				</s:form>
 			</div>
-			
+
+		</div>
+
 	</div>
 	<div class="clear"></div>
 
-<<<<<<< HEAD
-	<div style="display: none"><</div>
-	</form>
-	</div>
-	 -->
-=======
 	<div style="display: none"></div>
->>>>>>> a8067eebb9441ef1662600fcd3ea18cd4210d326
 </body>
 
 </html>

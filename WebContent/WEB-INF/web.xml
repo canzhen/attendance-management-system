@@ -15,7 +15,7 @@
   </filter-mapping>
   
   <welcome-file-list>
-  	<welcome-file>jsp/login_index.jsp</welcome-file>
+  	<welcome-file>login_index.jsp</welcome-file>
   </welcome-file-list>
   
   <!-- session配置 
