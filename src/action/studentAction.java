@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.hibernate.Transaction;
 
+import utils.PicFace;
 import utils.StudentAbsenceTimerTask;
 import utils.TimerHelper;
 import utils.Values;
@@ -19,14 +20,15 @@ import db.entity.Sc;
 import db.entity.ScHome;
 import db.entity.ScId;
 import db.util.DBHelper;
-import pic.Pic;
-import pic.PicFace;
+import pic.entity.FaceEntity;
+import pic.entity.PicEntity;
 
 public class studentAction extends MyActionSupport{
 	private Map session = getSession();//获取session
 	private String sno;//学号
 	private List<CourseInfo> courses = new ArrayList<CourseInfo>();//课程链表，保存当前时间学生的课程信息
 	
+	String msg="";
 	/**
 	 * 在返回页面之前，需要从数据库中比对，查找当前要上的课，
 	 * 然后把课程信息放到request里传递过去。
@@ -88,6 +90,28 @@ public class studentAction extends MyActionSupport{
 		}else{
 			session.put("addAbsenceNumInfo", "error");
 		}
+		return SUCCESS;
+	}
+	
+	public String chooseOneFace(){
+		//左上角坐标点的信息
+		FaceEntity face=(FaceEntity) session.get("face");
+		if(face.getName()==null||face.getName()==""){
+			@SuppressWarnings("unchecked")
+			List<FaceEntity> faceInfo=(List<FaceEntity>) session.get("faces");
+			String name=(String) session.get("id");
+			for(int i=0;i<faceInfo.size();i++){
+				if(faceInfo.get(i).equals(face)){
+					face.setName(name);
+					PicFace picFace=(PicFace) session.get("picface");
+					picFace.setFaceName(face.getcX(), face.getcY(), name);
+				}
+			}
+			msg="设置成功^_^";
+			session.put("faces",faceInfo);
+			return SUCCESS;
+		}
+		msg="该脸已被占用=.=";
 		return SUCCESS;
 	}
 	

@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+import="utils.*"
+import="java.util.*"
+import="pic.entity.*"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -8,6 +11,14 @@
 <link rel="stylesheet" type="text/css" href="css/wown.css" />
 <title>Insert title here</title>
 </head>
+<%
+String url="";
+Picture pic=new Picture();
+List<FaceEntity> faces=new ArrayList<FaceEntity>();
+PicFace picFace=new PicFace(url);
+session.putValue("picface", picFace);
+pic.giveFaces(url, faces, picFace);
+%>
 <script type="text/javascript">
 	//初始化
 	window.onload = function(){

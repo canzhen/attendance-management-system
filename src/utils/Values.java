@@ -13,4 +13,8 @@ public class Values {
 	 * 第二种上课时间
 	 */
 	public static int[] weekTypeTwo={9,16};
+	
+	public static int webX=800;
+	
+	public static int webY=370;
 }

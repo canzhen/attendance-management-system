@@ -1,6 +1,6 @@
-package pic;
+package pic.entity;
 
-public class Face {
+public class FaceEntity {
 	private String id;              //脸的编号
 	private double cX;           //原图片中心x坐标
 	private double cY;            //原图片中心y坐标
@@ -8,12 +8,12 @@ public class Face {
 	private double lY;             //原图片左上角y坐标
 	private double lXInPic;     //网页上图片左上角x坐标
 	private double lYInPic;      //网页上图片左上角y坐标
-	private double width;        //原图片的宽度
-	private double hight;         //原图片的高度
+	private double width;        //图片的宽度
+	private double hight;         //图片的高度
 	private String name;           //脸的名字
 	
 	
-	public Face() {
+	public FaceEntity() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

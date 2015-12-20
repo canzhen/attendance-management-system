@@ -1,4 +1,4 @@
-package pic;
+package utils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -15,17 +15,19 @@ import com.facepp.error.FaceppParseException;
 import com.facepp.http.HttpRequests;
 import com.facepp.http.PostParameters;
 
+import pic.entity.FaceEntity;
+
 
 public class PicFace{
 	static HttpRequests httpRequests= new HttpRequests("626d88a706ecc8f5f3a7b6dca2e8c006", "AuhwhMiAX1xUtt49sX-6_lq9dz_4xvM2", true, true);
 	private  JSONObject result ;
-	private  List<Face> faces;
+	private  List<FaceEntity> faces;
 
 	public PicFace(String url){
 		Charset.forName("UTF-8").name();
 		try {
 			result = httpRequests.detectionDetect(new PostParameters().setUrl(url));
-			faces=new ArrayList<Face>();
+			faces=new ArrayList<FaceEntity>();
 			setFaces();
 			System.out.println("result==="+result);
 		} catch (FaceppParseException e) {
@@ -34,7 +36,7 @@ public class PicFace{
 		}
 	}
 
-	public List<Face> getFaces() {
+	public List<FaceEntity> getFaces() {
 		return faces;
 	}
 
@@ -48,7 +50,7 @@ public class PicFace{
 		Double hight;
 		try {
 			for (int i = 0; i < result.getJSONArray("face").length(); ++i){
-				Face face=new Face();
+				FaceEntity face=new FaceEntity();
 				id= result.getJSONArray("face").getJSONObject(i).getString("id");
 				//获得中心点的坐标
 				x=(Double) result.getJSONArray("face").getJSONObject(i).getJSONObject("position").getJSONObject("center").get("x");
