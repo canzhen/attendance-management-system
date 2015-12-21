@@ -21,7 +21,7 @@ import pic.entity.FaceEntity;
 public class PicFace{
 	static HttpRequests httpRequests= new HttpRequests("626d88a706ecc8f5f3a7b6dca2e8c006", "AuhwhMiAX1xUtt49sX-6_lq9dz_4xvM2", true, true);
 	private  JSONObject result ;
-	private  List<FaceEntity> faces;
+	private static  List<FaceEntity> faces;
 
 	public PicFace(String url){
 		Charset.forName("UTF-8").name();
@@ -51,23 +51,21 @@ public class PicFace{
 		try {
 			for (int i = 0; i < result.getJSONArray("face").length(); ++i){
 				FaceEntity face=new FaceEntity();
-				id= result.getJSONArray("face").getJSONObject(i).getString("id");
 				//获得中心点的坐标
-				x=(Double) result.getJSONArray("face").getJSONObject(i).getJSONObject("position").getJSONObject("center").get("x");
-				y=(Double) result.getJSONArray("face").getJSONObject(i).getJSONObject("position").getJSONObject("center").get("y");
+				x=2*(Double) result.getJSONArray("face").getJSONObject(i).getJSONObject("position").getJSONObject("center").get("x");
+				y=2*(Double) result.getJSONArray("face").getJSONObject(i).getJSONObject("position").getJSONObject("center").get("y");
 				//获得头像宽度和高度
-				width= (Double) result.getJSONArray("face").getJSONObject(i).getJSONObject("position").get("width");
-				hight= (Double) result.getJSONArray("face").getJSONObject(i).getJSONObject("position").get("height");
+				width= 2*(Double) result.getJSONArray("face").getJSONObject(i).getJSONObject("position").get("width");
+				hight= 2*(Double) result.getJSONArray("face").getJSONObject(i).getJSONObject("position").get("height");
 				
-				String sname=result.getJSONArray("face").getJSONObject(i).getString("tag");
-				face.setId(id);
+				String sno=result.getJSONArray("face").getJSONObject(i).getString("tag");
 				face.setcX(x);
 				face.setcY(y);
 				face.setHight(hight);
 				face.setWidth(width);
 				face.setlX(x-width/2);
 				face.setlY(y-hight/2);
-				face.setName(sname);
+				face.setSno(sno);
 				faces.add(face);
 			}
 		} catch (JSONException e) {
@@ -78,15 +76,15 @@ public class PicFace{
 
 
 	//根据中心点设置脸的名字
-	public  void setFaceName(Double x,Double y,String name) {
+	public  void setFaceName(Double x,Double y,String sno) {
 		try {
 			for (int i = 0; i < faces.size(); ++i){
 				Double sx = faces.get(i).getcX();
 				Double sy=faces.get(i).getcY();
 				if(sx==x&&sy==y){	
-					System.out.println("add:"+name);
-					result.getJSONArray("face").getJSONObject(i).put("tag", name);
-					faces.get(i).setName(name);
+					System.out.println("add:"+sno);
+					result.getJSONArray("face").getJSONObject(i).put("tag", sno);
+					faces.get(i).setSno(sno);
 					break;
 				}
 			}
@@ -97,14 +95,14 @@ public class PicFace{
 	}
 
 	//根据中心点删除脸的名字
-	public void deleteFaceName(String name) {
+	public void deleteFaceName(String sno) {
 		try {
 			for (int i = 0; i < result.getJSONArray("face").length(); ++i){
-				String sname=result.getJSONArray("face").getJSONObject(i).getString("tag");
-				if(sname.equals(name)){
-					System.out.println("delete:"+name);
+				String no=result.getJSONArray("face").getJSONObject(i).getString("tag");
+				if(no.equals(sno)){
+					System.out.println("delete:"+sno);
 					result.getJSONArray("face").getJSONObject(i).put("tag", "");
-					faces.get(i).setName("");
+					faces.get(i).setSno("");
 					break;
 				}
 			}
@@ -141,15 +139,15 @@ public class PicFace{
 
 	}
 
-	public String getFaceNameByCenter(Double x,Double y){
-		String sname="";
+	public String getFaceSNoByCenter(Double x,Double y){
+		String sno="";
 		try {
 			for (int i = 0; i < result.getJSONArray("face").length(); ++i){
 				Double sx = (Double) result.getJSONArray("face").getJSONObject(i).getJSONObject("position").getJSONObject("center").get("x");
 				Double sy=(Double) result.getJSONArray("face").getJSONObject(i).getJSONObject("position").getJSONObject("center").get("y");
 				if((sx.equals(x))&&(sy.equals(y))){	
-					sname=result.getJSONArray("face").getJSONObject(i).getString("tag");
-					System.out.println("get:"+sname);
+					sno=result.getJSONArray("face").getJSONObject(i).getString("tag");
+					System.out.println("get:"+sno);
 					break;
 				}
 			}
@@ -157,7 +155,7 @@ public class PicFace{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return sname;
+		return sno;
 	}
 }
 

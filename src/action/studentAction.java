@@ -96,18 +96,18 @@ public class studentAction extends MyActionSupport{
 	public String chooseOneFace(){
 		//左上角坐标点的信息
 		FaceEntity face=(FaceEntity) session.get("face");
-		if(face.getName()==null||face.getName()==""){
+		if(face.getSno()==null||face.getSno()==""){
 			@SuppressWarnings("unchecked")
 			List<FaceEntity> faceInfo=(List<FaceEntity>) session.get("faces");
-			String name=(String) session.get("id");
+			String sno=(String) session.get("id");
 			for(int i=0;i<faceInfo.size();i++){
 				if(faceInfo.get(i).equals(face)){
-					face.setName(name);
+					face.setSno(sno);
 					PicFace picFace=(PicFace) session.get("picface");
-					picFace.setFaceName(face.getcX(), face.getcY(), name);
+					picFace.setFaceName(face.getcX(), face.getcY(), sno);
 				}
 			}
-			msg="设置成功^_^";
+			msg="这张脸是你的啦^_^";
 			session.put("faces",faceInfo);
 			return SUCCESS;
 		}

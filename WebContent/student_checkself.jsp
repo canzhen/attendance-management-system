@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-import="utils.*"
-import="java.util.*"
-import="pic.entity.*"
+	import="utils.*" import="java.util.*" import="pic.entity.*"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -11,26 +9,33 @@ import="pic.entity.*"
 <link rel="stylesheet" type="text/css" href="css/wown.css" />
 <title>Insert title here</title>
 </head>
-<%
-String url="";
-Picture pic=new Picture();
-List<FaceEntity> faces=new ArrayList<FaceEntity>();
-PicFace picFace=new PicFace(url);
-session.putValue("picface", picFace);
-pic.giveFaces(url, faces, picFace);
-%>
+
 <script type="text/javascript">
+//声明Pic对象
+var size = 0;
+var Pic = function(x,y,width,height){
+this.x = x;
+this.y = y;
+this.width = width;
+this.height = height;
+}
+//声明arr数组
+var arr = new Array();
+
 	//初始化
-	window.onload = function(){
+	window.onload = function() {
 		var canvas = document.getElementById('myCanvas');
 		if (canvas.getContext) {
 			var ctx = canvas.getContext('2d');
 
 			ctx.strokeStyle = '#0000ff';
-
+			initData();
 			//左上角的x，y坐标，长宽
-			ctx.strokeRect(10, 10, 50, 50);
-			ctx.strokeRect(70, 10, 50, 50);
+			for(var m=0;m<size;m++){
+				ctx.strokeRect(arr[m].x, arr[m].y, arr[m].width, arr[m].height);
+			}
+			
+			ctx.strokeRect(116, 66, 50, 50);
 
 			//添加事件响应   
 			canvas.addEventListener('click', function(e) {
@@ -41,16 +46,47 @@ pic.giveFaces(url, faces, picFace);
 			}, false);
 		}
 	}
+	//初始化数组数据
+	function initData() {		
+		<%String url="http://homework2zbing-classpic.stor.sinaapp.com/20bc08e8aa5eceb82822b101ec9e662d%20%281%29.jpg";
+		Picture pic=new Picture();
+		List<FaceEntity> faces=new ArrayList<FaceEntity>();
+		PicFace picFace=new PicFace(url);
+		faces=picFace.getFaces();
+		pic.giveFaces(url, faces);
+		int size = 1;
+		size = faces.size();
+		session.putValue("picface", picFace);
+		%>
+		//初始化二维数组
+		size=<%=size%>;
+		for(var m=0;m<size;m++){
+			arr[m]=new Pic(0,0,0,0);
+		}
+		//二维数组赋值
+		<%if(faces!=null){
+			for(int i=0;i<size;i++){%>
+			arr[<%=i%>].x = <%=faces.get(i).getlXInPic()%>;
+			arr[<%=i%>].y = <%=faces.get(i).getlYInPic()%>;
+			arr[<%=i%>].width = <%=faces.get(i).getWidth()%>;
+			arr[<%=i%>].height = <%=faces.get(i).getHight()%>;
+			
+<%}
+		}%>
+	}
+	//基本绘图
 	function init() {
 		var canvas = document.getElementById('myCanvas');
 		if (canvas.getContext) {
 			var ctx = canvas.getContext('2d');
 
 			ctx.strokeStyle = '#0000ff';
-
+			//initData();
 			//左上角的x，y坐标，长宽
-			ctx.strokeRect(10, 10, 50, 50);
-			ctx.strokeRect(70, 10, 50, 50);
+			for(var m=0;m<size;m++){
+				ctx.strokeRect(arr[m].x, arr[m].y, arr[m].width, arr[m].height);
+			}
+			
 			//添加事件响应   
 			canvas.addEventListener('click', function(e) {
 				p = getEventPosition(e);
@@ -59,7 +95,7 @@ pic.giveFaces(url, faces, picFace);
 
 			}, false);
 		}
-		}
+	}
 	//得到点击的坐标   
 	function getEventPosition(ev) {
 		var x, y;
@@ -75,37 +111,7 @@ pic.giveFaces(url, faces, picFace);
 			y : y
 		};
 	}
-	var arr = [ {
-		x : 10,
-		y : 10,
-		width : 50,
-		height : 50
-	}, {
-		x : 70,
-		y : 10,
-		width : 50,
-		height : 50
-	}, {
-		x : 130,
-		y : 10,
-		width : 50,
-		height : 50
-	}, {
-		x : 190,
-		y : 10,
-		width : 50,
-		height : 50
-	}, {
-		x : 250,
-		y : 10,
-		width : 50,
-		height : 50
-	}, {
-		x : 310,
-		y : 10,
-		width : 50,
-		height : 50
-	} ];
+
 	//重绘   
 	function reDraw(p, ctx) {
 		var whichObject = [];
@@ -116,9 +122,9 @@ pic.giveFaces(url, faces, picFace);
 				//清空所有的绘图
 				ctx.clearRect(0, 0, 800, 370);
 				//把所有的脸选择改为false
-				for(var n=0;n<arr.length;n++){
-						arr[n].selected = false;
-					}
+				for (var n = 0; n < arr.length; n++) {
+					arr[n].selected = false;
+				}
 				//把所有的脸的框框绘制出来
 				init();
 				ctx.fillStyle = 'rgba(0,0,255,0.5)';
@@ -170,7 +176,7 @@ pic.giveFaces(url, faces, picFace);
 		<div class="check_tip">请在图中找出并选择你自己，确定提交</div>
 		<div class="check_peopleimg">
 			<canvas id="myCanvas" width="800" height="370"
-				style="background:url(images/test.jpg);background-size:100% 100%">
+				style="background:url(http://homework2zbing-classpic.stor.sinaapp.com/20bc08e8aa5eceb82822b101ec9e662d%20%281%29.jpg);background-size:100% 100%">
 		</div>
 		<div class="check_divsubmitall">
 			<input class="check_submit" type="button" value="取消" /> <input

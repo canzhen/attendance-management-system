@@ -13,7 +13,7 @@
 	如果正在点名并且老师已经上传图片，那么显示图片供学生签到。
  -->
  
- <%= (int)session.getAttribute("classNum")%>
+ 
 </head>
 <script>
 	function ScrollImgLeft() {
@@ -43,7 +43,8 @@
 		//需要获取的参数:总行数，每列的值，进读条在程序中生成html语句传过来字符串,字符串格式入下
 		document.all.table1.innerHTML = "";
 		var mytable = document.getElementById("myTable");
-		var getTr = 5;
+		//获取课程数
+		var getTr = <%= (int)session.getAttribute("classNum")%>;
 		//动态创建表格
 
 		for (var i = 1; i <= getTr; i++) {
