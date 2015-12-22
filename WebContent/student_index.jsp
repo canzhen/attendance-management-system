@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+	import="utils.*" import="java.util.*" import="pic.entity.*"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -6,72 +7,139 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="css/header.css" />
 <link rel="stylesheet" type="text/css" href="css/wown.css" />
-<link rel="stylesheet" type="text/css" href="css/processbar.css" />
-<title>学生首页</title>
-<!-- 
-	若该时间段有课，那么显示该节课的各种信息。
-	如果正在点名并且老师已经上传图片，那么显示图片供学生签到。
- -->
- 
- 
+<title>Insert title here</title>
 </head>
-<script>
-	function ScrollImgLeft() {
-		var speed = 50;
-		var scroll_begin = document.getElementById("scroll_begin");
-		var scroll_end = document.getElementById("scroll_end");
-		var scroll_div = document.getElementById("scroll_div");
-		scroll_end.innerHTML = scroll_begin.innerHTML + scroll_begin.innerHTML
-				+ scroll_begin.innerHTML;
 
-		function Marquee() {
-			if (scroll_end.offsetWidth - scroll_div.scrollLeft <= 0)
-				scroll_div.scrollLeft -= scroll_begin.offsetWidth;
-			else
-				scroll_div.scrollLeft++;
-		}
-		var MyMar = setInterval(Marquee, speed);
-		scroll_div.onmouseover = function() {
-			clearInterval(MyMar);
-		}
-		scroll_div.onmouseout = function() {
-			MyMar = setInterval(Marquee, speed);
+<script type="text/javascript">
+//声明Pic对象
+var size = 0;
+var Pic = function(x,y,width,height){
+this.x = x;
+this.y = y;
+this.width = width;
+this.height = height;
+}
+//声明arr数组
+var arr = new Array();
+
+	//初始化
+	window.onload = function() {
+		var canvas = document.getElementById('myCanvas');
+		if (canvas.getContext) {
+			var ctx = canvas.getContext('2d');
+
+			ctx.strokeStyle = '#0000ff';
+			initData();
+			//左上角的x，y坐标，长宽
+			for(var m=0;m<size;m++){
+				ctx.strokeRect(arr[m].x, arr[m].y, arr[m].width, arr[m].height);
+			}
+			
+			ctx.strokeRect(116, 66, 50, 50);
+
+			//添加事件响应   
+			canvas.addEventListener('click', function(e) {
+				p = getEventPosition(e);
+
+				reDraw(p, ctx);
+
+			}, false);
 		}
 	}
-
-	function getValue() {
-		//需要获取的参数:总行数，每列的值，进读条在程序中生成html语句传过来字符串,字符串格式入下
-		document.all.table1.innerHTML = "";
-		var mytable = document.getElementById("myTable");
-		//获取课程数
-		var getTr = <%= (int)session.getAttribute("classNum")%>;
-		//动态创建表格
-
-		for (var i = 1; i <= getTr; i++) {
-			var tr = document.createElement("tr");
-			var td = document.createElement("td");
-			var newl, newc;
-			newl = mytable.insertRow();
-			//第一列
-			newc = newl.insertCell();
-			newc.innerHTML = 'Javaee&nbsp;&nbsp;李辉';
-
-			//第二列
-			newc = newl.insertCell();
-			newc.innerHTML = '周二&nbsp;&nbsp;6节&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1-16周]';
-
-			//第三列
-			newc = newl.insertCell();
-			newc.innerHTML = '<div class="progress" id="myprogress">'
-					+ '<span id="progressbar_out" class="blue" style="width: 33%;"><span id="progressbar_in">1/3</span></span>'
-					+ '</div>';
-
-			mytable.appendChild(tr);
+	//初始化数组数据
+	function initData() {		
+		<%String url="http://homework2zbing-classpic.stor.sinaapp.com/20bc08e8aa5eceb82822b101ec9e662d%20%281%29.jpg";
+		Picture pic=new Picture();
+		List<FaceEntity> faces=new ArrayList<FaceEntity>();
+		PicFace picFace=new PicFace(url);
+		faces=picFace.getFaces();
+		pic.giveFaces(url, faces);
+		int size = 1;
+		size = faces.size();
+		session.putValue("picface", picFace);
+		%>
+		//初始化二维数组
+		size=<%=size%>;
+		for(var m=0;m<size;m++){
+			arr[m]=new Pic(0,0,0,0);
 		}
+		//二维数组赋值
+		<%if(faces!=null){
+			for(int i=0;i<size;i++){%>
+			arr[<%=i%>].x = <%=faces.get(i).getlXInPic()%>;
+			arr[<%=i%>].y = <%=faces.get(i).getlYInPic()%>;
+			arr[<%=i%>].width = <%=faces.get(i).getWidth()%>;
+			arr[<%=i%>].height = <%=faces.get(i).getHight()%>;
+			
+<%}
+		}%>
+	}
+	//基本绘图
+	function init() {
+		var canvas = document.getElementById('myCanvas');
+		if (canvas.getContext) {
+			var ctx = canvas.getContext('2d');
 
+			ctx.strokeStyle = '#0000ff';
+			//initData();
+			//左上角的x，y坐标，长宽
+			for(var m=0;m<size;m++){
+				ctx.strokeRect(arr[m].x, arr[m].y, arr[m].width, arr[m].height);
+			}
+			
+			//添加事件响应   
+			canvas.addEventListener('click', function(e) {
+				p = getEventPosition(e);
+
+				reDraw(p, ctx);
+
+			}, false);
+		}
+	}
+	//得到点击的坐标   
+	function getEventPosition(ev) {
+		var x, y;
+		if (ev.layerX || ev.layerX == 0) {
+			x = ev.layerX;
+			y = ev.layerY;
+		} else if (ev.offsetX || ev.offsetX == 0) { // Opera   
+			x = ev.offsetX;
+			y = ev.offsetY;
+		}
+		return {
+			x : x,
+			y : y
+		};
+	}
+
+	//重绘   
+	function reDraw(p, ctx) {
+		var whichObject = [];
+		for (var i = 0; i < arr.length; i++) {
+			if (p && (arr[i].x + arr[i].width) >= p.x && p.x >= arr[i].x
+					&& (arr[i].y + arr[i].height) >= p.y && p.y >= arr[i].y) {
+				whichObject.push(i);
+				//清空所有的绘图
+				ctx.clearRect(0, 0, 800, 370);
+				//把所有的脸选择改为false
+				for (var n = 0; n < arr.length; n++) {
+					arr[n].selected = false;
+				}
+				//把所有的脸的框框绘制出来
+				init();
+				ctx.fillStyle = 'rgba(0,0,255,0.5)';
+				ctx.strokeStyle = '#0000ff';
+				//把选中的脸标记位true
+				arr[i].selected = true;
+				//绘制选中的脸
+				ctx.fillRect(arr[i].x, arr[i].y, arr[i].width, arr[i].height);
+				ctx.strokeRect(arr[i].x, arr[i].y, arr[i].width, arr[i].height);
+				break;
+			}
+		}
 	}
 </script>
-<body onload="getValue();">
+<body>
 	<div class="header">
 		<div class="header-top">
 			<div class="container">
@@ -100,54 +168,21 @@
 			alt="" /></a>
 		<div class="clearfix"></div>
 	</div>
-	<div id="gongao">
-		<div class="scroll_div" id="scroll_div"
-			style="width: 60%; height: 30px; margin: 0 auto; white-space: nowrap; overflow: hidden;">
-			<div id="scroll_begin">哈哈哈哈哈，你javaee点名都没来，你要挂科啦啦啦</div>
-			<div id="scroll_end"> </div>
+	<div class="welcome_center">
+		<div>
+			<label id="courseTeancher" name="courseTeancher"
+				class="check_coursefont">Javaee 李辉</label>
 		</div>
-		<script type="text/javascript">
-			ScrollImgLeft();
-		</script>
-	</div>
-	<!--
-    <table>
-        <tr>
-            <td>行数:
-                <input type="text" id="inputTr" />
-            </td>
-            <td>列数:
-                <input type="text" id="inputTd" />
-            </td>
-            <tr>
-                <tr>
-                    <td>
-                        <input type="button" value="确定" onClick="getValue()">
-                    </td>
-                    <td>
-                        <input type="button" value="取消" onClick="cancle();" />
-                    </td>
-                </tr>
-    </table>
--->
-	<!--
-    <div class="progress" id="myprogress">
-        <span id="progressbar_out" class="blue" style="width: 20%;"><span id="progressbar_in">20%</span></span>
-    </div>
--->
-	<div class="table-c">
-		<table id="myTable">
-			<tbody>
-				<tr>
-					<td>课程</td>
-					<td>时间</td>
-					<td>缺课情况<font size="2pt" color="#8D8D8D">&nbsp;&nbsp;&nbsp;(缺勤数/最大缺勤数)</font></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	<div id="table1">
-		<p>&nbsp;</p>
+		<div class="check_tip">请在图中找出并选择你自己，确定提交</div>
+		<div class="check_peopleimg">
+			<canvas id="myCanvas" width="800" height="370"
+				style="background:url(http://homework2zbing-classpic.stor.sinaapp.com/20bc08e8aa5eceb82822b101ec9e662d%20%281%29.jpg);background-size:100% 100%">
+		</div>
+		<div class="check_divsubmitall">
+			<input class="check_submit" type="button" value="取消" /> <input
+				class="check_submit" type="submit" value="确定" />
+		</div>
+
 	</div>
 </body>
 </html>
