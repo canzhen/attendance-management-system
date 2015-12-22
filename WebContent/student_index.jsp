@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	import="utils.*" import="java.util.*" import="pic.entity.*"
+	import="utils.*" import="java.util.*" import="pic.entity.*" import="db.entity.*"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -24,6 +24,7 @@ var arr = new Array();
 
 	//初始化
 	window.onload = function() {
+		
 		var canvas = document.getElementById('myCanvas');
 		if (canvas.getContext) {
 			var ctx = canvas.getContext('2d');
@@ -36,7 +37,6 @@ var arr = new Array();
 			}
 			
 			ctx.strokeRect(116, 66, 50, 50);
-
 			//添加事件响应   
 			canvas.addEventListener('click', function(e) {
 				p = getEventPosition(e);
@@ -46,16 +46,16 @@ var arr = new Array();
 			}, false);
 		}
 	}
+
 	//初始化数组数据
 	function initData() {		
-		<%String url="http://homework2zbing-classpic.stor.sinaapp.com/20bc08e8aa5eceb82822b101ec9e662d%20%281%29.jpg";
+		<% String url="http://homework2zbing-classpic.stor.sinaapp.com/20bc08e8aa5eceb82822b101ec9e662d%20%281%29.jpg";
 		List<FaceEntity> faces=new ArrayList<FaceEntity>();
 		PicFace picFace=new PicFace(url);
 		faces=picFace.getFaces();
 		int size = 1;
 		size = faces.size();
-		session.putValue("picface", picFace);
-		%>
+		session.putValue("picface", picFace); %>
 		//初始化二维数组
 		size=<%=size%>;
 		for(var m=0;m<size;m++){
@@ -81,10 +81,10 @@ var arr = new Array();
 			ctx.strokeStyle = '#0000ff';
 			//initData();
 			//左上角的x，y坐标，长宽
-			for(var m=0;m<size;m++){
+			for (var m = 0; m < size; m++) {
 				ctx.strokeRect(arr[m].x, arr[m].y, arr[m].width, arr[m].height);
 			}
-			
+
 			//添加事件响应   
 			canvas.addEventListener('click', function(e) {
 				p = getEventPosition(e);
@@ -135,6 +135,25 @@ var arr = new Array();
 				break;
 			}
 		}
+	}
+	function judge(){
+		
+		var count = <%=session.getAttribute("count")%>;
+		
+		if ( count == 1 ){//当天有一节课，返回SUCCESS
+			//session.put("coursesInfo", courses.get(0));//传入当前课程的类，包含具体信息
+			<% CourseInfo course = (CourseInfo)session.getAttribute("coursesInfo");%>
+			document.getElementById("courseTeancher").innerHTML=<%=course.getCname()%>;
+		}else if ( count > 1){//课程冲突，返回SUCCESS，由界面判断处理
+			//session.put("coursesInfo", courses);//课程冲突，将所有课传入，便于页面显示
+			<% CourseInfo course = (CourseInfo)session.getAttribute("coursesInfo");%>
+			alert();
+		}else if ( count == -1 ){//当天无课，返回SUCCESS，由界面判断处理
+			//session.put("coursesInfo", "这周不属于上课周，放假或者为自习周，无课");
+			var str = <%=session.getAttribute("coursesInfo")%>;
+			alert(str);
+		}
+	
 	}
 </script>
 <body>

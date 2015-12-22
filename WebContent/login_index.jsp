@@ -22,21 +22,20 @@
 <script type="text/javascript">
 	window.onload = function()
 	{
-		var judge =
-<%=session.getAttribute("id")%>
-	;
-		var identity =
-"<%=session.getAttribute("identity")%>";
+		var judge = <%=session.getAttribute("id")%>;
+		var identity = "<%=session.getAttribute("identity")%>";
 		if (judge != null) {
-
+			
 			//登录判断是什么身份
 			if (identity == "student") {
-				document.innerHTML = '<meta http-equiv="refresh" content="5; url=studentAction_index"/>';
+				document.location.href="student_index";
+				//document.innerHTML = '<meta http-equiv="refresh" content="5; url=studentAction_index"/>';
 				//登录成功判断跳进哪个界面
 
 			} else if (identity == "teacher") {
 				//进入老师的界面
-			}
+				document.location.href="teacher_index";
+		}
 
 		}
 	}
