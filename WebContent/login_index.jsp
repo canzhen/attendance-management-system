@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+	import="java.util.List" import="db.entity.*" 
 	pageEncoding="UTF-8"%>
-<%@page import="java.util.List"%>
-<%@page import="db.entity.Teacher"%>
-<%@page import="db.entity.Teacher"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
 <html>
@@ -72,44 +70,41 @@
 			alt="" /></a>
 		<div class="clearfix"></div>
 	</div>
+	
 	<div class="login_center">
-		<s:form action="login_check.action"  cssStyle="padding: 3em 2em;">
-		<div class="message warning">
-			<div class="inset">
-				<div class="login-head">
-					<h1>用户登录</h1>
+		<s:form action="login_check"  method="post" cssStyle="padding: 3em 2em;">
+			<div class="message warning">
+				<div class="inset">
+					<div class="login-head">
+						<h1>用户登录</h1>
+					</div>
+						<s:div cssClass="login_li">
+							<s:radio list="#{'student':'学生','teacher':'老师','manager':'管理员' }"
+								value="student" name="identity" cssStyle=" color: #8D8D8D;
+	    						font-size: 20px;">
+							</s:radio>
+						</s:div>
+						<s:div cssClass="divbackground">
+							<s:textfield name="id" placeholder="用户名"></s:textfield>
+							<img alt="" src="images/name.png">
+						</s:div>
+						<s:div cssClass="divbackground">
+							<s:password name="pwd" placeholder="密码"></s:password>
+							<img alt="" src="images/pwd.png">
+						</s:div>
+						<s:div cssClass="submit">
+							<s:submit value="登录" cssClass="inputSubmit" />
+						</s:div>
 				</div>
-				
-					<s:div cssClass="login_li">
-						<s:radio list="#{'student':'学生','teacher':'老师','manager':'管理员' }"
-							value="student" name="identity" cssStyle=" color: #8D8D8D;
-    						font-size: 20px;">
-						</s:radio>
-					</s:div>
-					<s:div cssClass="divbackground">
-						<s:textfield name="id" placeholder="用户名"></s:textfield>
-						<img alt="" src="images/name.png">
-					</s:div>
-					<s:div cssClass="divbackground">
-						<s:password name="pwd" placeholder="密码"></s:password>
-						<img alt="" src="images/pwd.png">
-					</s:div>
-					<s:div cssClass="submit">
-						<s:submit value="登录" cssClass="inputSubmit" />
-					</s:div>
-				
-
-
 			</div>
-
-		</div>
-
-	</s:form>
+		</s:form>
+	
 		<div style="text-align: center">
 			<font color="red" size="12pt"><s:property value="msg" /></font>
 		</div>
-
 	</div>
+	
+	
 	<div class="clear"></div>
 
 	<div style="display: none"></div>

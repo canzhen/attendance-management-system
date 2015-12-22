@@ -59,10 +59,12 @@ public class teacherAction extends MyActionSupport{
 		}
 	}
 	
-	
+	/**
+	 * 修改老师点名的时长
+	 * @return
+	 */
 	public String editChecktime(){
 		DBHelper.editTcValue("11111111", "cs002", "checktime", 11);
 		return SUCCESS;
 	}
-	
 }

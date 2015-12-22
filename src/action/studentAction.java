@@ -65,6 +65,10 @@ public class studentAction extends MyActionSupport{
 		}
 	}
 	
+	/**
+	 * 在数据库内的缺勤次数上加一
+	 * @return
+	 */
 	public String addAbsenceNum(){
 		String stuId="";
 		String className="";
@@ -81,6 +85,10 @@ public class studentAction extends MyActionSupport{
 		return SUCCESS;
 	}
 	
+	/**
+	 * 选择自己的脸，并将信息进行处理和传递
+	 * @return
+	 */
 	public String chooseOneFace(){
 		//左上角坐标点的信息
 		FaceEntity face=(FaceEntity) session.get("face");

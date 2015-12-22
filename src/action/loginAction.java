@@ -1,7 +1,5 @@
 package action;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Transaction;
@@ -19,14 +17,12 @@ import db.entity.TeacherHome;
  */
 public class loginAction extends MyActionSupport{
 	private Map session;
-	/**
-	 * 身份，老师或者学生
-	 */
 	private String identity="";
 	/**
 	 * 用户名，可以是老师的也可以是学生的
 	 */
 	private String id="";
+
 	/**
 	 * 密码
 	 */
@@ -96,6 +92,45 @@ public class loginAction extends MyActionSupport{
 		session.put("name", name);
 		return SUCCESS;
 
+	}
+	
+	public String getIdentity() {
+		return identity;
+	}
+
+
+	public void setIdentity(String identity) {
+		this.identity = identity;
+	}
+
+
+	public String getId() {
+		return id;
+	}
+
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
+	public String getPwd() {
+		return pwd;
+	}
+
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+
+
+	public String getMsg() {
+		return msg;
+	}
+
+
+	public void setMsg(String msg) {
+		this.msg = msg;
 	}
 		
 }
