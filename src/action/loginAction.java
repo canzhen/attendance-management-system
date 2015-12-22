@@ -22,15 +22,15 @@ public class loginAction extends MyActionSupport{
 	/**
 	 * 身份，老师或者学生
 	 */
-	private String identity="student";
+	private String identity;
 	/**
 	 * 用户名，可以是老师的也可以是学生的
 	 */
-	private String id="13301085";
+	private String id;
 	/**
 	 * 密码
 	 */
-	private String pwd="111";
+	private String pwd;
 
 	/**
 	 * 错误信息

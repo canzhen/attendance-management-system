@@ -7,7 +7,7 @@ import java.util.Map;
 import pic.entity.FaceEntity;
 import pic.entity.PicEntity;
 
-public class Picture {
+public class PictureHelper {
 
 	//提供脸的左上角的信息
 	public void giveFaces( String url,List<FaceEntity> faceInfo){

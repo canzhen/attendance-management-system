@@ -1,6 +1,7 @@
 package pic.entity;
 
 import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -50,12 +51,11 @@ public class PicEntity {
 		
 	}
 
-	
 	/**
 	 * 
 	 * @param imgUrl 图片地址
 	 * @return 
-	 */
+	*/
 	private BufferedImage getBufferedImage(String imgUrl) {
 		URL url = null;
 		InputStream is = null;
