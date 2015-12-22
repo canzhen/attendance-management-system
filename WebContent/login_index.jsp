@@ -75,9 +75,9 @@
 				<s:form action="login_check.action">
 					<li>
 						<div class="login_li">
-							<input type="radio" name="identity" value="学生" checked="true">学生
-							<input type="radio" name="identity" value="教师">教师 <input
-								type="radio" name="identity" value="管理员">管理员
+							<input type="radio" name="identity" value="student" checked="true">学生
+							<input type="radio" name="identity" value="teacher">教师 
+							<input type="radio" name="identity" value="管理员">管理员
 						</div>
 
 					</li>
