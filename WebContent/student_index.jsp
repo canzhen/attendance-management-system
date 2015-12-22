@@ -49,11 +49,9 @@ var arr = new Array();
 	//初始化数组数据
 	function initData() {		
 		<%String url="http://homework2zbing-classpic.stor.sinaapp.com/20bc08e8aa5eceb82822b101ec9e662d%20%281%29.jpg";
-		Picture pic=new Picture();
 		List<FaceEntity> faces=new ArrayList<FaceEntity>();
 		PicFace picFace=new PicFace(url);
 		faces=picFace.getFaces();
-		pic.giveFaces(url, faces);
 		int size = 1;
 		size = faces.size();
 		session.putValue("picface", picFace);

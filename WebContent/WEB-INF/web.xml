@@ -15,7 +15,7 @@
   </filter-mapping>
   
   <welcome-file-list>
-  	<welcome-file>welcome.jsp</welcome-file>
+  	<welcome-file>student_index.jsp</welcome-file>
   </welcome-file-list>
   
   <!-- session配置 

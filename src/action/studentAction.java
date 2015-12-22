@@ -1,27 +1,15 @@
 package action;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-import org.hibernate.Transaction;
-
 import utils.PicFace;
 import utils.StudentAbsenceTimerTask;
-import utils.TimerHelper;
-import utils.Values;
 import db.entity.Course;
-import db.entity.CourseHome;
 import db.entity.CourseInfo;
-import db.entity.Sc;
-import db.entity.ScHome;
-import db.entity.ScId;
 import db.util.DBHelper;
 import pic.entity.FaceEntity;
-import pic.entity.PicEntity;
 
 public class studentAction extends MyActionSupport{
 	private Map session = getSession();//获取session
