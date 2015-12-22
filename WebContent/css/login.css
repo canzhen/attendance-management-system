@@ -36,25 +36,7 @@ body{
 	background-position: center;
 	background-size: cover;
 }
-.message.warning  {
-	background: rgba(255, 255, 255, 0.33);
-	-moz-box-shadow: 0 0 0 3px rgba(56, 41, 32, 0.25);
-    -webkit-box-shadow: 0 0 0 3px rgba(56, 41, 32, 0.25);
-    box-shadow: 0 0 0 3px rgba(56, 41, 32, 0.25);
-    margin:auto;
-	width: 26%;
-}
-.login-head {
-	padding: 2em 0;
-	background: #2a72bf;
-	position:relative;
-}
-.login-head h1 {
-	color: #fff;
-	font-size: 1.5em;
-	text-align: left;
-	margin: 0 23px;
-}
+
 
 .inset li{
 	border: 2px ridge rgba(187, 185, 189, 0.11);

@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+	import="java.util.List" import="db.entity.*" 
 	pageEncoding="UTF-8"%>
-<%@page import="java.util.List"%>
-<%@page import="db.entity.Teacher"%>
-<%@page import="db.entity.Teacher"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
 <html>
@@ -22,16 +20,25 @@
 	若未登录则提示登录，若登录失败则用javascript写出用户名密码错误等等信息
  -->
 <script type="text/javascript">
-	window.onload()
+	window.onload = function()
 	{
-		if (true) {
-			//登录成功判断跳进哪个界面
-			if (true)
-				document.location.href = "student_checkself.jsp"
-			else
-				document.location.href = "student_index.jsp"
-		}
+		var judge =
+<%=session.getAttribute("id")%>
+	;
+		var identity =
+"<%=session.getAttribute("identity")%>";
+		if (judge != null) {
 
+			//登录判断是什么身份
+			if (identity == "student") {
+				document.innerHTML = '<meta http-equiv="refresh" content="5; url=studentAction_index"/>';
+				//登录成功判断跳进哪个界面
+
+			} else if (identity == "teacher") {
+				//进入老师的界面
+			}
+
+		}
 	}
 </script>
 
@@ -64,43 +71,41 @@
 			alt="" /></a>
 		<div class="clearfix"></div>
 	</div>
+	
 	<div class="login_center">
-
-		<div class="message warning">
-			<div class="inset">
-				<div class="login-head">
-					<h1>用户登录</h1>
-
-				</div>
-				<s:form action="login_check.action">
-					<li>
-						<div class="login_li">
-							<input type="radio" name="identity" value="student" checked="true">学生
-							<input type="radio" name="identity" value="teacher">教师 
-							<input type="radio" name="identity" value="管理员">管理员
-						</div>
-
-					</li>
-					<li><input type="text" class="text" placeholder="用户名"><a
-						href="#" class=" icon user"></a></li>
-					<div class="clear"></div>
-					<li><input type="password" placeholder="密码"> <a
-						href="#" class="icon lock"></a></li>
-					<div class="clear"></div>
-					<div class="submit">
-						<s:a href=""></s:a>
-						<s:submit value="登录" cssClass="inputSubmit" />
-						<div class="clear"></div>
+		<s:form action="login_check"  method="post" cssStyle="padding: 3em 2em;">
+			<div class="message warning">
+				<div class="inset">
+					<div class="login-head">
+						<h1>用户登录</h1>
 					</div>
-				</s:form>
+						<s:div cssClass="login_li">
+							<s:radio list="#{'student':'学生','teacher':'老师','manager':'管理员' }"
+								value="student" name="identity" cssStyle=" color: #8D8D8D;
+	    						font-size: 20px;">
+							</s:radio>
+						</s:div>
+						<s:div cssClass="divbackground">
+							<s:textfield name="id" placeholder="用户名"></s:textfield>
+							<img alt="" src="images/name.png">
+						</s:div>
+						<s:div cssClass="divbackground">
+							<s:password name="pwd" placeholder="密码"></s:password>
+							<img alt="" src="images/pwd.png">
+						</s:div>
+						<s:div cssClass="submit">
+							<s:submit value="登录" cssClass="inputSubmit" />
+						</s:div>
+				</div>
 			</div>
-
-		</div>
+		</s:form>
+	
 		<div style="text-align: center">
 			<font color="red" size="12pt"><s:property value="msg" /></font>
 		</div>
-
 	</div>
+	
+	
 	<div class="clear"></div>
 
 	<div style="display: none"></div>

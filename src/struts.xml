@@ -31,7 +31,7 @@
     <include file="example.xml"/>
     -->
     
-    
+    <constant name="struts.ui.theme" value="simple" />
     <constant name="struts.devMode" value="true"/>
     <constant name="struts.i18n.encoding" value="UTF-8"/>
     <package name="default" namespace="/" extends="struts-default">
