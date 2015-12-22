@@ -42,28 +42,34 @@ public class PicFace{
 
 	//获得所有图片的脸的信息
 	private void setFaces(){
-		String id;
 		Double x;
 		Double y;
 		Double width;
 		Double hight;
+
 		try {
 			for (int i = 0; i < result.getJSONArray("face").length(); ++i){
 				FaceEntity face=new FaceEntity();
 				//获得中心点的坐标
-				x=2*(Double) result.getJSONArray("face").getJSONObject(i).getJSONObject("position").getJSONObject("center").get("x");
-				y=2*(Double) result.getJSONArray("face").getJSONObject(i).getJSONObject("position").getJSONObject("center").get("y");
+				x=(Double) result.getJSONArray("face").getJSONObject(i).getJSONObject("position").getJSONObject("center").get("x");
+				y=(Double) result.getJSONArray("face").getJSONObject(i).getJSONObject("position").getJSONObject("center").get("y");
 				//获得头像宽度和高度
-				width= 2*(Double) result.getJSONArray("face").getJSONObject(i).getJSONObject("position").get("width");
-				hight= 2*(Double) result.getJSONArray("face").getJSONObject(i).getJSONObject("position").get("height");
+				width= (Double) result.getJSONArray("face").getJSONObject(i).getJSONObject("position").get("width");
+				hight= (Double) result.getJSONArray("face").getJSONObject(i).getJSONObject("position").get("height");
 				
 				String sno=result.getJSONArray("face").getJSONObject(i).getString("tag");
+				
+
+				x=Values.webX*x/100;
+				y=Values.webY*y/100;
+				width=Values.webX*width/100;
+				hight=Values.webY*hight/100;
 				face.setcX(x);
 				face.setcY(y);
 				face.setHight(hight);
 				face.setWidth(width);
-				face.setlX(x-width/2);
-				face.setlY(y-hight/2);
+				face.setlXInPic(x-width/2);
+				face.setlYInPic(y-hight/2);
 				face.setSno(sno);
 				faces.add(face);
 			}
