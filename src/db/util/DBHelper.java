@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.hibernate.Transaction;
 
+import com.mysql.jdbc.ResultSet;
+
 import utils.DateCalculator;
 import utils.Values;
 import db.entity.Course;
@@ -15,6 +17,9 @@ import db.entity.CourseInfo;
 import db.entity.Sc;
 import db.entity.ScHome;
 import db.entity.ScId;
+import db.entity.Student;
+import db.entity.StudentHome;
+import db.entity.StudentInfo;
 import db.entity.Tc;
 import db.entity.TcHome;
 import db.entity.TcId;
@@ -140,12 +145,14 @@ public class DBHelper {
 	}
 	
 	
-	
+	/**
+	 * 根据tno和cno查询课程的具体信息
+	 * @param tno 教师编号
+	 * @param cno 课程编号
+	 * @return 课程的具体信息
+	 */
 	private static Tc getCourseDetails(String tno,String cno){
-		
-		/*
-		 * 根据tno和cno查询课程的具体信息
-		 */
+
 		TcHome tchome = new TcHome();
 		TcId tcid = new TcId();
 		tcid.setTno(tno);
@@ -168,6 +175,7 @@ public class DBHelper {
 	 */
 	private static void setCourseInfo(CourseInfo courseInfo,
 			Course course,Tc courseDetails,String identity,String id){
+		
 		courseInfo.setCno(courseDetails.getId().getCno());//设置课程编号
 		courseInfo.setCname(course.getCname());//设置课程名字
 		courseInfo.setCheckTime(courseDetails.getCheckTime());
@@ -180,8 +188,8 @@ public class DBHelper {
 			scid.setCno(cno);
 			scid.setSno(sno);
 			Sc result = schome.findById(scid);
-			courseInfo.setAbsenceNum(result.getAbsenceNum());
 			tran.commit();
+			courseInfo.setAbsenceNum(result.getAbsenceNum());
 		}
 	}
 	
@@ -269,6 +277,32 @@ public class DBHelper {
 			result.setMaxAbsence(value);
 		tchome.merge(result);//更新数据库信息
 		tran.commit();
+	}
+	
+	/**
+	 * 获取当前课程的所有没到的学生的学号、姓名和缺勤数
+	 * @return 学生信息的列表
+	 */
+	public static List<StudentInfo> getStudentInfoForAClassByCnoTno(String cno,String tno){
+		List<StudentInfo> result = new ArrayList<StudentInfo>();
+		List<Sc> students =new  ScHome().findByCnoTno(cno, tno);
+		StudentInfo tempInfo = new StudentInfo();
+		Sc tempSc = new Sc();
+		Student tempStudent = new Student();
+		StudentHome tempSHome = new StudentHome();
+		
+		for (int i = 0; i < students.size(); i++){
+			Transaction tran = tempSHome.createTransaction();
+			tempInfo = new StudentInfo();
+			tempSc = students.get(i);
+			tempInfo.setSno(tempSc.getId().getSno());
+			tempInfo.setAbsenceNum(tempSc.getAbsenceNum());
+			tempStudent = tempSHome.findById(tempSc.getId().getSno());
+			tempInfo.setSname(tempStudent.getSname());
+			result.add(tempInfo);
+			tran.commit();
+		}
+		return result;
 	}
 	
 }

@@ -147,5 +147,18 @@ public class ScHome {
 		}
 		return result;
 	}
-
+	
+	public List findByCnoTno(String cno,String tno){
+		String hql = "from Sc sc where sc.id.cno=:cno and sc.tno=:tno";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("cno",cno);
+		query.setParameter("tno", tno);
+		List result = query.list();
+		if (result == null){
+			log.debug("get successful, no instance found");
+		} else {
+			log.debug("get successful, instance found");
+		}
+		return result;
+	}
 }

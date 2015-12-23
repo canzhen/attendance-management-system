@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import db.entity.CourseInfo;
+import db.entity.StudentInfo;
 import db.util.DBHelper;
 
 public class teacherAction extends MyActionSupport{
@@ -65,6 +66,11 @@ public class teacherAction extends MyActionSupport{
 	 */
 	public String editChecktime(){
 		DBHelper.editTcValue("11111111", "cs002", "checktime", 11);
+		return SUCCESS;
+	}
+	
+	public String getStudentInfoForAClass(){
+		List result = DBHelper.getStudentInfoForAClassByCnoTno("cs001","1111114");
 		return SUCCESS;
 	}
 }
