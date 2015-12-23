@@ -6,23 +6,9 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.hibernate.Transaction;
-
-import com.mysql.jdbc.ResultSet;
-
 import utils.DateCalculator;
 import utils.Values;
-import db.entity.Course;
-import db.entity.CourseHome;
-import db.entity.CourseInfo;
-import db.entity.Sc;
-import db.entity.ScHome;
-import db.entity.ScId;
-import db.entity.Student;
-import db.entity.StudentHome;
-import db.entity.StudentInfo;
-import db.entity.Tc;
-import db.entity.TcHome;
-import db.entity.TcId;
+import db.entity.*;
 
 public class DBHelper {
 	/**
@@ -280,14 +266,17 @@ public class DBHelper {
 	 */
 	public static List<StudentInfo> getStudentInfoForAClassByCnoTno(String cno,String tno){
 		List<StudentInfo> result = new ArrayList<StudentInfo>();
-		List<Sc> students =new  ScHome().findByCnoTno(cno, tno);
+		ScHome schome = new ScHome();
+		Transaction tran = schome.createTransaction();
+		List<Sc> students =schome.findByCnoTno(cno, tno);
+		tran.commit();
 		StudentInfo tempInfo = new StudentInfo();
 		Sc tempSc = new Sc();
 		Student tempStudent = new Student();
 		StudentHome tempSHome = new StudentHome();
 		
 		for (int i = 0; i < students.size(); i++){
-			Transaction tran = tempSHome.createTransaction();
+			Transaction tran1 = tempSHome.createTransaction();
 			tempInfo = new StudentInfo();
 			tempSc = students.get(i);
 			tempInfo.setSno(tempSc.getId().getSno());
@@ -295,7 +284,7 @@ public class DBHelper {
 			tempStudent = tempSHome.findById(tempSc.getId().getSno());
 			tempInfo.setSname(tempStudent.getSname());
 			result.add(tempInfo);
-			tran.commit();
+			tran1.commit();
 		}
 		return result;
 	}
