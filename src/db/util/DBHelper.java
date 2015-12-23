@@ -85,7 +85,6 @@ public class DBHelper {
 		Course course;
 		CourseInfo courseInfo;
 		
-	
 		
 		Tc courseDetails;
 		for (int i = 0; i < classesno.size(); i++){
@@ -133,14 +132,11 @@ public class DBHelper {
 				&& time.contains(current_time)){//符合时间
 				
 				courseInfo = new CourseInfo();
-				setCourseTime(courseInfo,week,day,time,
-						current_week,current_day,current_time);//设置时间信息
+				setCourseTime(courseInfo,week,day,time);//设置时间信息
 				setCourseInfo(courseInfo,course,courseDetails,identity,id);//设置除了时间信息之外的其他信息
 				courses.add(courseInfo);
 			}
 		}
-		
-		
 		return courses;
 	}
 	
@@ -200,8 +196,7 @@ public class DBHelper {
 	 * @param day 上课的天
 	 * @param time 上课的具体时间
 	 */
-	private static void setCourseTime(CourseInfo courseInfo,int week,String day,String time,
-			int current_week,String current_day,String current_time){
+	private static void setCourseTime(CourseInfo courseInfo,int week,String day,String time){
 		
 		String result="",weekInfo="上课时间为", dayInfo="星期",timeInfo="第";
 		/*
@@ -305,4 +300,28 @@ public class DBHelper {
 		return result;
 	}
 	
+	
+	public CourseInfo getCourseInfo(String cno,String tno){
+		
+		CourseInfo courseInfo = new CourseInfo();
+		CourseHome courseHome = new CourseHome();
+		Transaction tran = courseHome.createTransaction();
+		Course course = courseHome.findById(cno);
+		tran.commit();
+		if ( course !=  null ){
+			courseInfo.setCno(course.getCno());
+			courseInfo.setCname(course.getCname());
+		}
+		TcId tcid = new TcId();
+		tcid.setCno(cno);
+		tcid.setTno(tno);
+		TcHome tchome = new TcHome();
+		Transaction tran1 = tchome.createTransaction();
+		Tc tc = tchome.findById(tcid);
+		setCourseTime(courseInfo,tc.getCweek(),tc.getCday()+"",tc.getCtime()+"");
+		courseInfo.setMaxAbsence(tc.getMaxAbsence());
+		courseInfo.setCheckTime(tc.getCheckTime());
+		
+		return courseInfo;
+	}
 }
