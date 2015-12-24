@@ -175,26 +175,14 @@ var arr = new Array();
 				<%}%>
 				
 			alert(str+"上课时间冲突,不能签到");
-<<<<<<< HEAD
-=======
-
-			<% course = (CourseInfo)session.getAttribute("coursesInfo");%>
-			document.getElementById("courseTeacher").innerHTML=<%=course.getCname()%>;
-		}else if ( count > 1){//课程冲突，返回SUCCESS，由界面判断处理
-			//session.put("coursesInfo", courses);//课程冲突，将所有课传入，便于页面显示
-			<% course = (CourseInfo)session.getAttribute("coursesInfo");%>
-			alert();
-
->>>>>>> 00ac65384dac62501cbe7bfa46b3bee3ff6ee704
 		}else if ( count == -1 ){//当天无课，返回SUCCESS，由界面判断处理
 			//session.put("coursesInfo", "这周不属于上课周，放假或者为自习周，无课");
-			var str = <%=session.getAttribute("coursesInfo")%>;
+		
+			var str = <%=session.getAttribute("courseInfo")%>;
 			alert(str);
 		}
 	}
-<<<<<<< HEAD
-	
-=======
+
 	//传值给studentAction
 	function putFace() {
 	
@@ -208,7 +196,7 @@ var arr = new Array();
 		form1.submit();
 		
 	}
->>>>>>> b58fa83ee43e16698b1e3186a6b04230388bfe78
+
 </script>
 <body>
 	<div class="header">
