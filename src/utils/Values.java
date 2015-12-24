@@ -17,4 +17,10 @@ public class Values {
 	public static int webX=800;
 	
 	public static int webY=370;
+	/**
+	 * 教师上传图片的路径
+	 */
+	public static String save_pic_path = "";
+	
+	public static int index = 1;
 }

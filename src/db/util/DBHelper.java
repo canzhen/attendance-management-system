@@ -299,7 +299,6 @@ public class DBHelper {
 	
 	
 	public CourseInfo getCourseInfo(String cno,String tno){
-		
 		CourseInfo courseInfo = new CourseInfo();
 		CourseHome courseHome = new CourseHome();
 		Transaction tran = courseHome.createTransaction();
@@ -321,4 +320,20 @@ public class DBHelper {
 		
 		return courseInfo;
 	}
+	
+	public int getMaxAbsenceNum(String cno,String tno){
+		int result = 0;
+		Tc tc = new Tc();
+		TcId tcid = new TcId();
+		tcid.setCno(cno);
+		tcid.setTno(tno);
+		TcHome tchome = new TcHome();
+		Transaction tran = tchome.createTransaction();
+		tc = tchome.findById(tcid);
+		if (tc != null)
+			result = tc.getMaxAbsence();		
+		return result;
+	}
+	
+	
 }
