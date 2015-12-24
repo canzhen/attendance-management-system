@@ -192,14 +192,14 @@ public class DBHelper {
 	 */
 	private static void setCourseTime(CourseInfo courseInfo,int week,String day,String time){
 		
-		String result="",weekInfo="上课时间为", dayInfo="星期",timeInfo="第";
+		String result="",weekInfo="", dayInfo="周",timeInfo="";
 		/*
 		 * 处理week字符
 		 */
 		switch (week){
-		case 0: weekInfo += "1-16周";break;
-		case 1: weekInfo += "1-8周";break;
-		case 2: weekInfo += "9-16周";break;
+		case 0: weekInfo += "[1-16周]";break;
+		case 1: weekInfo += "[1-8周]";break;
+		case 2: weekInfo += "[9-16周]";break;
 		}
 		
 		/*
@@ -207,7 +207,7 @@ public class DBHelper {
 		 */
 		for (int i = 0; i < day.length(); i++){
 			if ( i != (day.length()-1) )
-				dayInfo += (day.charAt(i)+"和星期");
+				dayInfo += (day.charAt(i)+"周  ");
 			else dayInfo += (day.charAt(i));
 		}
 		
@@ -216,11 +216,11 @@ public class DBHelper {
 		 */
 		for (int i = 0; i < time.length(); i++){
 			if ( i != (time.length()-1) )
-				timeInfo += (time.charAt(i)+"节和第");
+				timeInfo += (time.charAt(i)+"、");
 			else timeInfo += (time.charAt(i)+"节");
 		}
 		//拼接星期、天、时间，形成时间信息
-		courseInfo.setTime(weekInfo+"的"+dayInfo+"的"+timeInfo);
+		courseInfo.setTime(dayInfo+"&nbsp;&nbsp;"+timeInfo+"&nbsp;&nbsp;"+weekInfo);
 	}
 	
 	

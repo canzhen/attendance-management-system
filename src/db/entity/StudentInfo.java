@@ -3,8 +3,7 @@ package db.entity;
 public class StudentInfo {
 	private String sno;
 	private String sname;
-	private Integer absenceNum;
-	
+	private Integer absenceNum;	
 	
 	public String getSno() {
 		return sno;

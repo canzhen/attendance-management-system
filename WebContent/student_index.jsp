@@ -192,7 +192,7 @@ var arr = new Array();
 				break;
 				}
 			}
- 		form1.action="student_index?face=facejs";		 
+ 		form1.action="student_addFace?face=facejs";		 
 		form1.submit();
 		
 	}

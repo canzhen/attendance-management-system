@@ -12,36 +12,22 @@ public class FaceEntity {
 	
 	public FaceEntity() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-
-
 	
-
 	public String getSno() {
 		return sno;
 	}
-
-
-
 
 	public void setSno(String sno) {
 		this.sno = sno;
 	}
 
-
-
-
 	public double getcX() {
 		return cX;
 	}
-
-
 	public void setcX(double cX) {
 		this.cX = cX;
 	}
-
-
 	public double getcY() {
 		return cY;
 	}
@@ -50,8 +36,6 @@ public class FaceEntity {
 	public void setcY(double cY) {
 		this.cY = cY;
 	}
-
-
 	public double getlXInPic() {
 		return lXInPic;
 	}
@@ -60,7 +44,6 @@ public class FaceEntity {
 	public void setlXInPic(double lXInPic) {
 		this.lXInPic = lXInPic;
 	}
-
 
 	public double getlYInPic() {
 		return lYInPic;

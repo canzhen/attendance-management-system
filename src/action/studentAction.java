@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import utils.CheckHelper;
 import utils.PicFace;
 import utils.StudentAbsenceTimerTask;
 import db.entity.Course;
@@ -56,6 +57,7 @@ public class studentAction extends MyActionSupport{
 				session.put("coursesInfo", courses);//传入所有课程编号
 				return NOCURRENTCLASS;
 			}else if ( count == 1 ){//当天有一节课，返回SUCCESS
+				session.put("courseId", courses.get(0).getCno());
 				session.put("coursesInfo", courses);//传入当前课程的类，包含具体信息
 			}else if ( count > 1){//课程冲突，返回SUCCESS，由界面判断处理
 				session.put("coursesInfo", courses);//课程冲突，将所有课传入，便于页面显示
@@ -115,7 +117,8 @@ public class studentAction extends MyActionSupport{
 	}
 	
 	public String addFace(){
-		
+		FaceEntity myface = (FaceEntity) getRequest().get("face");
+		CheckHelper.getCheckHelper().addFace(myface);
 		return SUCCESS;
 	}
 	
