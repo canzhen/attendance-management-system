@@ -22,6 +22,7 @@
 <script type="text/javascript">
 	window.onload = function()
 	{
+		document.getElementsByName('identity')[0].checked=true;
 		var judge = <%=session.getAttribute("id")%>;
 		var identity = "<%=session.getAttribute("identity")%>";
 		if (judge != null) {
@@ -100,7 +101,7 @@
 		</s:form>
 	
 		<div style="text-align: center">
-			<font color="red" size="12pt"><s:property value="msg" /></font>
+			<font color="red" size="4pt"><s:property value="msg" /></font>
 		</div>
 	</div>
 	

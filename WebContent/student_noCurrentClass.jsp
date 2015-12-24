@@ -1,5 +1,6 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="db.entity.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,10 +13,11 @@
 	若该时间段有课，那么显示该节课的各种信息。
 	如果正在点名并且老师已经上传图片，那么显示图片供学生签到。
  -->
- 
- 
+
+
 </head>
 <script>
+    
 	function ScrollImgLeft() {
 		var speed = 50;
 		var scroll_begin = document.getElementById("scroll_begin");
@@ -40,14 +42,20 @@
 	}
 
 	function getValue() {
+		var name = "<%=session.getAttribute("name")%>";
+		document.getElementById("stuname").innerText = name;
 		//需要获取的参数:总行数，每列的值，进读条在程序中生成html语句传过来字符串,字符串格式入下
 		document.all.table1.innerHTML = "";
 		var mytable = document.getElementById("myTable");
 		//获取课程数
-		var getTr = <%= (int)session.getAttribute("classNum")%>;
+		var getTr =
+<%=session.getAttribute("classNum")%>
+	;
 		//动态创建表格
-
-		for (var i = 1; i <= getTr; i++) {
+<%ArrayList course = new ArrayList();
+			Object temp1 = session.getAttribute("coursesInfo");
+			course = (ArrayList) temp1;%>
+	for (var i = 1; i <= getTr; i++) {
 			var tr = document.createElement("tr");
 			var td = document.createElement("td");
 			var newl, newc;
@@ -84,7 +92,7 @@
 						<span class="menu"> </span>
 						<ul class="navigatoin">
 							<li><img src="images/tx.png" class="studentimg" alt="" /><label
-								class="studentname">张三</label></li>
+								class="studentname" id="stuname">张三</label></li>
 							<li><a href="" class="active">设置</a>
 						</ul>
 						<div class="clearfix"></div>
@@ -110,31 +118,7 @@
 			ScrollImgLeft();
 		</script>
 	</div>
-	<!--
-    <table>
-        <tr>
-            <td>行数:
-                <input type="text" id="inputTr" />
-            </td>
-            <td>列数:
-                <input type="text" id="inputTd" />
-            </td>
-            <tr>
-                <tr>
-                    <td>
-                        <input type="button" value="确定" onClick="getValue()">
-                    </td>
-                    <td>
-                        <input type="button" value="取消" onClick="cancle();" />
-                    </td>
-                </tr>
-    </table>
--->
-	<!--
-    <div class="progress" id="myprogress">
-        <span id="progressbar_out" class="blue" style="width: 20%;"><span id="progressbar_in">20%</span></span>
-    </div>
--->
+
 	<div class="table-c">
 		<table id="myTable">
 			<tbody>
