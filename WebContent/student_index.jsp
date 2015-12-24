@@ -159,14 +159,15 @@ var arr = new Array();
 	}
 	
 	function judge(){
-		var count = <%=session.getAttribute("count")%>;
-		
+		var count = <%=session.getAttribute("coursesNum")%>;
+		//document.getElementById("myCanvas").style.background="url(http://homework2zbing-classpic.stor.sinaapp.com/20bc08e8aa5eceb82822b101ec9e662d%20%281%29.jpg)";
 		if ( count == 1 ){//当天有一节课，返回SUCCESS
 			//session.put("coursesInfo", courses.get(0));//传入当前课程的类，包含具体信息
-			<% ArrayList course = new ArrayList();
+			<% ArrayList<CourseInfo> course = new ArrayList<CourseInfo>();
 			  Object temp1 = session.getAttribute("coursesInfo");
-			  course = (ArrayList) temp1; %>
-			document.getElementById("courseTeancher").innerHTML="temp";
+			  course = (ArrayList<CourseInfo>) temp1;
+			  String cname = course.get(0).getCname();%>
+			document.getElementById("courseTeancher").innerHTML= str;
 			document.getElementById("myCanvas").style.background="url(http://homework2zbing-classpic.stor.sinaapp.com/20bc08e8aa5eceb82822b101ec9e662d%20%281%29.jpg)";
 		}else if ( count > 1){//课程冲突，返回SUCCESS，由界面判断处理
 			//session.put("coursesInfo", courses);//课程冲突，将所有课传入，便于页面显示
@@ -187,19 +188,7 @@ var arr = new Array();
 		}
 	}
 
-	//传值给studentAction
-	function putFace() {
-	
-		for(var n=0;n<arr.length;n++){
-			if(arr[n].selected){
-				var facejs = new FaceJS(id,0,0,arr[n].x,arr[n].y,arr[n].width,arr[n].height);
-				break;
-				}
-			}
- 		form1.action="student_addFace?face=facejs";
-		form1.submit();
-		
-	}
+
 
 </script>
 <body>
@@ -239,7 +228,7 @@ var arr = new Array();
 		<div class="check_tip">请在图中找出并选择你自己，确定提交</div>
 		<div class="check_peopleimg">
 			<canvas id="myCanvas" width="800" height="370"
-				style="background:url(F:\test.jpg);background-size:100% 100%">
+				style="background:url(http://homework2zbing-classpic.stor.sinaapp.com/20bc08e8aa5eceb82822b101ec9e662d%20%281%29.jpg);background-size:100% 100%">
 		</div>
 		<s:form  action="student_addface"  method="post">
 			<s:textfield name="index" id="index" cssStyle="visibility:hidden"></s:textfield>

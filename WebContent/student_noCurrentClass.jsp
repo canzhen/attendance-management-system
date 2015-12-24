@@ -85,6 +85,24 @@
 			mytable.appendChild(tr);
 			<%}%>
 
+			
+			<%String warning=null;
+				for(int i=0;i<course.size();i++){
+				if((double)course.get(i).getAbsenceNum()/(double)course.get(i).getMaxAbsence() > 0.6){
+					if(warning==null)
+						warning = " ";
+					warning = warning + course.get(i).getCname()+"  ";
+				}
+				
+			}
+				if(warning!=null)
+					warning = warning + "这些课程，你的缺勤次数太多啦，小心挂科！！！最后真诚的祝你科科都不挂！！";
+				else
+					warning = "出勤好积极！再接再厉，最后真诚的祝你科科都不挂！！";
+			%>
+		document.getElementById("scroll_begin").innerHTML="<%=warning%>";
+		ScrollImgLeft();
+
 	}
 </script>
 <body onload="getValue();">
@@ -119,12 +137,10 @@
 	<div id="gongao">
 		<div class="scroll_div" id="scroll_div"
 			style="width: 60%; height: 30px; margin: 0 auto; white-space: nowrap; overflow: hidden;">
-			<div id="scroll_begin">哈哈哈哈哈，你javaee点名都没来，你要挂科啦啦啦</div>
+			<div id="scroll_begin"></div>
 			<div id="scroll_end"> </div>
 		</div>
-		<script type="text/javascript">
-			ScrollImgLeft();
-		</script>
+	
 	</div>
 
 	<div class="table-c">
