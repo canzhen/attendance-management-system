@@ -47,35 +47,43 @@
 		//需要获取的参数:总行数，每列的值，进读条在程序中生成html语句传过来字符串,字符串格式入下
 		document.all.table1.innerHTML = "";
 		var mytable = document.getElementById("myTable");
-		//获取课程数
-		var getTr =
-<%=session.getAttribute("classNum")%>
-	;
+		
+
 		//动态创建表格
-<%ArrayList course = new ArrayList();
+	<%ArrayList<CourseInfo> course = new ArrayList<CourseInfo>();
 			Object temp1 = session.getAttribute("coursesInfo");
-			course = (ArrayList) temp1;%>
-	for (var i = 1; i <= getTr; i++) {
+			course = (ArrayList<CourseInfo>) temp1;
+			int length = course.size();%>
+			//获取课程数
+			var getTr = <%=length%>;
+		<%for (int i = 0; i < length; i++) {%>
 			var tr = document.createElement("tr");
 			var td = document.createElement("td");
 			var newl, newc;
 			newl = mytable.insertRow();
 			//第一列
 			newc = newl.insertCell();
-			newc.innerHTML = 'Javaee&nbsp;&nbsp;李辉';
+			
+			newc.innerHTML = '<%=course.get(i).getCname()%>';
 
 			//第二列
 			newc = newl.insertCell();
-			newc.innerHTML = '周二&nbsp;&nbsp;6节&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1-16周]';
+			
+			newc.innerHTML = '<%=course.get(i).getTime()%>';
 
+			<% int absenceNum = course.get(i).getAbsenceNum();
+			   int maxAbsence = course.get(i).getMaxAbsence();
+			   int result = (int) (((double)absenceNum / (double)maxAbsence)*100);
+			   String show = absenceNum +"/" + maxAbsence;
+			   String finalresult = result + "%";
+			   String str = "'<div class=\"progress\" id=\"myprogress\"><span id=\"progressbar_out\" class=\"blue\" style=\"width:"+finalresult+";\"><span id=\"progressbar_in\">"+show+"</span></span></div>'";
+			%>
 			//第三列
 			newc = newl.insertCell();
-			newc.innerHTML = '<div class="progress" id="myprogress">'
-					+ '<span id="progressbar_out" class="blue" style="width: 33%;"><span id="progressbar_in">1/3</span></span>'
-					+ '</div>';
+			newc.innerHTML = <%=str%>;
 
 			mytable.appendChild(tr);
-		}
+			<%}%>
 
 	}
 </script>

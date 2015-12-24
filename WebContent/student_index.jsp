@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	import="utils.*" import="java.util.*" import="pic.entity.*"
 	import="db.entity.*" pageEncoding="UTF-8"%>
+	<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -146,6 +147,9 @@ var arr = new Array();
 				ctx.strokeStyle = '#0000ff';
 				//把选中的脸标记位true
 				arr[i].selected = true;
+				
+				document.getElementById("index").value=i;
+				
 				//绘制选中的脸
 				ctx.fillRect(arr[i].x, arr[i].y, arr[i].width, arr[i].height);
 				ctx.strokeRect(arr[i].x, arr[i].y, arr[i].width, arr[i].height);
@@ -235,14 +239,15 @@ var arr = new Array();
 		<div class="check_tip">请在图中找出并选择你自己，确定提交</div>
 		<div class="check_peopleimg">
 			<canvas id="myCanvas" width="800" height="370"
-				style="background:url();background-size:100% 100%">
+				style="background:url(F:\test.jpg);background-size:100% 100%">
 		</div>
-		<form method="post" onsubmit="putFace()" name="form1">
-			<div class="check_divsubmitall">
+		<s:form  action="student_addface"  method="post">
+			<s:textfield name="index" id="index" cssStyle="visibility:hidden"></s:textfield>
+			<s:div cssClass="check_divsubmitall">
 				<input class="check_submit" type="button" value="取消" />
-				<input class="check_submit" type="submit" value="确定" />
-			</div>
-		</form>
+				<s:submit value="确定" cssClass="check_submit" />
+			</s:div>
+		</s:form>
 
 	</div>
 </body>
