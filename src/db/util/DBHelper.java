@@ -207,8 +207,8 @@ public class DBHelper {
 		 */
 		for (int i = 0; i < day.length(); i++){
 			if ( i != (day.length()-1) )
-				dayInfo += (i+"和星期");
-			else dayInfo += i;
+				dayInfo += (day.charAt(i)+"和星期");
+			else dayInfo += (day.charAt(i));
 		}
 		
 		/*
@@ -216,8 +216,8 @@ public class DBHelper {
 		 */
 		for (int i = 0; i < time.length(); i++){
 			if ( i != (time.length()-1) )
-				timeInfo += (i+"节和第");
-			else timeInfo += (i+"节");
+				timeInfo += (time.charAt(i)+"节和第");
+			else timeInfo += (time.charAt(i)+"节");
 		}
 		//拼接星期、天、时间，形成时间信息
 		courseInfo.setTime(weekInfo+"的"+dayInfo+"的"+timeInfo);
