@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	import="utils.*" import="java.util.*" import="pic.entity.*" import="db.entity.*"
-	pageEncoding="UTF-8"%>
+	import="utils.*" import="java.util.*" import="pic.entity.*"
+	import="db.entity.*" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,18 +12,36 @@
 
 <script type="text/javascript">
 //声明Pic对象
+var id;
+var name;
 var size = 0;
 var Pic = function(x,y,width,height){
 this.x = x;
 this.y = y;
 this.width = width;
 this.height = height;
+this.selected = false;
+}
+var FaceJS = function(sno,cX,cY,lXInPic,lYInPic,width,hight){
+	this.sno = sno;      
+	this.cX = cX;        
+	this.cY = cY;        
+	this.lXInPic = lXInPic;   
+	this.lYInPic = lYInPic;     
+	this.width = width;       
+	this.hight = hight;
 }
 //声明arr数组
 var arr = new Array();
 
 	//初始化
 	window.onload = function() {
+		//判断是否开始点名
+		judge();
+		
+		id = <%=session.getAttribute("id")%>;
+		name = "<%=session.getAttribute("name")%>";
+		document.getElementById("stuname").innerText=name;
 		
 		var canvas = document.getElementById('myCanvas');
 		if (canvas.getContext) {
@@ -36,7 +54,6 @@ var arr = new Array();
 				ctx.strokeRect(arr[m].x, arr[m].y, arr[m].width, arr[m].height);
 			}
 			
-			ctx.strokeRect(116, 66, 50, 50);
 			//添加事件响应   
 			canvas.addEventListener('click', function(e) {
 				p = getEventPosition(e);
@@ -142,19 +159,53 @@ var arr = new Array();
 		<% CourseInfo course = null;%>
 		if ( count == 1 ){//当天有一节课，返回SUCCESS
 			//session.put("coursesInfo", courses.get(0));//传入当前课程的类，包含具体信息
+			<% ArrayList course = new ArrayList();
+			  Object temp1 = session.getAttribute("coursesInfo");
+			  course = (ArrayList) temp1; %>
+			document.getElementById("courseTeancher").innerHTML="temp";
+			document.getElementById("myCanvas").style.background="url(http://homework2zbing-classpic.stor.sinaapp.com/20bc08e8aa5eceb82822b101ec9e662d%20%281%29.jpg)";
+		}else if ( count > 1){//课程冲突，返回SUCCESS，由界面判断处理
+			//session.put("coursesInfo", courses);//课程冲突，将所有课传入，便于页面显示
+			var str=" ";
+			<%  List<CourseInfo> coursect = new ArrayList<CourseInfo>();
+			   coursect = (ArrayList<CourseInfo>)session.getAttribute("coursesInfo");
+				
+				for(int i=0;i<coursect.size();i++){%>
+					str = str+<%=coursect.get(i).getCname()%>+" , ";
+				<%}%>
+				
+			alert(str+"上课时间冲突,不能签到");
+
 			<% course = (CourseInfo)session.getAttribute("coursesInfo");%>
 			document.getElementById("courseTeacher").innerHTML=<%=course.getCname()%>;
 		}else if ( count > 1){//课程冲突，返回SUCCESS，由界面判断处理
 			//session.put("coursesInfo", courses);//课程冲突，将所有课传入，便于页面显示
 			<% course = (CourseInfo)session.getAttribute("coursesInfo");%>
 			alert();
+
 		}else if ( count == -1 ){//当天无课，返回SUCCESS，由界面判断处理
 			//session.put("coursesInfo", "这周不属于上课周，放假或者为自习周，无课");
 			var str = <%=session.getAttribute("coursesInfo")%>;
 			alert(str);
 		}
 	}
+<<<<<<< HEAD
 	
+=======
+	//传值给studentAction
+	function putFace() {
+	
+		for(var n=0;n<arr.length;n++){
+			if(arr[n].selected){
+				var facejs = new FaceJS(id,0,0,arr[n].x,arr[n].y,arr[n].width,arr[n].height);
+				break;
+				}
+			}
+ 		form1.action="student_index?face=facejs";		 
+		form1.submit();
+		
+	}
+>>>>>>> b58fa83ee43e16698b1e3186a6b04230388bfe78
 </script>
 <body>
 	<div class="header">
@@ -169,7 +220,7 @@ var arr = new Array();
 						<span class="menu"> </span>
 						<ul class="navigatoin">
 							<li><img src="images/tx.png" class="studentimg" alt="" /><label
-								class="studentname">张三</label></li>
+								class="studentname" id="stuname">张三</label></li>
 							<li><a href="" class="active">设置</a>
 						</ul>
 						<div class="clearfix"></div>
@@ -193,12 +244,14 @@ var arr = new Array();
 		<div class="check_tip">请在图中找出并选择你自己，确定提交</div>
 		<div class="check_peopleimg">
 			<canvas id="myCanvas" width="800" height="370"
-				style="background:url(http://homework2zbing-classpic.stor.sinaapp.com/20bc08e8aa5eceb82822b101ec9e662d%20%281%29.jpg);background-size:100% 100%">
+				style="background:url();background-size:100% 100%">
 		</div>
-		<div class="check_divsubmitall">
-			<input class="check_submit" type="button" value="取消" /> <input
-				class="check_submit" type="submit" value="确定" />
-		</div>
+		<form method="post" onsubmit="putFace()" name="form1">
+			<div class="check_divsubmitall">
+				<input class="check_submit" type="button" value="取消" />
+				<input class="check_submit" type="submit" value="确定" />
+			</div>
+		</form>
 
 	</div>
 </body>
