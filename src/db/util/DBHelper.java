@@ -6,18 +6,9 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.hibernate.Transaction;
-
 import utils.DateCalculator;
 import utils.Values;
-import db.entity.Course;
-import db.entity.CourseHome;
-import db.entity.CourseInfo;
-import db.entity.Sc;
-import db.entity.ScHome;
-import db.entity.ScId;
-import db.entity.Tc;
-import db.entity.TcHome;
-import db.entity.TcId;
+import db.entity.*;
 
 public class DBHelper {
 	/**
@@ -80,7 +71,6 @@ public class DBHelper {
 		Course course;
 		CourseInfo courseInfo;
 		
-	
 		
 		Tc courseDetails;
 		for (int i = 0; i < classesno.size(); i++){
@@ -128,24 +118,23 @@ public class DBHelper {
 				&& time.contains(current_time)){//符合时间
 				
 				courseInfo = new CourseInfo();
-				setCourseTime(courseInfo,week,day,time,
-						current_week,current_day,current_time);//设置时间信息
+				setCourseTime(courseInfo,week,day,time);//设置时间信息
 				setCourseInfo(courseInfo,course,courseDetails,identity,id);//设置除了时间信息之外的其他信息
 				courses.add(courseInfo);
 			}
 		}
-		
-		
 		return courses;
 	}
 	
 	
-	
+	/**
+	 * 根据tno和cno查询课程的具体信息
+	 * @param tno 教师编号
+	 * @param cno 课程编号
+	 * @return 课程的具体信息
+	 */
 	private static Tc getCourseDetails(String tno,String cno){
-		
-		/*
-		 * 根据tno和cno查询课程的具体信息
-		 */
+
 		TcHome tchome = new TcHome();
 		TcId tcid = new TcId();
 		tcid.setTno(tno);
@@ -168,6 +157,7 @@ public class DBHelper {
 	 */
 	private static void setCourseInfo(CourseInfo courseInfo,
 			Course course,Tc courseDetails,String identity,String id){
+		
 		courseInfo.setCno(courseDetails.getId().getCno());//设置课程编号
 		courseInfo.setCname(course.getCname());//设置课程名字
 		courseInfo.setCheckTime(courseDetails.getCheckTime());
@@ -180,8 +170,8 @@ public class DBHelper {
 			scid.setCno(cno);
 			scid.setSno(sno);
 			Sc result = schome.findById(scid);
-			courseInfo.setAbsenceNum(result.getAbsenceNum());
 			tran.commit();
+			courseInfo.setAbsenceNum(result.getAbsenceNum());
 		}
 	}
 	
@@ -192,8 +182,7 @@ public class DBHelper {
 	 * @param day 上课的天
 	 * @param time 上课的具体时间
 	 */
-	private static void setCourseTime(CourseInfo courseInfo,int week,String day,String time,
-			int current_week,String current_day,String current_time){
+	private static void setCourseTime(CourseInfo courseInfo,int week,String day,String time){
 		
 		String result="",weekInfo="上课时间为", dayInfo="星期",timeInfo="第";
 		/*
@@ -271,4 +260,57 @@ public class DBHelper {
 		tran.commit();
 	}
 	
+	/**
+	 * 获取当前课程的所有没到的学生的学号、姓名和缺勤数
+	 * @return 学生信息的列表
+	 */
+	public static List<StudentInfo> getStudentInfoForAClassByCnoTno(String cno,String tno){
+		List<StudentInfo> result = new ArrayList<StudentInfo>();
+		ScHome schome = new ScHome();
+		Transaction tran = schome.createTransaction();
+		List<Sc> students =schome.findByCnoTno(cno, tno);
+		tran.commit();
+		StudentInfo tempInfo = new StudentInfo();
+		Sc tempSc = new Sc();
+		Student tempStudent = new Student();
+		StudentHome tempSHome = new StudentHome();
+		
+		for (int i = 0; i < students.size(); i++){
+			Transaction tran1 = tempSHome.createTransaction();
+			tempInfo = new StudentInfo();
+			tempSc = students.get(i);
+			tempInfo.setSno(tempSc.getId().getSno());
+			tempInfo.setAbsenceNum(tempSc.getAbsenceNum());
+			tempStudent = tempSHome.findById(tempSc.getId().getSno());
+			tempInfo.setSname(tempStudent.getSname());
+			result.add(tempInfo);
+			tran1.commit();
+		}
+		return result;
+	}
+	
+	
+	public CourseInfo getCourseInfo(String cno,String tno){
+		
+		CourseInfo courseInfo = new CourseInfo();
+		CourseHome courseHome = new CourseHome();
+		Transaction tran = courseHome.createTransaction();
+		Course course = courseHome.findById(cno);
+		tran.commit();
+		if ( course !=  null ){
+			courseInfo.setCno(course.getCno());
+			courseInfo.setCname(course.getCname());
+		}
+		TcId tcid = new TcId();
+		tcid.setCno(cno);
+		tcid.setTno(tno);
+		TcHome tchome = new TcHome();
+		Transaction tran1 = tchome.createTransaction();
+		Tc tc = tchome.findById(tcid);
+		setCourseTime(courseInfo,tc.getCweek(),tc.getCday()+"",tc.getCtime()+"");
+		courseInfo.setMaxAbsence(tc.getMaxAbsence());
+		courseInfo.setCheckTime(tc.getCheckTime());
+		
+		return courseInfo;
+	}
 }

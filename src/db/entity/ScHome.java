@@ -2,13 +2,16 @@ package db.entity;
 // Generated 2015-12-16 20:34:33 by Hibernate Tools 4.3.1.Final
 
 import java.util.List;
+
 import javax.naming.InitialContext;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Example;
 
 /**
@@ -24,7 +27,7 @@ public class ScHome {
 
 	protected SessionFactory getSessionFactory() {
 		try {
-			return (SessionFactory) new InitialContext().lookup("SessionFactory");
+			return (SessionFactory) new Configuration().configure().buildSessionFactory();
 		} catch (Exception e) {
 			log.error("Could not locate SessionFactory in JNDI", e);
 			throw new IllegalStateException("Could not locate SessionFactory in JNDI");
@@ -144,5 +147,18 @@ public class ScHome {
 		}
 		return result;
 	}
-
+	
+	public List findByCnoTno(String cno,String tno){
+		String hql = "from Sc sc where sc.id.cno=:cno and sc.tno=:tno";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("cno",cno);
+		query.setParameter("tno", tno);
+		List result = query.list();
+		if (result == null){
+			log.debug("get successful, no instance found");
+		} else {
+			log.debug("get successful, instance found");
+		}
+		return result;
+	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import db.entity.CourseInfo;
+import db.entity.StudentInfo;
 import db.util.DBHelper;
 
 public class teacherAction extends MyActionSupport{
@@ -45,7 +46,7 @@ public class teacherAction extends MyActionSupport{
 				count = courses.size();
 			session.put("classNum", count);
 			if ( count == 0 ){//当天无课，返回NOCURRENTCLASS
-				session.put("coursesInfo", coursesno);//传入所有课程编号
+				session.put("coursesInfo", courses);//传入所有课程编号
 				return NOCURRENTCLASS;
 			}else if ( count == 1 ){//当天有一节课，返回SUCCESS
 				session.put("coursesInfo", courses.get(0));//传入当前课程的类，包含具体信息
@@ -65,6 +66,11 @@ public class teacherAction extends MyActionSupport{
 	 */
 	public String editChecktime(){
 		DBHelper.editTcValue("11111111", "cs002", "checktime", 11);
+		return SUCCESS;
+	}
+	
+	public String getStudentInfoForAClass(){
+		List result = DBHelper.getStudentInfoForAClassByCnoTno("cs001","1111114");
 		return SUCCESS;
 	}
 }
