@@ -30,10 +30,16 @@
 function judge(){
 		
 		var count = <%=session.getAttribute("count")%>;
-		
+		<%
+		ArrayList list ;
+		CourseInfo course;
+		%>
 		if ( count == 1 ){//当天有一节课，返回SUCCESS
 			//session.put("coursesInfo", courses.get(0));//传入当前课程的类，包含具体信息
-			<% CourseInfo course = (CourseInfo)session.getAttribute("coursesInfo");%>
+			<% 
+			list = (ArrayList)session.getAttribute("coursesInfo");
+			course = (CourseInfo)list.get(0);
+			%>
 			document.getElementById("courseN").innerHTML=<%=course.getCname()%>;
 			document.getElementById("teacherN").innerHTML=<%=session.getAttribute("name")%>;
 		}else if ( count > 1){//课程冲突，返回SUCCESS，由界面判断处理
@@ -120,7 +126,7 @@ function judge(){
 		<div class="fileUpload btn btn-primary">
 			<!--<span>Upload</span>-->
 			<!-- <input type="file" class="upload" name="myFile" id="file0" /> -->
-			<s:form action="" method="POST"
+			<s:form action="teacher_savePic" method="POST"
 				enctype="multipart/form-data">
 
 				<s:fielderror />

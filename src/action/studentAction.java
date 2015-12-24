@@ -14,6 +14,7 @@ import pic.entity.FaceEntity;
 
 public class studentAction extends MyActionSupport{	
 	String msg="";
+	FaceEntity face;
 
 
 	/**
@@ -117,8 +118,9 @@ public class studentAction extends MyActionSupport{
 	}
 	
 	public String addFace(){
-		FaceEntity myface = (FaceEntity) getRequest().get("face");
-		CheckHelper.getCheckHelper().addFace(myface);
+		//FaceEntity myface = (FaceEntity) getRequest().get("face");
+		if (face != null)			
+			CheckHelper.getCheckHelper().addFace(face);
 		return SUCCESS;
 	}
 	
