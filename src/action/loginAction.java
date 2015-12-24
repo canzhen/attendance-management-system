@@ -16,10 +16,9 @@ import db.entity.TeacherHome;
  *
  */
 public class loginAction extends MyActionSupport{
-	private Map session;
 	private String identity="";
 	/**
-	 * 用户名，可以是老师的也可以是学生的
+	 * 用户名，可以是老师 的也可以是学生的
 	 */
 	private String id="";
 
@@ -43,7 +42,6 @@ public class loginAction extends MyActionSupport{
 	public String check(){
 		String name = "";
 		Transaction trans;
-		session = getSession();
 		/*
 		 * 根据老师或者学生身份的不同进行比对，
 		 * 并把老师或学生编号存入session
@@ -87,6 +85,7 @@ public class loginAction extends MyActionSupport{
 		/*
 		 * 保存信息到session中
 		 */
+		Map session = getSession();
 		session.put("identity", identity);
 		session.put("id", id);
 		session.put("name", name);

@@ -50,14 +50,17 @@ public class DBHelper {
 		return coursenoList;
 	}
 	
-	
 	/**
-	 * 查询相应课程id的课程列表内是否有当前时间的课程，并返回
+	 *  根据身份和id和课程编号返回所有的课程信息，可以是当前时间的，
+	 *  也可以是该同学或老师的所有时间段的课程
+	 * @param identity 身份
+	 * @param id 编号
 	 * @param classesno 课程的id列表
+	 * @param ifReturnAll 是否返回全部，还是只是返回当前课程
 	 * @return 返回当前时间的课程
 	 */
-	public static ArrayList<CourseInfo> checkHasClasses(
-			String identity,String id,List<String> classesno){
+	public static ArrayList<CourseInfo> getAllCoursesInfo(
+			String identity,String id,List<String> classesno,boolean ifReturnAll){
 		int week = 0;
 		String day="",time="";
 		Date date = new Date();//获取当前日期
@@ -111,16 +114,21 @@ public class DBHelper {
 			 */
 			if (current_week<Values.BeginEndWeek[0] || current_week>Values.BeginEndWeek[1] )
 				return courses;
+			courseInfo = new CourseInfo();
 			
-			if(((week==0)||(week==1 && current_week>=Values.weekTypeOne[0] && current_week<=Values.weekTypeOne[1]) 
-				||( week==2 && current_week>=Values.weekTypeTwo[0] && current_week<=Values.weekTypeTwo[1]))//符合周
-				&& day.contains(current_day)//符合天
-				&& time.contains(current_time)){//符合时间
-				
-				courseInfo = new CourseInfo();
+			if (ifReturnAll){//如果是所有课程都要返回，则返回所有
 				setCourseTime(courseInfo,week,day,time);//设置时间信息
 				setCourseInfo(courseInfo,course,courseDetails,identity,id);//设置除了时间信息之外的其他信息
 				courses.add(courseInfo);
+			}else {//否则，进行判断之后再返回
+				if(((week==0)||(week==1 && current_week>=Values.weekTypeOne[0] && current_week<=Values.weekTypeOne[1]) 
+						||( week==2 && current_week>=Values.weekTypeTwo[0] && current_week<=Values.weekTypeTwo[1]))//符合周
+						&& day.contains(current_day)//符合天
+						&& time.contains(current_time)){//符合时间
+							setCourseTime(courseInfo,week,day,time);//设置时间信息
+							setCourseInfo(courseInfo,course,courseDetails,identity,id);//设置除了时间信息之外的其他信息
+							courses.add(courseInfo);
+					}
 			}
 		}
 		return courses;

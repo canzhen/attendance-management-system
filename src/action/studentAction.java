@@ -11,12 +11,10 @@ import db.entity.CourseInfo;
 import db.util.DBHelper;
 import pic.entity.FaceEntity;
 
-public class studentAction extends MyActionSupport{
-	private Map session = getSession();//获取session
-	private String sno;//学号
-	private List<CourseInfo> courses = new ArrayList<CourseInfo>();//课程链表，保存当前时间学生的课程信息
-	
+public class studentAction extends MyActionSupport{	
 	String msg="";
+
+
 	/**
 	 * 在返回页面之前，需要从数据库中比对，查找当前要上的课，
 	 * 然后把课程信息放到request里传递过去。
@@ -26,15 +24,17 @@ public class studentAction extends MyActionSupport{
 	 */
 	@Override
 	public String index(){
+		Map session = getSession();
+		String sno = (String) session.get("id");//获取学号
+		List<CourseInfo> courses = new ArrayList<CourseInfo>();//课程链表，保存当前时间学生的课程信息
 		/*
 		 * --------测试部分----------
 		 */
-		session.put("identity", "student");
-		sno = "13301081";
+		//session.put("identity", "student");
+		//sno = "13301081";
 		/*
 		 * --------测试部分----------
 		 */
-		//sno = (String) session.get("id");//获取学号
 		
 		if ( !session.get("identity").equals("student") ){
 			return ERROR;
@@ -46,12 +46,13 @@ public class studentAction extends MyActionSupport{
 			 * -1为这周不属于上课周，放假或者为自习周，无课
 			 * 大于1为课程冲突
 			 */
-			courses = DBHelper.checkHasClasses("student",sno,coursesno);
+			courses = DBHelper.getAllCoursesInfo("student",sno,coursesno,false);
 			int count = -1;
 			if ( courses != null) 
 				count = courses.size();
 			session.put("coursesNum", count);//返回当天的课程数
 			if ( count == 0 ){//当天无课，返回NOCURRENTCLASS
+				courses = DBHelper.getAllCoursesInfo("student",sno,coursesno,true);
 				session.put("coursesInfo", courses);//传入所有课程编号
 				return NOCURRENTCLASS;
 			}else if ( count == 1 ){//当天有一节课，返回SUCCESS
@@ -72,6 +73,7 @@ public class studentAction extends MyActionSupport{
 	public String addAbsenceNum(){
 		String stuId="";
 		String className="";
+		Map session = getSession();
 		if ( (session.get("id") != null) && //如果有已经登录
 				(session.get("identity") != null) && //且身份为学生
 				((int)session.get("coursesNum") == 1) ){//且当天只有一节课
@@ -90,6 +92,7 @@ public class studentAction extends MyActionSupport{
 	 * @return
 	 */
 	public String chooseOneFace(){
+		Map session = getSession();
 		//左上角坐标点的信息
 		FaceEntity face=(FaceEntity) session.get("face");
 		if(face.getSno()==null||face.getSno()==""){
@@ -111,6 +114,17 @@ public class studentAction extends MyActionSupport{
 		return SUCCESS;
 	}
 	
+	public String addFace(){
+		
+		return SUCCESS;
+	}
 	
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
 	
 }

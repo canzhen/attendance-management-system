@@ -12,8 +12,19 @@ import db.entity.StudentInfo;
  *
  */
 public class CheckHelper {
-	public List<FaceEntity> checkFaceList = new ArrayList<FaceEntity>();
+	public List<FaceEntity> checkFaceList = null;
+	public static CheckHelper myCheckHelper= null;
 
+	private CheckHelper(){
+		checkFaceList = new ArrayList<FaceEntity>();
+	}
+	
+	public static CheckHelper getCheckHelper(){
+		if (myCheckHelper == null)
+			myCheckHelper = new CheckHelper();
+		return myCheckHelper;
+	}
+	
 	/**
 	 * 学生签到，返回是否签到成功
 	 * @param sno 学生学号
