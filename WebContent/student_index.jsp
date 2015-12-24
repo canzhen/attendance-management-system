@@ -136,14 +136,14 @@ var arr = new Array();
 			}
 		}
 	}
+	
 	function judge(){
-		
 		var count = <%=session.getAttribute("count")%>;
 		<% CourseInfo course = null;%>
 		if ( count == 1 ){//当天有一节课，返回SUCCESS
 			//session.put("coursesInfo", courses.get(0));//传入当前课程的类，包含具体信息
 			<% course = (CourseInfo)session.getAttribute("coursesInfo");%>
-			document.getElementById("courseTeancher").innerHTML=<%=course.getCname()%>;
+			document.getElementById("courseTeacher").innerHTML=<%=course.getCname()%>;
 		}else if ( count > 1){//课程冲突，返回SUCCESS，由界面判断处理
 			//session.put("coursesInfo", courses);//课程冲突，将所有课传入，便于页面显示
 			<% course = (CourseInfo)session.getAttribute("coursesInfo");%>
@@ -153,8 +153,8 @@ var arr = new Array();
 			var str = <%=session.getAttribute("coursesInfo")%>;
 			alert(str);
 		}
-	
 	}
+	
 </script>
 <body>
 	<div class="header">
@@ -187,7 +187,7 @@ var arr = new Array();
 	</div>
 	<div class="welcome_center">
 		<div>
-			<label id="courseTeancher" name="courseTeancher"
+			<label id="courseTeacher" name="courseTeacher"
 				class="check_coursefont">Javaee 李辉</label>
 		</div>
 		<div class="check_tip">请在图中找出并选择你自己，确定提交</div>
