@@ -96,7 +96,7 @@ public class teacherAction extends MyActionSupport{
 		//pic = new File("d:\\my_icon.jpg");
 		//String path =  ServletActionContext.getServletContext().getRealPath("/");
 		if (pic != null)
-			PictureHelper.savePic(pic,session);
+			PictureHelper.savePic(pic,(String)session.get("id"));
 		return SUCCESS;
 	}
 	

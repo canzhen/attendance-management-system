@@ -64,7 +64,7 @@ public class DBHelper {
 		int week = 0;
 		String day="",time="";
 		Date date = new Date();//获取当前日期
-		int current_week = DateCalculator.getCurrentWeek(new Date(115,10,1),date);
+		int current_week = DateCalculator.getCurrentWeek(Values.start_date,date);
 		String current_day = DateCalculator.getCurrentDay(date);
 		String current_time = DateCalculator.getCurrentTime(date);
 		//记录当天的课程

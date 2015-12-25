@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	import="utils.*" import="java.util.*" import="pic.entity.*"
+	import="java.io.File"
 	import="db.entity.*" pageEncoding="UTF-8"%>
 	<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -13,6 +14,7 @@
 
 <script type="text/javascript">
 //声明Pic对象
+var count = 0;
 var id;
 var name;
 var size = 0;
@@ -32,6 +34,7 @@ var FaceJS = function(sno,cX,cY,lXInPic,lYInPic,width,hight){
 	this.width = width;       
 	this.hight = hight;
 }
+<%String url = "";%>
 //声明arr数组
 var arr = new Array();
 
@@ -45,7 +48,7 @@ var arr = new Array();
 		document.getElementById("stuname").innerText=name;
 		
 		var canvas = document.getElementById('myCanvas');
-		if (canvas.getContext) {
+		if (canvas.getContext && count == 1) {
 			var ctx = canvas.getContext('2d');
 
 			ctx.strokeStyle = '#0000ff';
@@ -67,11 +70,11 @@ var arr = new Array();
 
 	//初始化数组数据
 	function initData() {		
-		<% String url="http://homework2zbing-classpic.stor.sinaapp.com/20bc08e8aa5eceb82822b101ec9e662d%20%281%29.jpg";
+		<% //url ="d:\\1.jpg";
 		List<FaceEntity> faces=new ArrayList<FaceEntity>();
-		PicFace picFace=new PicFace(url);
+		PicFace picFace=new PicFace(new File(url));
 		faces=picFace.getFaces();
-		int size = 1;
+		int size = 0;
 		size = faces.size();
 		session.putValue("picface", picFace); %>
 		//初始化二维数组
@@ -159,7 +162,7 @@ var arr = new Array();
 	}
 	
 	function judge(){
-		var count = <%=session.getAttribute("coursesNum")%>;
+		count = <%=session.getAttribute("coursesNum")%>;
 		//var testimg = "images/test.jpg";
 		//document.getElementById("myCanvas").style.backgroundImage="url("+urlpic+")";
 		if ( count == 1 ){//当天有一节课，返回SUCCESS
@@ -168,10 +171,10 @@ var arr = new Array();
 			  Object temp1 = session.getAttribute("coursesInfo");
 			  course = (ArrayList<CourseInfo>) temp1;
 			  String cname = course.get(0).getCname();
-			  String urlpic = (String)session.getAttribute("classPicUrl");%>
+			  url = (String)session.getAttribute("classPicUrl");%>
 			
 			document.getElementById("courseTeancher").innerHTML= str;
-			var bgurl = '"url('+<%=urlpic%>+')"';
+			var bgurl = '"url('+<%=url%>+')"';
 			if(bgurl==null){
 				document.getElementById("bgurl").innerHTML="还未开始点名或者图片上传不成功，请耐心等候";
 				}else{
@@ -237,9 +240,9 @@ var arr = new Array();
 		<div class="check_tip" id="tips">请在图中找出并选择你自己，确定提交</div>
 		<div class="check_peopleimg">
 			<canvas id="myCanvas" width="800" height="370"
-				style="background:url();background-size:100% 100%">
+				style="background:url(d:\\1.jpg);background-size:100% 100%">
 		</div>
-		<s:form  action="student_addface"  method="post">
+		<s:form  action="student_addFace"  method="post">
 			<s:textfield name="index" id="index" cssStyle="visibility:hidden"></s:textfield>
 			<s:div cssClass="check_divsubmitall">
 				<input class="check_submit" type="button" value="取消" />
