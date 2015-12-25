@@ -5,6 +5,7 @@ import java.util.List;
 
 import pic.entity.FaceEntity;
 import db.entity.StudentInfo;
+import db.util.DBHelper;
 
 /**
  * 老师点名，学生签到的内部工具类
@@ -15,9 +16,7 @@ public class CheckHelper {
 	public List<FaceEntity> checkFaceList = null;
 	public static CheckHelper myCheckHelper= null;
 
-	private CheckHelper(){
-		checkFaceList = new ArrayList<FaceEntity>();
-	}
+	private CheckHelper(){}
 	
 	public static CheckHelper getCheckHelper(){
 		if (myCheckHelper == null)
@@ -31,8 +30,9 @@ public class CheckHelper {
 	 * @param studentsInfo 该课的学生列表
 	 * @return 是否签到成功
 	 */
-	public  boolean checkIn(int index,List<StudentInfo> studentsInfo){
+	public  boolean checkIn(int index,String tno){
 		String sno = "";
+		List<StudentInfo> studentsInfo =(List<StudentInfo>)Values.studentsInfo_for_each_class.get(tno);
 		if (checkFaceList != null){
 			sno = checkFaceList.get(index).getSno();
 			StudentInfo sinfo;
@@ -46,6 +46,7 @@ public class CheckHelper {
 		}
 		return false;//列表里没找到该同学，则签到失败
 	}
+	
 	/**
 	 * 往脸点名列表里加入脸的信息
 	 * @param face
@@ -53,6 +54,16 @@ public class CheckHelper {
 	public void addFace(FaceEntity face){
 		checkFaceList.add(face);
 	}
+	
+	/**
+	 * 在数据库内的缺勤次数上加一
+	 * @return
+	 */
+	public void addAbsenceNum(String sno,String cno){
+		DBHelper.addAbsenceNum(sno, cno);
+	}
+	
+	
 	
 	public List<FaceEntity> getCheckFaceList() {
 		return checkFaceList;

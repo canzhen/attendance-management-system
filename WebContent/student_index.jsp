@@ -76,6 +76,7 @@ var arr = new Array();
 		faces=picFace.getFaces();
 		int size = 0;
 		size = faces.size();
+		session.putValue("facesList",faces);
 		session.putValue("picface", picFace); %>
 		//初始化二维数组
 		size=<%=size%>;
@@ -163,6 +164,7 @@ var arr = new Array();
 	
 	function judge(){
 		count = <%=session.getAttribute("coursesNum")%>;
+		count=1;
 		//var testimg = "images/test.jpg";
 		//document.getElementById("myCanvas").style.backgroundImage="url("+urlpic+")";
 		if ( count == 1 ){//当天有一节课，返回SUCCESS
@@ -171,7 +173,7 @@ var arr = new Array();
 			  Object temp1 = session.getAttribute("coursesInfo");
 			  course = (ArrayList<CourseInfo>) temp1;
 			  String cname = course.get(0).getCname();
-			  url = (String)session.getAttribute("classPicUrl");%>
+			  url = (String)session.getAttribute("picUrl");%>
 			
 			document.getElementById("courseTeancher").innerHTML= str;
 			var bgurl = '"url('+<%=url%>+')"';

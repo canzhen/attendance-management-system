@@ -9,6 +9,7 @@ import utils.CheckHelper;
 import utils.PicFace;
 import utils.PictureHelper;
 import utils.StudentAbsenceTimerTask;
+import utils.Values;
 import db.entity.Course;
 import db.entity.CourseInfo;
 import db.entity.StudentInfo;
@@ -18,7 +19,6 @@ import pic.entity.FaceEntity;
 public class studentAction extends MyActionSupport{	
 	String msg="";
 	String index="";
-	List<StudentInfo> studentsInfo = null;
 	Map session = getSession();
 	String sno = (String) session.get("id");//获取学号
 	List<CourseInfo> courses = new ArrayList<CourseInfo>();//课程链表，保存当前时间学生的课程信息
@@ -32,14 +32,6 @@ public class studentAction extends MyActionSupport{
 	 */
 	@Override
 	public String index(){
-		/*
-		 * --------测试部分----------
-		 */
-		//session.put("identity", "student");
-		//sno = "13301081";
-		/*
-		 * --------测试部分----------
-		 */
 		
 		if ( !session.get("identity").equals("student") ){
 			return ERROR;
@@ -63,6 +55,7 @@ public class studentAction extends MyActionSupport{
 			}else if ( count == 1 ){//当天有一节课，返回SUCCESS
 				String cno = courses.get(0).getCno();
 				session.put("cno", cno);
+				session.put("tno", courses.get(0).getTno());
 				session.put("coursesInfo", courses);//传入当前课程的类，包含具体信息
 				/*
 				 * 判断老师是否已经将点名的图片上传，
@@ -78,27 +71,7 @@ public class studentAction extends MyActionSupport{
 			return SUCCESS;
 		}
 	}
-	
-	/**
-	 * 在数据库内的缺勤次数上加一
-	 * @return
-	 */
-	public String addAbsenceNum(){
-		String stuId="";
-		String className="";
-		if ( (session.get("id") != null) && //如果有已经登录
-				(session.get("identity") != null) && //且身份为学生
-				((int)session.get("coursesNum") == 1) ){//且当天只有一节课
-			stuId = (String)session.get("id");
-			className = ((Course)session.get("coursesInfo")).getCno();
-			session.put("addAbsenceNumInfo", "success");
-			new StudentAbsenceTimerTask(stuId,className).execute();
-		}else{
-			session.put("addAbsenceNumInfo", "error");
-		}
-		return SUCCESS;
-	}
-	
+
 	/**
 	 * 选择自己的脸，并将信息进行处理和传递
 	 * @return
@@ -127,13 +100,16 @@ public class studentAction extends MyActionSupport{
 	
 	
 	public String addFace(){
+		String tno = (String)session.get("tno");
+		if (Values.studentsInfo_for_each_class.get(tno) == null)
+			session.put("checkStatus", 0);//0表示不在点名时间
+		else session.put("checkStatus", 1);
+		
+		CheckHelper myCheckHelper = CheckHelper.getCheckHelper();
+		if ( myCheckHelper.getCheckFaceList() == null && session.get("facesList") != null)
+			myCheckHelper.setCheckFaceList((List<FaceEntity>)session.get("facesList"));
 		if ( !index.equals("") ){
-			if (studentsInfo == null){
-				String cno = (String)session.get("cno");
-				studentsInfo = DBHelper.getStudentInfoForAClassByCnoTno(
-						cno, DBHelper.getTnoBySnoCno((String)session.get("id"), cno));
-			}
-			CheckHelper.getCheckHelper().checkIn(new Integer(index), studentsInfo);
+			CheckHelper.getCheckHelper().checkIn(new Integer(index), tno);
 		}
 		return SUCCESS;
 	}

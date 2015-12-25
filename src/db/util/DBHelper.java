@@ -51,7 +51,8 @@ public class DBHelper {
 	}
 	
 	/**
-	 *  根据身份和id和课程编号返回所有的课程信息，可以是当前时间的，
+	 *  根据身份和id和该老师或者学生所上的所有课程的课程编号
+	 *  来返回所有的课程信息，可以是当前时间的，
 	 *  也可以是该同学或老师的所有时间段的课程
 	 * @param identity 身份
 	 * @param id 编号
@@ -168,6 +169,7 @@ public class DBHelper {
 		
 		courseInfo.setCno(courseDetails.getId().getCno());//设置课程编号
 		courseInfo.setCname(course.getCname());//设置课程名字
+		courseInfo.setTno(courseDetails.getId().getTno());
 		courseInfo.setCheckTime(courseDetails.getCheckTime());
 		courseInfo.setMaxAbsence(courseDetails.getMaxAbsence());
 		if (identity.equals("student")){
