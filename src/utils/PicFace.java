@@ -23,10 +23,10 @@ public class PicFace{
 	private  JSONObject result ;
 	private static  List<FaceEntity> faces;
 
-	public PicFace(String url){
+	public PicFace(File file){
 		Charset.forName("UTF-8").name();
 		try {
-			result = httpRequests.detectionDetect(new PostParameters().setUrl(url));
+			result = httpRequests.detectionDetect(new PostParameters().setImg(file));
 			faces=new ArrayList<FaceEntity>();
 			setFaces();
 			System.out.println("result==="+result);
@@ -35,7 +35,7 @@ public class PicFace{
 		}
 	}
 
-	public List<FaceEntity> getFaces() {
+	public static List<FaceEntity> getFaces() {
 		return faces;
 	}
 
