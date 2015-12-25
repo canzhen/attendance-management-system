@@ -99,6 +99,7 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 		faces=picFace.getFaces();
 		int size = 0;
 		size = faces.size();
+		session.putValue("facesList",faces);
 		session.putValue("picface", picFace); %>
 		//初始化二维数组
 		size=<%=size%>;
@@ -186,7 +187,11 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 	
 	function judge(){
 		count = <%=session.getAttribute("coursesNum")%>;
+<<<<<<< HEAD
+		count=1;
+=======
 		//count = 1;
+>>>>>>> 4cb7f8705e08624ef828cf9ba32434895886ff28
 		//var testimg = "images/test.jpg";
 		//document.getElementById("myCanvas").style.backgroundImage="url("+urlpic+")";
 		if ( count == 1 ){//当天有一节课
@@ -196,8 +201,11 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 			  course = (ArrayList<CourseInfo>) temp1;
 			  String cname = course.get(0).getCname();
 			  url = (String)session.getAttribute("picUrl");%>
+<<<<<<< HEAD
+=======
 			var coursename = <%=cname%>;
 			document.getElementById("courseTeacher").innerHTML= coursename;
+>>>>>>> 4cb7f8705e08624ef828cf9ba32434895886ff28
 			
 			var urlpic = <%=url%>;
 			if(urlpic==null){

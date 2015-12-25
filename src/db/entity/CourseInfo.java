@@ -14,6 +14,10 @@ public class CourseInfo {
 	 */
 	String time;
 	/**
+	 * 给该节课上课的老师的教工号
+	 */
+	String tno;
+	/**
 	 * 点名时间
 	 */
 	int checkTime;
@@ -26,7 +30,6 @@ public class CourseInfo {
 	 * 学生已经迟到的次数
 	 */
 	int absenceNum;
-	
 	
 	
 	public String getCno() {
@@ -47,6 +50,12 @@ public class CourseInfo {
 	public void setTime(String time) {
 		this.time = time;
 	}
+	public String getTno() {
+		return tno;
+	}
+	public void setTno(String tno) {
+		this.tno = tno;
+	}
 	public int getCheckTime() {
 		return checkTime;
 	}
@@ -65,4 +74,5 @@ public class CourseInfo {
 	public void setAbsenceNum(int absenceNum) {
 		this.absenceNum = absenceNum;
 	}
+	
 }

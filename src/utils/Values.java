@@ -1,6 +1,10 @@
 package utils;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+
+import db.entity.StudentInfo;
 
 public class Values {
 	/**
@@ -27,4 +31,13 @@ public class Values {
 	public static int index = 1;
 	
 	public static Date start_date = new Date(115,9,1);//默认开学日期为2015年9月1日
+	
+	/**
+	 * 记录每节课老师的开始点名时间
+	 */
+	public static HashMap start_check_time = new HashMap<String,Date>();
+	/**
+	 * 记录每节课的学生信息
+	 */
+	public static HashMap studentsInfo_for_each_class = new HashMap<String,ArrayList<StudentInfo>>();
 }

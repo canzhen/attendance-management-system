@@ -4,7 +4,7 @@ Source Host     : localhost:3306
 Source Database : amdb
 Target Host     : localhost:3306
 Target Database : amdb
-Date: 2015-12-14 22:31:38
+Date: 2015-12-25 20:12:22
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,9 +26,9 @@ CREATE TABLE `tc` (
 -- ----------------------------
 -- Records of tc
 -- ----------------------------
-INSERT INTO `tc` VALUES ('1111113', 'cs002', '0', '13', '2', '11', '10');
-INSERT INTO `tc` VALUES ('1111115', 'cs003', '2', '26', '6', '10', '10');
-INSERT INTO `tc` VALUES ('1111114', 'cs001', '0', '13', '2', '11', '10');
-INSERT INTO `tc` VALUES ('1111115', 'cs001', '2', '26', '6', '10', '10');
-INSERT INTO `tc` VALUES ('1111112', 'cs001', '0', '13', '2', '11', '10');
-INSERT INTO `tc` VALUES ('1111114', 'cs002', '2', '26', '6', '10', '10');
+INSERT INTO `tc` VALUES ('11111112', 'cs001', '0', '13', '2', '11', '10');
+INSERT INTO `tc` VALUES ('11111113', 'cs002', '0', '13', '2', '11', '10');
+INSERT INTO `tc` VALUES ('11111114', 'cs001', '0', '25', '4', '11', '10');
+INSERT INTO `tc` VALUES ('11111114', 'cs002', '2', '26', '6', '10', '10');
+INSERT INTO `tc` VALUES ('11111115', 'cs001', '2', '26', '6', '10', '10');
+INSERT INTO `tc` VALUES ('11111115', 'cs003', '2', '26', '6', '10', '10');

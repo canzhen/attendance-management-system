@@ -17,6 +17,7 @@ import org.apache.struts2.ServletActionContext;
 import utils.PictureHelper;
 import utils.Values;
 import db.entity.CourseInfo;
+import db.entity.StudentInfo;
 import db.util.DBHelper;
 
 public class teacherAction extends MyActionSupport{
@@ -29,6 +30,7 @@ public class teacherAction extends MyActionSupport{
 	Map session = getSession();//获取session
 	String tno = (String) session.get("id");//获取教工号
 	List<CourseInfo> courses = new ArrayList<CourseInfo>();//课程链表，保存当前时间老师的课程信息
+	List<StudentInfo> studentsInfo = null;//如果此时有课，保存此时的课的所有学生的信息
 
 	/**
 	 * 在返回页面之前，需要从数据库中比对，查找当前要上的课，
@@ -60,13 +62,18 @@ public class teacherAction extends MyActionSupport{
 			int count = -1;
 			if ( courses != null) 
 				count = courses.size();
+			/**
+			 * 测试有课的时候
+			 */
 			session.put("coursesNum", count);
+//			session.put("coursesNum", 1);
 			if ( count == 0 ){//当天无课，返回NOCURRENTCLASS
 				courses = DBHelper.getAllCoursesInfo("teacher",tno,coursesno,true);
 				session.put("coursesInfo", courses);//传入所有课程编号
 				return NOCURRENTCLASS;
 			}else if ( count == 1 ){//当天有一节课，返回SUCCESS
 				session.put("cno", courses.get(0).getCno());
+//				session.put("cno", "cs002");
 				session.put("coursesInfo", courses);//传入当前课程的类，包含具体信息
 			}else if ( count > 1){//课程冲突，返回SUCCESS，由界面判断处理
 				session.put("coursesInfo", courses);//课程冲突，将所有课传入，便于页面显示
@@ -103,6 +110,14 @@ public class teacherAction extends MyActionSupport{
 	public String setMaxAbsence(){
 		if ( !max_absence.equals("") )
 			DBHelper.editTcValue(tno, courseNo, "maxabsence", new Integer(max_absence));
+		return SUCCESS;
+	}
+	
+	public String start_checking(){
+		Values.start_check_time.put(tno, new Date());//在Values里给该老师的上课时间赋值
+		if ( studentsInfo == null )
+			studentsInfo = DBHelper.getStudentInfoForAClassByCnoTno(tno, (String)session.get("cno"));
+		Values.studentsInfo_for_each_class.put(tno, studentsInfo);
 		return SUCCESS;
 	}
 

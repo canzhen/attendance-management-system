@@ -11,16 +11,16 @@ import db.entity.ScId;
 import db.util.DBHelper;
 
 public class StudentAbsenceTimerTask extends TimerTask{
-	private String sno = "", cno = "";
+	private String tno = "";
 	
-	public StudentAbsenceTimerTask(String sno,String cno){
-		this.sno = sno;
-		this.cno = cno;
+	public StudentAbsenceTimerTask(String tno){
+		this.tno = tno;
 	}
 	
 	
 	public void execute(){
-		DBHelper.addAbsenceNum(sno, cno);
+		Values.start_check_time.remove(tno);//在Values里去掉给该老师的点名时间
+		Values.studentsInfo_for_each_class.remove(tno);//在Values里去掉该节课的学生信息
 	}
 	
 	@Override
