@@ -96,7 +96,7 @@ var arr = new Array();
 		if (canvas.getContext) {
 			var ctx = canvas.getContext('2d');
 
-			ctx.strokeStyle = '#0000ff';
+			ctx.strokeStyle = '#ff0000';
 			//initData();
 			//左上角的x，y坐标，长宽
 			for (var m = 0; m < size; m++) {
@@ -143,8 +143,8 @@ var arr = new Array();
 				}
 				//把所有的脸的框框绘制出来
 				init();
-				ctx.fillStyle = 'rgba(0,0,255,0.5)';
-				ctx.strokeStyle = '#0000ff';
+				ctx.fillStyle = 'rgba(255,0,0,0.5)';
+				ctx.strokeStyle = '#ff0000';
 				//把选中的脸标记位true
 				arr[i].selected = true;
 				
@@ -160,15 +160,24 @@ var arr = new Array();
 	
 	function judge(){
 		var count = <%=session.getAttribute("coursesNum")%>;
-		//document.getElementById("myCanvas").style.background="url(http://homework2zbing-classpic.stor.sinaapp.com/20bc08e8aa5eceb82822b101ec9e662d%20%281%29.jpg)";
+		//var testimg = "images/test.jpg";
+		//document.getElementById("myCanvas").style.backgroundImage="url("+urlpic+")";
 		if ( count == 1 ){//当天有一节课，返回SUCCESS
 			//session.put("coursesInfo", courses.get(0));//传入当前课程的类，包含具体信息
 			<% ArrayList<CourseInfo> course = new ArrayList<CourseInfo>();
 			  Object temp1 = session.getAttribute("coursesInfo");
 			  course = (ArrayList<CourseInfo>) temp1;
-			  String cname = course.get(0).getCname();%>
+			  String cname = course.get(0).getCname();
+			  String urlpic = (String)session.getAttribute("classPicUrl");%>
+			
 			document.getElementById("courseTeancher").innerHTML= str;
-			document.getElementById("myCanvas").style.background="url(http://homework2zbing-classpic.stor.sinaapp.com/20bc08e8aa5eceb82822b101ec9e662d%20%281%29.jpg)";
+			var bgurl = '"url('+<%=urlpic%>+')"';
+			if(bgurl==null){
+				document.getElementById("bgurl").innerHTML="还未开始点名或者图片上传不成功，请耐心等候";
+				}else{
+					document.getElementById("myCanvas").style.backgroundImage="url("+urlpic+")";
+					}
+			
 		}else if ( count > 1){//课程冲突，返回SUCCESS，由界面判断处理
 			//session.put("coursesInfo", courses);//课程冲突，将所有课传入，便于页面显示
 			var str=" ";
@@ -196,7 +205,7 @@ var arr = new Array();
 		<div class="header-top">
 			<div class="container">
 				<div class="logo">
-					<a href="index.html"><img src="images/logo.png"
+					<a href="welcome.jsp"><img src="images/logo.png"
 						class="img-responsive" alt="" /></a> <font class="login_font_title">超人点名</font>
 				</div>
 				<div class="header-right">
@@ -225,10 +234,10 @@ var arr = new Array();
 			<label id="courseTeacher" name="courseTeacher"
 				class="check_coursefont">Javaee 李辉</label>
 		</div>
-		<div class="check_tip">请在图中找出并选择你自己，确定提交</div>
+		<div class="check_tip" id="tips">请在图中找出并选择你自己，确定提交</div>
 		<div class="check_peopleimg">
 			<canvas id="myCanvas" width="800" height="370"
-				style="background:url(http://homework2zbing-classpic.stor.sinaapp.com/20bc08e8aa5eceb82822b101ec9e662d%20%281%29.jpg);background-size:100% 100%">
+				style="background:url();background-size:100% 100%">
 		</div>
 		<s:form  action="student_addface"  method="post">
 			<s:textfield name="index" id="index" cssStyle="visibility:hidden"></s:textfield>
