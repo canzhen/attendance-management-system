@@ -187,11 +187,7 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 	
 	function judge(){
 		count = <%=session.getAttribute("coursesNum")%>;
-<<<<<<< HEAD
-		count=1;
-=======
-		//count = 1;
->>>>>>> 4cb7f8705e08624ef828cf9ba32434895886ff28
+
 		//var testimg = "images/test.jpg";
 		//document.getElementById("myCanvas").style.backgroundImage="url("+urlpic+")";
 		if ( count == 1 ){//当天有一节课
@@ -201,11 +197,10 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 			  course = (ArrayList<CourseInfo>) temp1;
 			  String cname = course.get(0).getCname();
 			  url = (String)session.getAttribute("picUrl");%>
-<<<<<<< HEAD
-=======
+
 			var coursename = <%=cname%>;
 			document.getElementById("courseTeacher").innerHTML= coursename;
->>>>>>> 4cb7f8705e08624ef828cf9ba32434895886ff28
+
 			
 			var urlpic = <%=url%>;
 			if(urlpic==null){
@@ -268,7 +263,7 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 		<div class="check_tip" id="tips">请在图中找出并选择你自己，确定提交</div>
 		<div class="check_peopleimg">
 			<canvas id="myCanvas" width="800" height="400"
-				style="background:url(d:\\1.jpg);background-size:100% 100%">
+				style="background:url();background-size:100% 100%">
 		</div>
 		<s:form  action="student_addFace"  method="post">
 			<s:textfield name="index" id="index" cssStyle="visibility:hidden"></s:textfield>
