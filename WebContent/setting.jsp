@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="java.util.ArrayList" import="utils.*"
+	import="java.util.*" import="pic.entity.*" import="db.entity.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,6 +11,26 @@
 <script type="text/javascript" src="jquery/jquery.js"></script>
 <title>Insert title here</title>
 <script language="JavaScript" type="text/javascript">
+<%ArrayList list1;
+CourseInfo course;%>
+function judge(){
+	<%
+	list1 = (ArrayList) session.getAttribute("coursesInfo");
+	course=(CourseInfo)list1.get(0);%>
+document.getElementById("courseN").innerHTML =
+<%=course.getCname()%>
+;
+document.getElementById("teacherN").innerHTML =
+<%=session.getAttribute("name")%>
+;
+	var count = <%=session.getAttribute("count")%>;
+	if(count!=1)
+	{ 
+		$("#start").hide();
+		$("#now").hide();
+		
+	};
+}
 function start() {
 	window.location.href="teacher.index.jsp";
 }
@@ -24,7 +45,7 @@ function record(){
 }
 </script>
 </head>
-<body>
+<body onload="judge()">
 	<div class="container">
 		<div class="logo">
 			<a href="index.html"><img src="images/logo.png"
@@ -34,7 +55,7 @@ function record(){
 
 			<ul class="navigatoin">
 				<li><img src="./images/tx.png" class="studentimg" alt="" /> <label
-					class="studentname">张三</label></li>
+					class="studentname" id="teacherN"></label></li>
 				<li><a href="" class="active">设置</a>
 			</ul>
 			<div class="clearfix"></div>
@@ -56,15 +77,15 @@ function record(){
 					src="images/bbb_04.jpg">
 			</div>
 			<div class="div2">
-				<h1 style="color: #000000; align-content: center;">JavaEE</h1>
+				<h1 style="color: #000000; align-content: center;" id="courseN"></h1>
 			</div>
-<div class="div2" onclick="start()">
+<div class="div2" id="start" onclick="start()">
 				开始点名
 			</div>
 			<div class="div2" onclick="set()">
 				点名设置
 			</div>
-			<div class="div2" onclick="record()">
+			<div class="div2" onclick="record()" id="now">
 				本堂课点名记录
 			</div>
 			<div class="div2" onclick="recordTotal()">
@@ -74,18 +95,16 @@ function record(){
 	</div>
 
 	<form class="setting"
-		style="margin-top: 30px; font-size: 10pt; font-family: '微软雅黑'; color: #000000;">
-		<p>课程名称：Javaee</p>
-		<p>上课时间：1-16周，6-7节</p>
-		<p>点名时间：</p>
+		style="margin-top: 30px; font-size: 10pt; font-family: '微软雅黑'; color: #000000;" action="" method="post">
+		<p>课程名称：<%=course.getCname() %></p>
+		<p>上课时间：<%=course.getTime() %></p>
+		<p>点名时间：<%=course.getCheckTime() %></p>
 		<input type="text" onfocus="this.value = '';"
-			onblur="if (this.value == '') {this.value = '请输入';}">
-		<p>*最大缺勤数:</p>
+			onblur="if (this.value == '') {this.value = '请输入';}" name="check_time">
+		<p>*最大缺勤数:<%=course.getMaxAbsence() %></p>
 		<input type="text" onfocus="this.value = '';"
-			onblur="if (this.value == '') {this.value = '请输入';}"><br />
-
-		<input type="submit" value="保存" style="margin-top: 10px;">
-
+			onblur="if (this.value == '') {this.value = '请输入';}" name="max_absence"><br />
+		<input type="submit" value="保存" style="margin-top: 10px;" >
 	</form>
 </body>
 </html>

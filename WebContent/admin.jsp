@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="java.util.ArrayList" import="utils.*"
+	import="java.util.*" import="pic.entity.*" import="db.entity.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -10,6 +11,9 @@
 <link rel="stylesheet" href="./css/header.css" type="text/css"
 	media="all" />
 <link rel="stylesheet" href="css/caicai.css" type="text/css" media="all" />
+<script language="JavaScript" type="text/javascript">
+
+</script>
 </head>
 
 <body>
@@ -44,7 +48,7 @@
 					src="images/bbb_04.jpg"/>
 			</div>
 			<div class="div2">
-				<h1 style="color: #000000; align-content: center;">JavaEE</h1>
+				<h1 style="color: #000000; align-content: center;">管理员</h1>
 			</div>
 
 			<div class="div2">
@@ -59,7 +63,6 @@
 			method="post">
 		<p>开学日期：<input type="text" name="date"/></p>
 		<input type="submit" value="保存" style="margin-top: 10px;"/>
-		
 
 	</form>
 </body>

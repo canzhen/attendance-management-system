@@ -16,8 +16,14 @@
 	若该段时间有课，则老师可以上传
  -->
  <script language="JavaScript" type="text/javascript">
+ <%int i=0;%>
  <% List<CourseInfo> list=new ArrayList<CourseInfo>();
  list=(List<CourseInfo>)session.getAttribute("coursesInfo");%>
+ function jump() {
+	var value=document.getElementById("cno").value;
+	document.getElementById("cnoN").value=value;
+	document.getElementById("form").submit();
+}
 </script>
 </head>
 <body>
@@ -47,13 +53,14 @@
 <div class="portfolio">
   <div class="portfolio-info">
 	<div class="container">
-		<%for(int i=0;i<list.size();i++){ %>
+		<%for( ;i<list.size();i++){ %>
 				<div id="portfoliolist">
 					<div class="portfolio icon mix_all"  style="display: inline-block; opacity: 1;">
-						<div class="portfolio-wrapper wow bounceIn capt" data-wow-delay="0.4s">		
-							<a href="single.html" class="b-link-stripe b-animate-go">
+						<div class="portfolio-wrapper wow bounceIn capt" data-wow-delay="0.4s" onclick="jump(i)">		
+							<a href="#"class="b-link-stripe b-animate-go" onclick="jump()">
 								<h1 style="margin: auto; color: #000000;"><%=list.get(i).getCname() %></h1>
 								<h4 style="margin: auto; color: #3071A9;"><%=list.get(i).getTime() %></h4>
+								<h4 style="margin: auto; color: #3071A9;" id="cno"><%=list.get(i).getCno() %></h4>
 								 <div class="b-wrapper"><h2 class="b-animate b-from-left    b-delay03 ">点名</h2>
 								  <p class="b-animate b-from-left    b-delay03 ">view</p>
 								</div>
@@ -62,6 +69,9 @@
 					</div>
 					</div>
 					<%} %>
+					<form method="post" id="form"hidden="hidden">
+					<input id="cnoN" type="text"/>
+					<input type="submit"></form>
 				<!--  <div id="portfoliolist">
 					<div class="portfolio icon mix_all" style="display: inline-block; opacity: 1;">
 						<div class="portfolio-wrapper wow bounceIn capt" data-wow-delay="0.4s">		

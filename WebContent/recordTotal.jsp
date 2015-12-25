@@ -15,7 +15,25 @@
 <link rel="stylesheet" href="css/header.css" type="text/css" media="all" />
 <link rel="stylesheet" href="css/caicai.css" type="text/css" media="all" />
 <script language="JavaScript" type="text/javascript">
-	
+<%ArrayList list1;
+CourseInfo course;%>
+function judge(){
+	<%
+	list1 = (ArrayList) session.getAttribute("coursesInfo");
+	course=(CourseInfo)list1.get(0);%>
+document.getElementById("courseN").innerHTML =
+<%=course.getCname()%>
+;
+document.getElementById("teacherN").innerHTML =
+<%=session.getAttribute("name")%>
+;
+	var count = <%=session.getAttribute("classNum")%>;
+	if(count!=1)
+	{ 
+		$("#start").hide();
+		$("#now").hide();
+	};
+}
 <%List<StudentInfo> list = new ArrayList<StudentInfo>();
 			list = (List<StudentInfo>) session.getAttribute("absenceList");%>
 	function start() {
@@ -44,7 +62,7 @@
 
 			<ul class="navigatoin">
 				<li><img src="./images/tx.png" class="studentimg" alt="" /> <label
-					class="studentname">张三</label></li>
+					class="studentname" id="teacherN"></label></li>
 				<li><a href="" class="active">设置</a>
 			</ul>
 			<div class="clearfix"></div>
@@ -66,12 +84,12 @@
 							src="images/bbb_04.jpg"/>
 			</div>
 			<div class="div2">
-				<h1 style="color: #000000; align-content: center;">JavaEE</h1>
+				<h1 style="color: #000000; align-content: center;" id="courseN"></h1>
 			</div>
 
-			<div class="div2" onclick="start()">开始点名</div>
+			<div class="div2" onclick="start()" id="start">开始点名</div>
 			<div class="div2" onclick="set()">点名设置</div>
-			<div class="div2" onclick="record()">本堂课点名记录</div>
+			<div class="div2" onclick="record()" id="now">本堂课点名记录</div>
 			<div class="div2" onclick="recordTotal()">本学期点名记录</div>
 		</div>
 	</div>
@@ -92,7 +110,7 @@
 					<td><%=list.get(i).getSname()%></td>
 					<td><div class="progress" id="myprogress">
 							<span id="progressbar_out" class="blue" style="width: 33%;"><span
-								id="progressbar_in"><%=list.get(i).getAbsenceNum()%>/<%=%></span></span>
+								id="progressbar_in"><%=list.get(i).getAbsenceNum()%>/<%=course.getMaxAbsence()%></span></span>
 						</div></td>
 				</tr>
 				<%
