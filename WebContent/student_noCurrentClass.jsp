@@ -76,7 +76,14 @@
 			   int result = (int) (((double)absenceNum / (double)maxAbsence)*100);
 			   String show = absenceNum +"/" + maxAbsence;
 			   String finalresult = result + "%";
-			   String str = "'<div class=\"progress\" id=\"myprogress\"><span id=\"progressbar_out\" class=\"blue\" style=\"width:"+finalresult+";\"><span id=\"progressbar_in\">"+show+"</span></span></div>'";
+			   String str;
+			   if((double)course.get(i).getAbsenceNum()/(double)course.get(i).getMaxAbsence() > 0.6){
+				   str = "'<div class=\"progress\" id=\"myprogress\"><span id=\"progressbar_out\" class=\"red\" style=\"width:"+finalresult+";\"><span id=\"progressbar_in\">"+show+"</span></span></div>'";
+
+			   }else{
+				   str = "'<div class=\"progress\" id=\"myprogress\"><span id=\"progressbar_out\" class=\"blue\" style=\"width:"+finalresult+";\"><span id=\"progressbar_in\">"+show+"</span></span></div>'";
+ 
+			   }
 			%>
 			//第三列
 			newc = newl.insertCell();
@@ -110,7 +117,7 @@
 		<div class="header-top">
 			<div class="container">
 				<div class="logo">
-					<a href="index.html"><img src="images/logo.png"
+					<a href="welcome.jsp"><img src="images/logo.png"
 						class="img-responsive" alt="" /></a> <font class="login_font_title">超人点名</font>
 				</div>
 				<div class="header-right">
@@ -146,7 +153,7 @@
 	<div class="table-c">
 		<table id="myTable">
 			<tbody>
-				<tr>
+				<tr>			
 					<td>课程</td>
 					<td>时间</td>
 					<td>缺课情况<font size="2pt" color="#8D8D8D">&nbsp;&nbsp;&nbsp;(缺勤数/最大缺勤数)</font></td>
