@@ -29,19 +29,14 @@
 	}
 function judge(){
 		
-		var count = <%=session.getAttribute("count")%>;
+		var count = <%=session.getAttribute("coursesNum")%>;
 		<%
-		ArrayList list ;
-		CourseInfo course;
+			ArrayList list ;
+			CourseInfo course;
 		%>
 		if ( count == 1 ){//当天有一节课，返回SUCCESS
 			//session.put("coursesInfo", courses.get(0));//传入当前课程的类，包含具体信息
-			<% 
-			list = (ArrayList)session.getAttribute("coursesInfo");
-			course = (CourseInfo)list.get(0);
-			%>
-			document.getElementById("courseN").innerHTML=<%=course.getCname()%>;
-			document.getElementById("teacherN").innerHTML=<%=session.getAttribute("name")%>;
+			
 		}else if ( count > 1){//课程冲突，返回SUCCESS，由界面判断处理
 			//session.put("coursesInfo", courses);//课程冲突，将所有课传入，便于页面显示
 			window.location.href="teacher_noCurrentClass.jsp";

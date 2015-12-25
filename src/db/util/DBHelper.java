@@ -207,7 +207,7 @@ public class DBHelper {
 		 */
 		for (int i = 0; i < day.length(); i++){
 			if ( i != (day.length()-1) )
-				dayInfo += (day.charAt(i)+"周  ");
+				dayInfo += (day.charAt(i)+"周");
 			else dayInfo += (day.charAt(i));
 		}
 		
@@ -247,7 +247,7 @@ public class DBHelper {
 	
 	
 	/**
-	 * 用于老师修改点名时长
+	 * 用于老师修改点名时长或者最大缺勤数
 	 * @param tno 老师的教工号
 	 * @param checktime 新的点名时长
 	 * @param type 要修改的tc表column的名字
@@ -335,5 +335,28 @@ public class DBHelper {
 		return result;
 	}
 	
+	/**
+	 * 通过学生的学号和当前的课程号
+	 * 获得上当前课程的老师的编号
+	 * @param sno 学生的学号
+	 * @param cno 当前的课程号
+	 * @return
+	 */
+	public static String getTnoBySnoCno(String sno,String cno){
+		String tno = "";
+		
+		Sc sc = new Sc();
+		ScId scid = new ScId();
+		scid.setSno(sno);
+		scid.setCno(cno);
+		ScHome schome = new ScHome();
+		Transaction tran = schome.createTransaction();
+		sc = schome.findById(scid);
+		tran.commit();
+		if ( sc != null )
+			tno = sc.getTno();
+		
+		return tno;
+	}
 	
 }

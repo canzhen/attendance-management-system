@@ -4,6 +4,8 @@ public class StudentInfo {
 	private String sno;
 	private String sname;
 	private Integer absenceNum;	
+	private boolean isChecked = false;//默认学生尚未签到
+	
 	
 	public String getSno() {
 		return sno;
@@ -22,6 +24,12 @@ public class StudentInfo {
 	}
 	public void setAbsenceNum(Integer absenceNum) {
 		this.absenceNum = absenceNum;
+	}
+	public boolean isChecked() {
+		return isChecked;
+	}
+	public void setChecked(boolean isChecked) {
+		this.isChecked = isChecked;
 	}
 
 }

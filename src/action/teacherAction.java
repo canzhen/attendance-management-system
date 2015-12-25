@@ -14,13 +14,22 @@ import java.util.Map;
 
 import org.apache.struts2.ServletActionContext;
 
+import utils.PictureHelper;
 import utils.Values;
 import db.entity.CourseInfo;
 import db.util.DBHelper;
 
 public class teacherAction extends MyActionSupport{
 	File pic;//用于获取教师上传的图片
-	
+	String picContentType;
+	String picFileName;
+	String courseNo="";//当前所在页面的课程id
+	String max_absence="";//最大缺勤数
+	String check_time="";//点名时间
+	Map session = getSession();//获取session
+	String tno = (String) session.get("id");//获取教工号
+	List<CourseInfo> courses = new ArrayList<CourseInfo>();//课程链表，保存当前时间老师的课程信息
+
 	/**
 	 * 在返回页面之前，需要从数据库中比对，查找当前要上的课，
 	 * 然后把课程信息放到request里传递过去。
@@ -28,9 +37,6 @@ public class teacherAction extends MyActionSupport{
 	 */
 	@Override
 	public String index(){
-		Map session = getSession();//获取session
-		String tno = (String) session.get("id");//获取教工号
-		List<CourseInfo> courses = new ArrayList<CourseInfo>();//课程链表，保存当前时间老师的课程信息
 		/*
 		 * --------测试部分----------
 		 */
@@ -54,13 +60,13 @@ public class teacherAction extends MyActionSupport{
 			int count = -1;
 			if ( courses != null) 
 				count = courses.size();
-			session.put("classNum", count);
+			session.put("coursesNum", count);
 			if ( count == 0 ){//当天无课，返回NOCURRENTCLASS
 				courses = DBHelper.getAllCoursesInfo("teacher",tno,coursesno,true);
 				session.put("coursesInfo", courses);//传入所有课程编号
 				return NOCURRENTCLASS;
 			}else if ( count == 1 ){//当天有一节课，返回SUCCESS
-				session.put("courseId", courses.get(0).getCno());
+				session.put("cno", courses.get(0).getCno());
 				session.put("coursesInfo", courses);//传入当前课程的类，包含具体信息
 			}else if ( count > 1){//课程冲突，返回SUCCESS，由界面判断处理
 				session.put("coursesInfo", courses);//课程冲突，将所有课传入，便于页面显示
@@ -82,38 +88,63 @@ public class teacherAction extends MyActionSupport{
 	}
 	
 	public String getStudentInfoForAClass(){
-		List result = DBHelper.getStudentInfoForAClassByCnoTno("cs001","1111114");
+		List result = DBHelper.getStudentInfoForAClassByCnoTno(courseNo,tno);
 		return SUCCESS;
 	}
-	
-	
 	
 	public String savePic(){
 		//pic = new File("d:\\my_icon.jpg");
 		//String path =  ServletActionContext.getServletContext().getRealPath("/");
-		/*获取当前系统时间*/
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
-		String date = df.format(new Date());//获取当前日期
-		String savePath = "d:\\teacher\\"+getSession().get("name")+""+date;
-		String filePath = "d:\\teacher\\"+getSession().get("name")+""+date+"\\"+(Values.index++) +".jpg";
-		if ( pic != null ){
-			try {
-				DataInputStream in = new DataInputStream(new FileInputStream(pic));
-				File saveFile = new File(savePath);
-				if ( !saveFile.exists())
-					saveFile.mkdirs();
-				DataOutputStream out = new DataOutputStream(new FileOutputStream(filePath));
-				/*将参数savePath，即将截取的图片的存储在本地地址赋值给out输出流所指定的地址*/
-	            byte[] buffer = new byte[4096];
-	            int count = 0;
-	            while ((count = in.read(buffer)) > 0)/*将输入流以字节的形式读取并写入buffer中*/
-	                out.write(buffer, 0, count);
-	            out.close();/*后面三行为关闭输入输出流以及网络资源的固定格式*/
-	            in.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+		if (pic != null)
+			PictureHelper.savePic(pic,session);
 		return SUCCESS;
 	}
+	
+	public String setMaxAbsence(){
+		if ( !max_absence.equals("") )
+			DBHelper.editTcValue(tno, courseNo, "maxabsence", new Integer(max_absence));
+		return SUCCESS;
+	}
+
+	public File getPic() {
+		return pic;
+	}
+
+	public void setPic(File pic) {
+		this.pic = pic;
+	}
+	
+
+	public String getPicContentType() {
+		return picContentType;
+	}
+
+	public void setPicContentType(String picContentType) {
+		this.picContentType = picContentType;
+	}
+
+	public String getPicFileName() {
+		return picFileName;
+	}
+
+	public void setPicFileName(String picFileName) {
+		this.picFileName = picFileName;
+	}
+	
+	public String getMax_absence() {
+		return max_absence;
+	}
+
+	public void setMax_absence(String max_absence) {
+		this.max_absence = max_absence;
+	}
+
+	public String getCheck_time() {
+		return check_time;
+	}
+
+	public void setCheck_time(String check_time) {
+		this.check_time = check_time;
+	}
+
 }

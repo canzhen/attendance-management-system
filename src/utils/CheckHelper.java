@@ -27,20 +27,24 @@ public class CheckHelper {
 	
 	/**
 	 * 学生签到，返回是否签到成功
-	 * @param sno 学生学号
+	 * @param index 是第几个学生 
 	 * @param studentsInfo 该课的学生列表
 	 * @return 是否签到成功
 	 */
-	public  boolean checkIn(FaceEntity faceEntity,List<StudentInfo> studentsInfo){
-		addFace(faceEntity);
-		String sno = faceEntity.getSno();
-		for (int i = 0; i < studentsInfo.size(); i++){
-			if (studentsInfo.get(i).getSno().equals(sno)){
-				studentsInfo.remove(i);//到了，则从列表里剔除，最后剩下的就是没到的
-				return true;//签到成功
+	public  boolean checkIn(int index,List<StudentInfo> studentsInfo){
+		String sno = "";
+		if (checkFaceList != null){
+			sno = checkFaceList.get(index).getSno();
+			StudentInfo sinfo;
+			for (int i = 0; i < studentsInfo.size(); i++){
+				sinfo = studentsInfo.get(i);
+				if (sinfo.equals(sno)){
+					sinfo.setChecked(true);//签到
+					return true;
+				}
 			}
 		}
-		return false;//列表里没有这个学生，则签到失败
+		return false;//列表里没找到该同学，则签到失败
 	}
 	/**
 	 * 往脸点名列表里加入脸的信息
