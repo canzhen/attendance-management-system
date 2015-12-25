@@ -37,7 +37,7 @@ var FaceJS = function(sno,cX,cY,lXInPic,lYInPic,width,hight){
 <%String url = "";%>
 //声明arr数组
 var arr = new Array();
-
+<% Object o = session.getAttribute("picUrl");%>
 	//初始化
 	window.onload = function() {
 		//判断是否开始点名
@@ -72,6 +72,10 @@ var arr = new Array();
 	function initData() {		
 		<% //url ="d:\\1.jpg";
 		List<FaceEntity> faces=new ArrayList<FaceEntity>();
+		//url = (String)session.getAttribute("picUrl");
+		url = "f:/test.jpg";
+		String path = request.getContextPath();
+		String s = path;
 		PicFace picFace=new PicFace(new File(url));
 		faces=picFace.getFaces();
 		int size = 0;
@@ -163,6 +167,7 @@ var arr = new Array();
 	
 	function judge(){
 		count = <%=session.getAttribute("coursesNum")%>;
+		//count = 1;
 		//var testimg = "images/test.jpg";
 		//document.getElementById("myCanvas").style.backgroundImage="url("+urlpic+")";
 		if ( count == 1 ){//当天有一节课，返回SUCCESS
@@ -171,32 +176,24 @@ var arr = new Array();
 			  Object temp1 = session.getAttribute("coursesInfo");
 			  course = (ArrayList<CourseInfo>) temp1;
 			  String cname = course.get(0).getCname();
-			  url = (String)session.getAttribute("classPicUrl");%>
+			  url = (String)session.getAttribute("picUrl");%>
 			
 			document.getElementById("courseTeancher").innerHTML= str;
 			var bgurl = '"url('+<%=url%>+')"';
 			if(bgurl==null){
-				document.getElementById("bgurl").innerHTML="还未开始点名或者图片上传不成功，请耐心等候";
+				document.getElementById("tips").innerHTML="还未开始点名或者图片上传不成功，请耐心等候";
 				}else{
 					document.getElementById("myCanvas").style.backgroundImage="url("+urlpic+")";
 					}
 			
 		}else if ( count > 1){//课程冲突，返回SUCCESS，由界面判断处理
 			//session.put("coursesInfo", courses);//课程冲突，将所有课传入，便于页面显示
-			var str=" ";
-			<%  List<CourseInfo> coursect = new ArrayList<CourseInfo>();
-			   coursect = (ArrayList<CourseInfo>)session.getAttribute("coursesInfo");
-				
-				for(int i=0;i<coursect.size();i++){%>
-					str = str+<%=coursect.get(i).getCname()%>+" , ";
-				<%}%>
-				
-			alert(str+"上课时间冲突,不能签到");
+			document.location.href="indextoerror.jsp";
+			
 		}else if ( count == -1 ){//当天无课，返回SUCCESS，由界面判断处理
 			//session.put("coursesInfo", "这周不属于上课周，放假或者为自习周，无课");
 		
-			var str = <%=session.getAttribute("courseInfo")%>;
-			alert(str);
+			document.location.href="indextoerror.jsp";
 		}
 	}
 
