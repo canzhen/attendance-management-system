@@ -93,7 +93,7 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 		<% 
 		List<FaceEntity> faces=new ArrayList<FaceEntity>();
 		
-		url = (String)session.getAttribute("picUrl");
+		url = "c:/"+url;
 
 		PicFace picFace=new PicFace(new File(url));
 		faces=picFace.getFaces();
