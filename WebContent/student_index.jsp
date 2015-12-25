@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	import="utils.*" import="java.util.*" import="pic.entity.*"
+	import="java.io.File"
 	import="db.entity.*" pageEncoding="UTF-8"%>
 	<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -67,9 +68,9 @@ var arr = new Array();
 
 	//初始化数组数据
 	function initData() {		
-		<% String url="http://homework2zbing-classpic.stor.sinaapp.com/20bc08e8aa5eceb82822b101ec9e662d%20%281%29.jpg";
+		<% String url="d:\\1.jpg";
 		List<FaceEntity> faces=new ArrayList<FaceEntity>();
-		PicFace picFace=new PicFace(url);
+		PicFace picFace=new PicFace(new File(url));
 		faces=picFace.getFaces();
 		int size = 1;
 		size = faces.size();
@@ -237,7 +238,7 @@ var arr = new Array();
 		<div class="check_tip" id="tips">请在图中找出并选择你自己，确定提交</div>
 		<div class="check_peopleimg">
 			<canvas id="myCanvas" width="800" height="370"
-				style="background:url();background-size:100% 100%">
+				style="background:url(d:\\1.jpg);background-size:100% 100%">
 		</div>
 		<s:form  action="student_addface"  method="post">
 			<s:textfield name="index" id="index" cssStyle="visibility:hidden"></s:textfield>
