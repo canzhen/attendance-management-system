@@ -37,7 +37,7 @@ var FaceJS = function(sno,cX,cY,lXInPic,lYInPic,width,hight){
 <%String url = "";%>
 //声明arr数组
 var arr = new Array();
-<% Object o = session.getAttribute("picUrl");%>
+
 var c = 60 *<%=session.getAttribute("daojishi")%>;
 	//10分钟
 	var t;
@@ -90,12 +90,11 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 
 	//初始化数组数据
 	function initData() {		
-		<% //url ="d:\\1.jpg";
+		<% 
 		List<FaceEntity> faces=new ArrayList<FaceEntity>();
-		//url = (String)session.getAttribute("picUrl");
-		url = "f:/test.jpg";
-		String path = request.getContextPath();
-		String s = path;
+		
+		url = (String)session.getAttribute("picUrl");
+
 		PicFace picFace=new PicFace(new File(url));
 		faces=picFace.getFaces();
 		int size = 0;
@@ -190,28 +189,29 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 		//count = 1;
 		//var testimg = "images/test.jpg";
 		//document.getElementById("myCanvas").style.backgroundImage="url("+urlpic+")";
-		if ( count == 1 ){//当天有一节课，返回SUCCESS
-			//session.put("coursesInfo", courses.get(0));//传入当前课程的类，包含具体信息
+		if ( count == 1 ){//当天有一节课
+			
 			<% ArrayList<CourseInfo> course = new ArrayList<CourseInfo>();
 			  Object temp1 = session.getAttribute("coursesInfo");
 			  course = (ArrayList<CourseInfo>) temp1;
 			  String cname = course.get(0).getCname();
 			  url = (String)session.getAttribute("picUrl");%>
+			var coursename = <%=cname%>;
+			document.getElementById("courseTeacher").innerHTML= coursename;
 			
-			document.getElementById("courseTeancher").innerHTML= str;
-			var bgurl = '"url('+<%=url%>+')"';
-			if(bgurl==null){
+			var urlpic = <%=url%>;
+			if(urlpic==null){
 				document.getElementById("tips").innerHTML="还未开始点名或者图片上传不成功，请耐心等候";
 				}else{
 					document.getElementById("myCanvas").style.backgroundImage="url("+urlpic+")";
 					}
 			
-		}else if ( count > 1){//课程冲突，返回SUCCESS，由界面判断处理
-			//session.put("coursesInfo", courses);//课程冲突，将所有课传入，便于页面显示
+		}else if ( count > 1){//课程冲突
+			
 			document.location.href="indextoerror.jsp";
 			
-		}else if ( count == -1 ){//当天无课，返回SUCCESS，由界面判断处理
-			//session.put("coursesInfo", "这周不属于上课周，放假或者为自习周，无课");
+		}else if ( count == -1 ){//当天无课
+			
 		
 			document.location.href="indextoerror.jsp";
 		}
@@ -251,7 +251,7 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 	</div>
 	<div class="welcome_center">
 		<div>
-			<label id="courseTeacher" name="courseTeacher"
+			<label id="courseTeacher" 
 				class="check_coursefont"></label>
 		</div>
 		<div id="CountMsg" class="HotDate">
