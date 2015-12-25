@@ -14,14 +14,12 @@ import db.util.DBHelper;
 
 public class PictureHelper {
 	
-	public static void savePic(File pic,Map session){
+	public static void savePic(File pic, String tno){
 		/*获取当前系统时间*/
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH");//设置日期格式
 		String date = df.format(new Date());//获取当前日期
-		String path = Values.save_pic_path;
-		String savePath,filePath,tno=(String) session.get("id");
-		savePath =path+tno;
-		filePath = path+tno+"\\"+date+".jpg";
+		String savePath = Values.save_pic_path+tno,
+				filePath = Values.save_pic_path+tno+"\\"+date+".jpg";
 		
 		if ( pic != null ){
 			try {
@@ -42,4 +40,24 @@ public class PictureHelper {
 			}
 		}
 	}
+	
+	/**
+	 * 返回该堂课老师上传的图片，
+	 * 如果老师尚未上传图片，则返回null
+	 * @param tno
+	 * @return
+	 */
+	public static String getPicUrl(String tno){
+		File pic = null;
+		/*获取当前系统时间*/
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH");//设置日期格式
+		String date = df.format(new Date());//获取当前日期
+		String savePath = Values.save_pic_path+tno,
+				filePath = Values.save_pic_path+tno+"\\"+date+".jpg";
+		
+		pic = new File(filePath);
+		if (!pic.exists())
+			return null;
+		else return filePath;
+	} 
 }

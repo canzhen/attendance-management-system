@@ -239,7 +239,7 @@ var arr = new Array();
 			<canvas id="myCanvas" width="800" height="370"
 				style="background:url();background-size:100% 100%">
 		</div>
-		<s:form  action="student_addface"  method="post">
+		<s:form  action="student_addFace"  method="post">
 			<s:textfield name="index" id="index" cssStyle="visibility:hidden"></s:textfield>
 			<s:div cssClass="check_divsubmitall">
 				<input class="check_submit" type="button" value="取消" />

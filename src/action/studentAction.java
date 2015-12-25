@@ -1,11 +1,13 @@
 package action;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import utils.CheckHelper;
 import utils.PicFace;
+import utils.PictureHelper;
 import utils.StudentAbsenceTimerTask;
 import db.entity.Course;
 import db.entity.CourseInfo;
@@ -59,13 +61,20 @@ public class studentAction extends MyActionSupport{
 				session.put("coursesInfo", courses);//传入所有课程编号
 				return NOCURRENTCLASS;
 			}else if ( count == 1 ){//当天有一节课，返回SUCCESS
-				session.put("cno", courses.get(0).getCno());
+				String cno = courses.get(0).getCno();
+				session.put("cno", cno);
 				session.put("coursesInfo", courses);//传入当前课程的类，包含具体信息
+				/*
+				 * 判断老师是否已经将点名的图片上传，
+				 * 若已经上传，则放在session里传过去
+				 */
+				session.put("picUrl", PictureHelper.getPicUrl(DBHelper.getTnoBySnoCno(sno, cno)))
 			}else if ( count > 1){//课程冲突，返回SUCCESS，由界面判断处理
 				session.put("coursesInfo", courses);//课程冲突，将所有课传入，便于页面显示
 			}else if ( count == -1 ){//当天无课，返回SUCCESS，由界面判断处理
 				session.put("coursesInfo", "这周不属于上课周，放假或者为自习周，无课");
 			}
+			
 			return SUCCESS;
 		}
 	}
