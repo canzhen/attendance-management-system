@@ -71,7 +71,7 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 		if (canvas.getContext && count == 1) {
 			var ctx = canvas.getContext('2d');
 
-			ctx.strokeStyle = '#0000ff';
+			ctx.strokeStyle = '#ff0000';
 			initData();
 			//左上角的x，y坐标，长宽
 			for(var m=0;m<size;m++){
@@ -163,7 +163,7 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 					&& (arr[i].y + arr[i].height) >= p.y && p.y >= arr[i].y) {
 				whichObject.push(i);
 				//清空所有的绘图
-				ctx.clearRect(0, 0, 800, 370);
+				ctx.clearRect(0, 0, 800, 400);
 				//把所有的脸选择改为false
 				for (var n = 0; n < arr.length; n++) {
 					arr[n].selected = false;
@@ -187,11 +187,7 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 	
 	function judge(){
 		count = <%=session.getAttribute("coursesNum")%>;
-<<<<<<< HEAD
-		count=1;
-=======
-		//count = 1;
->>>>>>> 4cb7f8705e08624ef828cf9ba32434895886ff28
+
 		//var testimg = "images/test.jpg";
 		//document.getElementById("myCanvas").style.backgroundImage="url("+urlpic+")";
 		if ( count == 1 ){//当天有一节课
@@ -201,11 +197,10 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 			  course = (ArrayList<CourseInfo>) temp1;
 			  String cname = course.get(0).getCname();
 			  url = (String)session.getAttribute("picUrl");%>
-<<<<<<< HEAD
-=======
+
 			var coursename = <%=cname%>;
 			document.getElementById("courseTeacher").innerHTML= coursename;
->>>>>>> 4cb7f8705e08624ef828cf9ba32434895886ff28
+
 			
 			var urlpic = <%=url%>;
 			if(urlpic==null){
@@ -224,9 +219,17 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 			document.location.href="indextoerror.jsp";
 		}
 	}
+	//注销
+	function logout(){
+		window.location.href="login_logout";
+	}
 
-
-
+	function submitFunction(){
+		alert("签到成功");
+	}
+	function cancleFunction(){
+		init();
+	}
 </script>
 <body>
 	<div class="header">
@@ -242,7 +245,7 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 						<ul class="navigatoin">
 							<li><img src="images/tx.png" class="studentimg" alt="" /><label
 								class="studentname" id="stuname">张三</label></li>
-							<li><a href="" class="active">设置</a>
+							<li><a href="" class="active" onclick="logout()">注销</a>
 						</ul>
 						<div class="clearfix"></div>
 
@@ -267,14 +270,14 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 		</div>
 		<div class="check_tip" id="tips">请在图中找出并选择你自己，确定提交</div>
 		<div class="check_peopleimg">
-			<canvas id="myCanvas" width="800" height="370"
-				style="background:url(d:\\1.jpg);background-size:100% 100%">
+			<canvas id="myCanvas" width="800" height="400"
+				style="background:url();background-size:100% 100%">
 		</div>
 		<s:form  action="student_addFace"  method="post">
 			<s:textfield name="index" id="index" cssStyle="visibility:hidden"></s:textfield>
 			<s:div cssClass="check_divsubmitall">
-				<input class="check_submit" type="button" value="取消" />
-				<s:submit value="确定" cssClass="check_submit" />
+				<input class="check_submit" type="button" value="取消" onclick="cancleFunction()"/>
+				<s:submit value="确定" cssClass="check_submit" onclick="submitFunction()"/>
 			</s:div>
 		</s:form>
 

@@ -20,9 +20,10 @@
  <% List<CourseInfo> list=new ArrayList<CourseInfo>();
  list=(List<CourseInfo>)session.getAttribute("coursesInfo");%>
  function jump() {
-	var value=document.getElementById("cno").value;
-	document.getElementById("cnoN").value=value;
+	var value1=document.getElementById("cno").value;
+	document.getElementById("cnoN").value=value1;
 	document.getElementById("form").submit();
+	window.location.href="setting.jsp";
 }
 </script>
 </head>

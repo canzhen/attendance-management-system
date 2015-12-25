@@ -111,6 +111,11 @@
 		ScrollImgLeft();
 
 	}
+	//注销
+	function logout(){
+		window.location.href="login_logout";
+	}
+
 </script>
 <body onload="getValue();">
 	<div class="header">
@@ -126,7 +131,7 @@
 						<ul class="navigatoin">
 							<li><img src="images/tx.png" class="studentimg" alt="" /><label
 								class="studentname" id="stuname">张三</label></li>
-							<li><a href="" class="active">设置</a>
+							<li><a href="" class="active" onclick="logout()">设置</a>
 						</ul>
 						<div class="clearfix"></div>
 

@@ -33,6 +33,49 @@ document.getElementById("teacherN").innerHTML =
 		$("#start").hide();
 		$("#now").hide();
 	};
+	<%ArrayList<StudentInfo> studentInfo = new ArrayList<StudentInfo>();
+	Object temp1 = session.getAttribute("absenceList");
+	studentInfo = (ArrayList<StudentInfo>) temp1;
+	int length = studentInfo.size();
+	%>
+	//获取课程数
+	var getTr = <%=length%>;
+<%for (int i = 0; i < length; i++) {%>
+	var tr = document.createElement("tr");
+	var td = document.createElement("td");
+	var newl, newc;
+	newl = mytable.insertRow();
+	//第一列
+	newc = newl.insertCell();
+	
+	newc.innerHTML = '<%=studentInfo.get(i).getSno()%>';
+
+	//第二列
+	newc = newl.insertCell();
+	
+	newc.innerHTML = '<%=studentInfo.get(i).getSname()%>';
+
+	<% int absenceNum = studentInfo.get(i).getAbsenceNum();
+	   int maxAbsence = course.getMaxAbsence();
+	   int result = (int) (((double)absenceNum / (double)maxAbsence)*100);
+	   String show = absenceNum +"/" + maxAbsence;
+	   String finalresult = result + "%";
+	   String str;
+	   if((double)studentInfo.get(i).getAbsenceNum()/course.getMaxAbsence() > 0.6){
+		   str = "'<div class=\"progress\" id=\"myprogress\"><span id=\"progressbar_out\" class=\"red\" style=\"width:"+finalresult+";\"><span id=\"progressbar_in\">"+show+"</span></span></div>'";
+
+	   }else{
+		   str = "'<div class=\"progress\" id=\"myprogress\"><span id=\"progressbar_out\" class=\"blue\" style=\"width:"+finalresult+";\"><span id=\"progressbar_in\">"+show+"</span></span></div>'";
+
+	   }
+	%>
+	//第三列
+	newc = newl.insertCell();
+	newc.innerHTML = <%=str%>;
+
+	mytable.appendChild(tr);
+	<%}%>
+
 }
 <%List<StudentInfo> list = new ArrayList<StudentInfo>();
 			list = (List<StudentInfo>) session.getAttribute("absenceList");%>
@@ -102,20 +145,7 @@ document.getElementById("teacherN").innerHTML =
 					<td>姓名</td>
 					<td>缺课情况<font size="2pt" color="#8D8D8D">&nbsp;&nbsp;&nbsp;(缺勤数/最大缺勤数)</font></td>
 				</tr>
-				<%
-					for (int i = 0; i < list.size(); i++) {
-				%>
-				<tr>
-					<td><%=list.get(i).getSno()%></td>
-					<td><%=list.get(i).getSname()%></td>
-					<td><div class="progress" id="myprogress">
-							<span id="progressbar_out" class="blue" style="width: 33%;"><span
-								id="progressbar_in"><%=list.get(i).getAbsenceNum()%>/<%=course.getMaxAbsence()%></span></span>
-						</div></td>
-				</tr>
-				<%
-					}
-				%>
+				
 			</tbody>
 		</table>
 	</div>

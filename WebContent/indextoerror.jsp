@@ -31,6 +31,10 @@ window.onload = function() {
 
 		document.getElementById("tips").innerHTML=str;
 }
+//注销
+function logout(){
+	window.location.href="login_logout";
+}
 
 </script>
 <body>
@@ -45,7 +49,7 @@ window.onload = function() {
 					<div class="menu">
 						<span class="menu"> </span>
 						<ul class="navigatoin">
-							<li><a href="index.html" class="active">帮助</a></li>
+							<li><a href="index.html" class="active" onclick="logout()">注销</a></li>
 
 						</ul>
 						<div class="clearfix"></div>

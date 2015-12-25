@@ -29,6 +29,6 @@ CREATE TABLE `tc` (
 INSERT INTO `tc` VALUES ('11111112', 'cs001', '0', '13', '2', '11', '10');
 INSERT INTO `tc` VALUES ('11111113', 'cs002', '0', '13', '2', '11', '10');
 INSERT INTO `tc` VALUES ('11111114', 'cs001', '0', '25', '4', '11', '10');
-INSERT INTO `tc` VALUES ('11111114', 'cs002', '2', '26', '6', '10', '10');
+INSERT INTO `tc` VALUES ('11111114', 'cs002', '2', '25', '7', '10', '10');
 INSERT INTO `tc` VALUES ('11111115', 'cs001', '2', '26', '6', '10', '10');
 INSERT INTO `tc` VALUES ('11111115', 'cs003', '2', '26', '6', '10', '10');
