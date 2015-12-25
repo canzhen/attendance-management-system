@@ -50,8 +50,7 @@ public class loginAction extends MyActionSupport{
 
 			TeacherHome teacherHome = new TeacherHome();
 			trans = teacherHome.createTransaction();
-			Teacher teacher ;
-			teacher = teacherHome.findById(id);
+			Teacher teacher  = teacherHome.findById(id);
 			if(teacher==null){
 				msg="该账号不存在";
 				return SUCCESS;
@@ -63,12 +62,29 @@ public class loginAction extends MyActionSupport{
 			name = teacher.getTname();
 			trans.commit();
 
+		}else if (identity.equals("manager")){
+			if ( !id.equals("00000000")) return SUCCESS;
+			else {
+				TeacherHome teacherHome = new TeacherHome();
+				trans = teacherHome.createTransaction();
+				Teacher teacher = teacherHome.findById(id);
+				if(teacher==null){
+					msg="该账号不存在";
+					return SUCCESS;
+				}
+				if(!pwd.equals(teacher.getTpwd())){
+					msg="密码错误";
+					return SUCCESS;
+				}
+				name = teacher.getTname();
+				trans.commit();
+			}
+			
 		}else if (identity.equals("student")){
 
 			StudentHome studentHome = new StudentHome();
 			trans = studentHome.createTransaction();
-			Student student =null;
-			student=studentHome.findById(id);
+			Student student = studentHome.findById(id);
 			if(student==null){
 				msg="该账号不存在";
 				return SUCCESS;
