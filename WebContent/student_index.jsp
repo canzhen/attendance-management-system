@@ -224,7 +224,12 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 		window.location.href="login_logout";
 	}
 
-
+	function submitFunction(){
+		alert("签到成功");
+	}
+	function cancleFunction(){
+		init();
+	}
 </script>
 <body>
 	<div class="header">
@@ -271,8 +276,8 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 		<s:form  action="student_addFace"  method="post">
 			<s:textfield name="index" id="index" cssStyle="visibility:hidden"></s:textfield>
 			<s:div cssClass="check_divsubmitall">
-				<input class="check_submit" type="button" value="取消" />
-				<s:submit value="确定" cssClass="check_submit" />
+				<input class="check_submit" type="button" value="取消" onclick="cancleFunction()"/>
+				<s:submit value="确定" cssClass="check_submit" onclick="submitFunction()"/>
 			</s:div>
 		</s:form>
 
