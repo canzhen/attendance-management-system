@@ -71,7 +71,7 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 		if (canvas.getContext && count == 1) {
 			var ctx = canvas.getContext('2d');
 
-			ctx.strokeStyle = '#0000ff';
+			ctx.strokeStyle = '#ff0000';
 			initData();
 			//左上角的x，y坐标，长宽
 			for(var m=0;m<size;m++){
@@ -162,7 +162,7 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 					&& (arr[i].y + arr[i].height) >= p.y && p.y >= arr[i].y) {
 				whichObject.push(i);
 				//清空所有的绘图
-				ctx.clearRect(0, 0, 800, 370);
+				ctx.clearRect(0, 0, 800, 400);
 				//把所有的脸选择改为false
 				for (var n = 0; n < arr.length; n++) {
 					arr[n].selected = false;
@@ -259,7 +259,7 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 		</div>
 		<div class="check_tip" id="tips">请在图中找出并选择你自己，确定提交</div>
 		<div class="check_peopleimg">
-			<canvas id="myCanvas" width="800" height="370"
+			<canvas id="myCanvas" width="800" height="400"
 				style="background:url(d:\\1.jpg);background-size:100% 100%">
 		</div>
 		<s:form  action="student_addFace"  method="post">
