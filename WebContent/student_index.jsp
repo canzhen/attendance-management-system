@@ -38,6 +38,26 @@ var FaceJS = function(sno,cX,cY,lXInPic,lYInPic,width,hight){
 //声明arr数组
 var arr = new Array();
 <% Object o = session.getAttribute("picUrl");%>
+var c = 60 *<%=session.getAttribute("daojishi")%>;
+	//10分钟
+	var t;
+	var m;
+	var s;
+
+	function timedCount() {
+		if (c == 0) {
+			m = 0;
+			s = 0;
+			window.location.href = "timeUp.jsp";
+		} else {
+			m = parseInt(c / 60);
+			s = c - 60 * m;
+			document.getElementById('min').innerHTML = m + "分";
+			document.getElementById('sec').innerHTML = s + "秒";
+			c = c - 1;
+			t = setTimeout("timedCount()", 1000);
+		}
+	}
 	//初始化
 	window.onload = function() {
 		//判断是否开始点名
@@ -232,7 +252,10 @@ var arr = new Array();
 	<div class="welcome_center">
 		<div>
 			<label id="courseTeacher" name="courseTeacher"
-				class="check_coursefont">Javaee 李辉</label>
+				class="check_coursefont"></label>
+		</div>
+		<div id="CountMsg" class="HotDate">
+			<span>还剩 </span> <span id="min">00分</span> <span id="sec">00秒</span>
 		</div>
 		<div class="check_tip" id="tips">请在图中找出并选择你自己，确定提交</div>
 		<div class="check_peopleimg">
