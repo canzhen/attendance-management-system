@@ -13,7 +13,7 @@
 <link rel="stylesheet" type="text/css" href="css/wown.css" />
 <link rel="stylesheet" type="text/css" href="css/processbar.css" />
 <link rel="stylesheet" href="css/header.css" type="text/css" media="all" />
-<link rel="stylesheet" href="css/caicai.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/daohang.css" type="text/css" media="all" />
 <script type="text/javascript">
 function start() {
 	window.location.href="teacher.index.jsp";
@@ -27,64 +27,6 @@ function recordTotal() {
 function record(){
 	
 }
-//声明Pic对象
-var size = 0;
-var Pic = function(x,y,width,height,sno){
-this.x = x;
-this.y = y;
-this.width = width;
-this.height = height;
-this.sno=sno;
-}
-//声明arr数组
-var arr = new Array();
-<%List<FaceEntity> faces;%>
-	//初始化
-	window.onload = function() {
-		getValue();
-		var canvas = document.getElementById('myCanvas');
-		if (canvas.getContext) {
-			var ctx = canvas.getContext('2d');
-
-			ctx.strokeStyle = '#0000ff';
-			initData();
-			//左上角的x，y坐标，长宽
-			for (var m = 0; m < size; m++) {
-				if (arr[m].sno == null)
-					ctx.strokeRect(arr[m].x, arr[m].y, arr[m].width,
-							arr[m].height);
-				else
-					ctx.fillRect(arr[m].x, arr[m].y, arr[m].width,
-							arr[m].height);
-			}
-			
-			
-		}
-	}
-	
-	//初始化数组数据
-	function initData() {		
-		<%
-		faces=new ArrayList<FaceEntity>();
-		faces=(List<FaceEntity>)session.getAttribute("checkFaceList");
-		int length = 1;
-		length = faces.size(); %>
-		//初始化二维数组
-		size=<%=length%>;
-		for(var m=0;m<size;m++){
-			arr[m]=new Pic(0,0,0,0);
-		}
-		//二维数组赋值
-		<%if(faces!=null){
-			for(int i=0;i<length;i++){%>
-			arr[<%=i%>].x = <%=faces.get(i).getlXInPic()%>;
-			arr[<%=i%>].y = <%=faces.get(i).getlYInPic()%>;
-			arr[<%=i%>].width = <%=faces.get(i).getWidth()%>;
-			arr[<%=i%>].height = <%=faces.get(i).getHight()%>;
-			arr[<%=i%>].sno=<%=faces.get(i).getSno()%>;
-<%}
-		}%>
-	}
 	function getValue() {
 	
 		document.all.table1.innerHTML = "";
@@ -92,14 +34,6 @@ var arr = new Array();
 	    var mytable = document.getElementById("myTable");
 		document.getElementById("courseN").innerHTML =
         <%=course.getCname()%>;
-        <%String url="";
-        url = (String)session.getAttribute("classPicUrl");%>
-        var bgurl = '"url('+<%=url%>+')"';
-		if(bgurl==null){
-			alert("fail");
-			}else{
-				document.getElementById("myCanvas").style.backgroundImage="url("+urlpic+")";
-				}
 		//动态创建表格
 <%List<StudentInfo> studentInfo=DBHelper.getStudentInfoForAClassByCnoTno((String)session.getAttribute((String)session.getAttribute("id")),course.getCno());%>
 	<%for (int i = 0; i <studentInfo.size(); i++){%>
@@ -126,7 +60,7 @@ var arr = new Array();
 
 </head>
 
-<body>
+<body onload="getValue()">
 	<div class="container">
 		<div class="logo">
 			<a href="index.html"><img src="images/logo.png"
@@ -137,7 +71,7 @@ var arr = new Array();
 			<ul class="navigatoin">
 				<li><img src="./images/tx.png" class="studentimg" alt="" /><label
 					class="studentname"><%=session.getAttribute("name")%> </label></li>
-				<li><a href="" class="active">设置</a></li>
+				<li><a href="" class="active">注销</a></li>
 
 			</ul>
 			<div class="clearfix"></div>
@@ -181,10 +115,6 @@ var arr = new Array();
 		</div>
 		<div id="table1">
 			<p>&nbsp;</p>
-		</div>
-		<div class="check_peopleimg">
-			<<canvas id="myCanvas" width="800" height="370"
-				style="background:url(d:\\1.jpg);background-size:100% 100%">
 		</div>
 </body>
 

@@ -10,7 +10,7 @@
 	media="all" />
 <link rel="stylesheet" href="css/header.css" type="text/css"
 	media="all" />
-<link rel="stylesheet" href="css/caicai.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/daohang.css" type="text/css" media="all" />
 <title>老师首页</title>
 <!-- 
 	若该段时间有课，则老师可以上传
@@ -20,9 +20,7 @@
  <% List<CourseInfo> list=new ArrayList<CourseInfo>();
  list=(List<CourseInfo>)session.getAttribute("coursesInfo");%>
  function jump() {
-	var value1=document.getElementById("cno").value;
-	document.getElementById("cnoN").value=value1;
-	document.getElementById("form").submit();
+	<%session.putValue("ccid", list.get(i).getCno());%>
 	window.location.href="setting.jsp";
 }
 </script>
@@ -61,7 +59,6 @@
 							<a href="#"class="b-link-stripe b-animate-go" onclick="jump()">
 								<h1 style="margin: auto; color: #000000;"><%=list.get(i).getCname() %></h1>
 								<h4 style="margin: auto; color: #3071A9;"><%=list.get(i).getTime() %></h4>
-								<h4 style="margin: auto; color: #3071A9;" id="cno"><%=list.get(i).getCno() %></h4>
 								 <div class="b-wrapper"><h2 class="b-animate b-from-left    b-delay03 ">点名</h2>
 								  <p class="b-animate b-from-left    b-delay03 ">view</p>
 								</div>

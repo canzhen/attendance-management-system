@@ -1,5 +1,5 @@
 <%@page import="java.util.ArrayList" import="utils.*"
-	import="java.util.*" import="pic.entity.*" import="db.entity.*"%>
+	import="java.util.*" import="pic.entity.*" import="db.entity.*" import="db.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -33,9 +33,10 @@ document.getElementById("teacherN").innerHTML =
 		$("#start").hide();
 		$("#now").hide();
 	};
-	<%ArrayList<StudentInfo> studentInfo = new ArrayList<StudentInfo>();
-	Object temp1 = session.getAttribute("absenceList");
-	studentInfo = (ArrayList<StudentInfo>) temp1;
+
+	
+	session.get(id),
+	<%List<StudentInfo> studentInfo = DBHelper.getStudentInfoForAClassByCnoTno((String)session.getAttribute("id"),(String)session.getAttribute("ccid"));
 	int length = studentInfo.size();
 	%>
 	//获取课程数

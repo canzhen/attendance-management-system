@@ -25,13 +25,7 @@ public class CheckHelper {
 		}
 		return false;//在列表里找不到此人，则返回签到失败
 	}
-	/**
-	 * 往脸点名列表里加入脸的信息
-	 * @param face
-	 */
-	public void addFace(FaceEntity face){
-		checkFaceList.add(face);
-	}
+
 	
 	/**
 	 * 在数据库内的缺勤次数上加一
@@ -42,11 +36,4 @@ public class CheckHelper {
 	}
 	
 	
-	
-	public List<FaceEntity> getCheckFaceList() {
-		return checkFaceList;
-	}
-	public void setCheckFaceList(List<FaceEntity> checkFaceList) {
-		this.checkFaceList = checkFaceList;
-	}
 }

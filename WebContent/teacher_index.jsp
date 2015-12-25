@@ -57,7 +57,7 @@
 
 <link rel="stylesheet" href="./css/header.css" type="text/css"
 	media="all" />
-<link rel="stylesheet" href="css/caicai.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/daohang.css" type="text/css" media="all" />
 </head>
 
 <body onload="getValue()">
@@ -71,7 +71,7 @@
 			<ul class="navigatoin">
 				<li><img src="./images/tx.png" class="studentimg" alt="" /> <label
 					class="studentname" id="teacherN"></label></li>
-				<li><a href="" class="active">设置</a></li>
+				<li><a href="" class="active">注销</a></li>
 			</ul>
 			<div class="clearfix"></div>
 		</div>
