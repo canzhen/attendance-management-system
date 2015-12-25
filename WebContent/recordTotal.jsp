@@ -36,7 +36,8 @@ document.getElementById("teacherN").innerHTML =
 	<%ArrayList<StudentInfo> studentInfo = new ArrayList<StudentInfo>();
 	Object temp1 = session.getAttribute("absenceList");
 	studentInfo = (ArrayList<StudentInfo>) temp1;
-	int length = studentInfo.size();%>
+	int length = studentInfo.size();
+	%>
 	//获取课程数
 	var getTr = <%=length%>;
 <%for (int i = 0; i < length; i++) {%>

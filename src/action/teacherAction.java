@@ -69,6 +69,8 @@ public class teacherAction extends MyActionSupport{
 //			session.put("coursesNum", 1);
 			if ( count == 0 ){//当天无课，返回NOCURRENTCLASS
 				courses = DBHelper.getAllCoursesInfo("teacher",tno,coursesno,true);
+				count = courses.size();
+				session.put("coursesNum",count);
 				session.put("coursesInfo", courses);//传入所有课程编号
 				return NOCURRENTCLASS;
 			}else if ( count == 1 ){//当天有一节课，返回SUCCESS

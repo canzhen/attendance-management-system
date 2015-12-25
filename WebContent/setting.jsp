@@ -7,23 +7,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <link rel="stylesheet" href="css/header.css" type="text/css" media="all" />
-<link rel="stylesheet" href="css/caicai.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/daohang.css" type="text/css" media="all" />
 <script type="text/javascript" src="jquery/jquery.js"></script>
 <title>Insert title here</title>
 <script language="JavaScript" type="text/javascript">
 <%ArrayList list1;
 CourseInfo course;%>
+var count;
 function judge(){
 	<%
 	list1 = (ArrayList) session.getAttribute("coursesInfo");
 	course=(CourseInfo)list1.get(0);%>
-document.getElementById("courseN").innerHTML =
-<%=course.getCname()%>
-;
-document.getElementById("teacherN").innerHTML =
-<%=session.getAttribute("name")%>
-;
-	var count = <%=session.getAttribute("count")%>;
+	 count = <%=session.getAttribute("count")%>;
 	if(count!=1)
 	{ 
 		$("#start").hide();
@@ -55,8 +50,8 @@ function record(){
 
 			<ul class="navigatoin">
 				<li><img src="./images/tx.png" class="studentimg" alt="" /> <label
-					class="studentname" id="teacherN"></label></li>
-				<li><a href="" class="active">设置</a>
+					class="studentname" ><%=session.getAttribute("name")%> </label></li>
+				<li><a href="" class="active">注销</a>
 			</ul>
 			<div class="clearfix"></div>
 		</div>
@@ -77,7 +72,7 @@ function record(){
 					src="images/bbb_04.jpg">
 			</div>
 			<div class="div2">
-				<h1 style="color: #000000; align-content: center;" id="courseN"></h1>
+				<h1 style="color: #000000; align-content: center;"><%=course.getCname()%></h1>
 			</div>
 <div class="div2" id="start" onclick="start()">
 				开始点名
@@ -98,12 +93,12 @@ function record(){
 		style="margin-top: 30px; font-size: 10pt; font-family: '微软雅黑'; color: #000000;" action="" method="post">
 		<p>课程名称：<%=course.getCname() %></p>
 		<p>上课时间：<%=course.getTime() %></p>
-		<p>点名时间：<%=course.getCheckTime() %></p>
-		<input type="text" onfocus="this.value = '';"
+		<p>点名时间</p>
+		<input type="text" onfocus="this.value = '';" value="<%=course.getCheckTime() %>"
 			onblur="if (this.value == '') {this.value = '请输入';}" name="check_time">
-		<p>*最大缺勤数:<%=course.getMaxAbsence() %></p>
-		<input type="text" onfocus="this.value = '';"
-			onblur="if (this.value == '') {this.value = '请输入';}" name="max_absence"><br />
+		<p>*最大缺勤数:</p>
+		<input type="text" onfocus="this.value = '';" value="<%=course.getMaxAbsence() %>"
+			onblur="if (this.value == '') {this.value = '请输入';}" name="max_absence">
 		<input type="submit" value="保存" style="margin-top: 10px;" >
 	</form>
 </body>
