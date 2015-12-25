@@ -14,6 +14,7 @@
 
 <script type="text/javascript">
 //声明Pic对象
+var count = 0;
 var id;
 var name;
 var size = 0;
@@ -33,6 +34,7 @@ var FaceJS = function(sno,cX,cY,lXInPic,lYInPic,width,hight){
 	this.width = width;       
 	this.hight = hight;
 }
+<%String url = "";%>
 //声明arr数组
 var arr = new Array();
 
@@ -46,7 +48,7 @@ var arr = new Array();
 		document.getElementById("stuname").innerText=name;
 		
 		var canvas = document.getElementById('myCanvas');
-		if (canvas.getContext) {
+		if (canvas.getContext && count == 1) {
 			var ctx = canvas.getContext('2d');
 
 			ctx.strokeStyle = '#0000ff';
@@ -68,11 +70,11 @@ var arr = new Array();
 
 	//初始化数组数据
 	function initData() {		
-		<% String url="d:\\1.jpg";
+		<% //url ="d:\\1.jpg";
 		List<FaceEntity> faces=new ArrayList<FaceEntity>();
 		PicFace picFace=new PicFace(new File(url));
 		faces=picFace.getFaces();
-		int size = 1;
+		int size = 0;
 		size = faces.size();
 		session.putValue("picface", picFace); %>
 		//初始化二维数组
@@ -160,7 +162,7 @@ var arr = new Array();
 	}
 	
 	function judge(){
-		var count = <%=session.getAttribute("coursesNum")%>;
+		count = <%=session.getAttribute("coursesNum")%>;
 		//var testimg = "images/test.jpg";
 		//document.getElementById("myCanvas").style.backgroundImage="url("+urlpic+")";
 		if ( count == 1 ){//当天有一节课，返回SUCCESS
@@ -169,10 +171,10 @@ var arr = new Array();
 			  Object temp1 = session.getAttribute("coursesInfo");
 			  course = (ArrayList<CourseInfo>) temp1;
 			  String cname = course.get(0).getCname();
-			  String urlpic = (String)session.getAttribute("classPicUrl");%>
+			  url = (String)session.getAttribute("classPicUrl");%>
 			
 			document.getElementById("courseTeancher").innerHTML= str;
-			var bgurl = '"url('+<%=urlpic%>+')"';
+			var bgurl = '"url('+<%=url%>+')"';
 			if(bgurl==null){
 				document.getElementById("bgurl").innerHTML="还未开始点名或者图片上传不成功，请耐心等候";
 				}else{
