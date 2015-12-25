@@ -19,6 +19,10 @@ public class Values {
 	 * 第二种上课时间
 	 */
 	public static int[] weekTypeTwo={9,16};
+	/**
+	 * 管理员的id号（存在teacher表里）
+	 */
+	public String manager_id = "00000000";
 	
 	public static int webX=800;
 	
@@ -40,4 +44,5 @@ public class Values {
 	 * 记录每节课的学生信息
 	 */
 	public static HashMap studentsInfo_for_each_class = new HashMap<String,ArrayList<StudentInfo>>();
+
 }
