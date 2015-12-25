@@ -93,6 +93,14 @@ public class loginAction extends MyActionSupport{
 
 	}
 	
+	public String logout(){
+		Map session = getSession();
+		session.put("identity",null);
+		session.put("id", null);
+		session.put("name", null);
+		return SUCCESS;
+	}
+	
 	public String getIdentity() {
 		return identity;
 	}

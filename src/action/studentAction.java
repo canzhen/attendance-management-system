@@ -8,7 +8,7 @@ import java.util.Map;
 import utils.CheckHelper;
 import utils.PicFace;
 import utils.PictureHelper;
-import utils.StudentAbsenceTimerTask;
+import utils.StopingCheckingTimerTask;
 import utils.Values;
 import db.entity.Course;
 import db.entity.CourseInfo;
@@ -71,46 +71,17 @@ public class studentAction extends MyActionSupport{
 			return SUCCESS;
 		}
 	}
-
-	/**
-	 * 选择自己的脸，并将信息进行处理和传递
-	 * @return
-	 */
-	public String chooseOneFace(){
-		//左上角坐标点的信息
-		FaceEntity face=(FaceEntity) session.get("face");
-		if(face.getSno()==null||face.getSno()==""){
-			@SuppressWarnings("unchecked")
-			List<FaceEntity> faceInfo=(List<FaceEntity>) session.get("faces");
-			String sno=(String) session.get("id");
-			for(int i=0;i<faceInfo.size();i++){
-				if(faceInfo.get(i).equals(face)){
-					face.setSno(sno);
-					PicFace picFace=(PicFace) session.get("picface");
-					picFace.setFaceName(face.getcX(), face.getcY(), sno);
-				}
-			}
-			msg="这张脸是你的啦^_^";
-			session.put("faces",faceInfo);
-			return SUCCESS;
-		}
-		msg="该脸已被占用=.=";
-		return SUCCESS;
-	}
-	
 	
 	public String addFace(){
 		String tno = (String)session.get("tno");
-		if (Values.studentsInfo_for_each_class.get(tno) == null)
+		List<StudentInfo> studentsInfo = null;
+		if ( (studentsInfo = (List<StudentInfo>) Values.studentsInfo_for_each_class.get(tno)) == null){
 			session.put("checkStatus", 0);//0表示不在点名时间
-		else session.put("checkStatus", 1);
-		
-		CheckHelper myCheckHelper = CheckHelper.getCheckHelper();
-		if ( myCheckHelper.getCheckFaceList() == null && session.get("facesList") != null)
-			myCheckHelper.setCheckFaceList((List<FaceEntity>)session.get("facesList"));
-		if ( !index.equals("") ){
-			CheckHelper.getCheckHelper().checkIn(new Integer(index), tno);
+		}else{
+			session.put("checkStatus", 1);
+			CheckHelper.checkIn(studentsInfo, sno);
 		}
+		
 		return SUCCESS;
 	}
 	

@@ -13,40 +13,18 @@ import db.util.DBHelper;
  *
  */
 public class CheckHelper {
-	public List<FaceEntity> checkFaceList = null;
-	public static CheckHelper myCheckHelper= null;
-
-	private CheckHelper(){}
 	
-	public static CheckHelper getCheckHelper(){
-		if (myCheckHelper == null)
-			myCheckHelper = new CheckHelper();
-		return myCheckHelper;
-	}
-	
-	/**
-	 * 学生签到，返回是否签到成功
-	 * @param index 是第几个学生 
-	 * @param studentsInfo 该课的学生列表
-	 * @return 是否签到成功
-	 */
-	public  boolean checkIn(int index,String tno){
-		String sno = "";
-		List<StudentInfo> studentsInfo =(List<StudentInfo>)Values.studentsInfo_for_each_class.get(tno);
-		if (checkFaceList != null){
-			sno = checkFaceList.get(index).getSno();
-			StudentInfo sinfo;
-			for (int i = 0; i < studentsInfo.size(); i++){
-				sinfo = studentsInfo.get(i);
-				if (sinfo.equals(sno)){
-					sinfo.setChecked(true);//签到
-					return true;
-				}
+	public static boolean checkIn ( List<StudentInfo> studentsInfo,String sno ){
+		StudentInfo info;
+		for (int i = 0; i < studentsInfo.size(); i++){
+			info = studentsInfo.get(i);
+			if (info.getSno().equals(sno)){
+				info.setChecked(true);//设置该同学已签到
+				return true;
 			}
 		}
-		return false;//列表里没找到该同学，则签到失败
+		return false;//在列表里找不到此人，则返回签到失败
 	}
-	
 	/**
 	 * 往脸点名列表里加入脸的信息
 	 * @param face

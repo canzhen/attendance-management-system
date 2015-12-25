@@ -60,7 +60,7 @@ public class teacherAction extends MyActionSupport{
 			 */
 			courses = DBHelper.getAllCoursesInfo("teacher",tno,coursesno,false);
 			int count = -1;
-			if ( courses != null) 
+			if ( courses != null)
 				count = courses.size();
 			/**
 			 * 测试有课的时候

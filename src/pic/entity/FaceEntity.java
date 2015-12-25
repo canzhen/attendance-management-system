@@ -1,7 +1,6 @@
 package pic.entity;
 
 public class FaceEntity {
-	private String sno;              //学生的编号
 	private double cX;           //原图片中心x坐标
 	private double cY;            //原图片中心y坐标
 	private double lXInPic;     //网页上图片左上角x坐标
@@ -12,14 +11,6 @@ public class FaceEntity {
 	
 	public FaceEntity() {
 		super();
-	}
-	
-	public String getSno() {
-		return sno;
-	}
-
-	public void setSno(String sno) {
-		this.sno = sno;
 	}
 
 	public double getcX() {

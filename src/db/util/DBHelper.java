@@ -91,7 +91,7 @@ public class DBHelper {
 				 * 根据sno和cno获得tno
 				 */
 				ScId scid = new ScId();
-				scid.setCno(course.getCno());
+				scid.setCno(cno);
 				scid.setSno(id);
 				ScHome schome = new ScHome();
 				Transaction tran1 = schome.createTransaction();
@@ -106,7 +106,7 @@ public class DBHelper {
 			
 			week = courseDetails.getCweek();
 			day = courseDetails.getCday()+"";
-			time = courseDetails.getCday()+"";
+			time = courseDetails.getCtime()+"";
 			
 			/*
 			 * 和当前时间进行比对，若符合，则在count上加一，
@@ -142,7 +142,7 @@ public class DBHelper {
 	 * @param cno 课程编号
 	 * @return 课程的具体信息
 	 */
-	private static Tc getCourseDetails(String tno,String cno){
+	public static Tc getCourseDetails(String tno,String cno){
 
 		TcHome tchome = new TcHome();
 		TcId tcid = new TcId();
