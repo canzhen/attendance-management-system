@@ -10,11 +10,11 @@
 <script type="text/javascript" src="jquery/jquery.js"></script>
 <script language="JavaScript" type="text/javascript">
 	var c = 60 *
-<%=session.getAttribute("daojishi")%>
+<%=session.getAttribute("daojishi")%>;
 	//10分钟
-	var t
-	var m
-	var s
+	var t;
+	var m;
+	var s;
 
 	function timedCount() {
 		if (c == 0) {

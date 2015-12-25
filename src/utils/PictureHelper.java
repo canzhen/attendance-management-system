@@ -61,10 +61,12 @@ public class PictureHelper {
 		 */
 		String savePath = "teacher\\"+tno,
 				filePath = "teacher\\"+tno+"\\"+date+".jpg";
+		return filePath;
+		//String test = PictureHelper.class.getResource("/").getPath();
 		
-		pic = new File(filePath);
-		if (!pic.exists())
-			return null;
-		else return filePath;
+		//pic = new File(filePath);
+		//if (!pic.exists())
+		//	return null;
+		//else return filePath;
 	} 
 }

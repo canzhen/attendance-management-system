@@ -38,6 +38,26 @@ var FaceJS = function(sno,cX,cY,lXInPic,lYInPic,width,hight){
 //声明arr数组
 var arr = new Array();
 
+var c = 60 *<%=session.getAttribute("daojishi")%>;
+	//10分钟
+	var t;
+	var m;
+	var s;
+
+	function timedCount() {
+		if (c == 0) {
+			m = 0;
+			s = 0;
+			window.location.href = "timeUp.jsp";
+		} else {
+			m = parseInt(c / 60);
+			s = c - 60 * m;
+			document.getElementById('min').innerHTML = m + "分";
+			document.getElementById('sec').innerHTML = s + "秒";
+			c = c - 1;
+			t = setTimeout("timedCount()", 1000);
+		}
+	}
 	//初始化
 	window.onload = function() {
 		//判断是否开始点名
@@ -70,8 +90,11 @@ var arr = new Array();
 
 	//初始化数组数据
 	function initData() {		
-		<% //url ="d:\\1.jpg";
+		<% 
 		List<FaceEntity> faces=new ArrayList<FaceEntity>();
+		
+		url = (String)session.getAttribute("picUrl");
+
 		PicFace picFace=new PicFace(new File(url));
 		faces=picFace.getFaces();
 		int size = 0;
@@ -164,41 +187,41 @@ var arr = new Array();
 	
 	function judge(){
 		count = <%=session.getAttribute("coursesNum")%>;
+<<<<<<< HEAD
 		count=1;
+=======
+		//count = 1;
+>>>>>>> 4cb7f8705e08624ef828cf9ba32434895886ff28
 		//var testimg = "images/test.jpg";
 		//document.getElementById("myCanvas").style.backgroundImage="url("+urlpic+")";
-		if ( count == 1 ){//当天有一节课，返回SUCCESS
-			//session.put("coursesInfo", courses.get(0));//传入当前课程的类，包含具体信息
+		if ( count == 1 ){//当天有一节课
+			
 			<% ArrayList<CourseInfo> course = new ArrayList<CourseInfo>();
 			  Object temp1 = session.getAttribute("coursesInfo");
 			  course = (ArrayList<CourseInfo>) temp1;
 			  String cname = course.get(0).getCname();
 			  url = (String)session.getAttribute("picUrl");%>
+<<<<<<< HEAD
+=======
+			var coursename = <%=cname%>;
+			document.getElementById("courseTeacher").innerHTML= coursename;
+>>>>>>> 4cb7f8705e08624ef828cf9ba32434895886ff28
 			
-			document.getElementById("courseTeancher").innerHTML= str;
-			var bgurl = '"url('+<%=url%>+')"';
-			if(bgurl==null){
-				document.getElementById("bgurl").innerHTML="还未开始点名或者图片上传不成功，请耐心等候";
+			var urlpic = <%=url%>;
+			if(urlpic==null){
+				document.getElementById("tips").innerHTML="还未开始点名或者图片上传不成功，请耐心等候";
 				}else{
 					document.getElementById("myCanvas").style.backgroundImage="url("+urlpic+")";
 					}
 			
-		}else if ( count > 1){//课程冲突，返回SUCCESS，由界面判断处理
-			//session.put("coursesInfo", courses);//课程冲突，将所有课传入，便于页面显示
-			var str=" ";
-			<%  List<CourseInfo> coursect = new ArrayList<CourseInfo>();
-			   coursect = (ArrayList<CourseInfo>)session.getAttribute("coursesInfo");
-				
-				for(int i=0;i<coursect.size();i++){%>
-					str = str+<%=coursect.get(i).getCname()%>+" , ";
-				<%}%>
-				
-			alert(str+"上课时间冲突,不能签到");
-		}else if ( count == -1 ){//当天无课，返回SUCCESS，由界面判断处理
-			//session.put("coursesInfo", "这周不属于上课周，放假或者为自习周，无课");
+		}else if ( count > 1){//课程冲突
+			
+			document.location.href="indextoerror.jsp";
+			
+		}else if ( count == -1 ){//当天无课
+			
 		
-			var str = <%=session.getAttribute("courseInfo")%>;
-			alert(str);
+			document.location.href="indextoerror.jsp";
 		}
 	}
 
@@ -236,8 +259,11 @@ var arr = new Array();
 	</div>
 	<div class="welcome_center">
 		<div>
-			<label id="courseTeacher" name="courseTeacher"
-				class="check_coursefont">Javaee 李辉</label>
+			<label id="courseTeacher" 
+				class="check_coursefont"></label>
+		</div>
+		<div id="CountMsg" class="HotDate">
+			<span>还剩 </span> <span id="min">00分</span> <span id="sec">00秒</span>
 		</div>
 		<div class="check_tip" id="tips">请在图中找出并选择你自己，确定提交</div>
 		<div class="check_peopleimg">

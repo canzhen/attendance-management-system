@@ -86,12 +86,20 @@ var arr = new Array();
 		}%>
 	}
 	function getValue() {
-		//需要获取的参数:总行数，每列的值，进读条在程序中生成html语句传过来字符串,字符串格式入下
+	
 		document.all.table1.innerHTML = "";
         <% CourseInfo course = (CourseInfo)session.getAttribute("coursesInfo"); %>
 	    var mytable = document.getElementById("myTable");
 		document.getElementById("courseN").innerHTML =
         <%=course.getCname()%>;
+        <%String url="";
+        url = (String)session.getAttribute("classPicUrl");%>
+        var bgurl = '"url('+<%=url%>+')"';
+		if(bgurl==null){
+			alert("fail");
+			}else{
+				document.getElementById("myCanvas").style.backgroundImage="url("+urlpic+")";
+				}
 		//动态创建表格
 <%List<StudentInfo> studentInfo=DBHelper.getStudentInfoForAClassByCnoTno((String)session.getAttribute((String)session.getAttribute("id")),course.getCno());%>
 	<%for (int i = 0; i <studentInfo.size(); i++){%>
@@ -175,9 +183,8 @@ var arr = new Array();
 			<p>&nbsp;</p>
 		</div>
 		<div class="check_peopleimg">
-			<canvas id="myCanvas" width="800" height="370"
-				style="background:url(http://homework2zbing-classpic.stor.sinaapp.com/20bc08e8aa5eceb82822b101ec9e662d%20%281%29.jpg);background-size:100% 100%">
-				</canvas>
+			<<canvas id="myCanvas" width="800" height="370"
+				style="background:url(d:\\1.jpg);background-size:100% 100%">
 		</div>
 </body>
 
