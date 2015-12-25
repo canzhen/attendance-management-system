@@ -87,15 +87,48 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 			}, false);
 		}
 	}
+	function judge(){
+		count = <%=session.getAttribute("coursesNum")%>;
 
+		//var testimg = "images/test.jpg";
+		//document.getElementById("myCanvas").style.backgroundImage="url("+urlpic+")";
+		if ( count == 1 ){//当天有一节课
+			
+			<% ArrayList<CourseInfo> course = new ArrayList<CourseInfo>();
+			  Object temp1 = session.getAttribute("coursesInfo");
+			  course = (ArrayList<CourseInfo>) temp1;
+			  String cname = course.get(0).getCname();
+			  url = (String)session.getAttribute("picUrl");%>
+
+			var coursename = "<%=cname%>";
+			document.getElementById("courseTeacher").innerHTML= coursename;
+
+			
+			var urlpic = "<%=url%>";
+			if(urlpic==null){
+				document.getElementById("tips").innerHTML="还未开始点名或者图片上传不成功，请耐心等候";
+				}else{
+					document.getElementById("myCanvas").style.backgroundImage="url(teacher/11111111/test.jpg)";
+					}
+			
+		}else if ( count > 1){//课程冲突
+			
+			document.location.href="indextoerror.jsp";
+			
+		}else if ( count == -1 ){//当天无课
+			
+		
+			document.location.href="indextoerror.jsp";
+		}
+	}
 	//初始化数组数据
 	function initData() {		
 		<% 
 		List<FaceEntity> faces=new ArrayList<FaceEntity>();
-		
-		url = "c:/"+url;
+		String urlzb = (String)session.getAttribute("picUrl");
+		urlzb = "c:\\"+urlzb;
 
-		PicFace picFace=new PicFace(new File(url));
+		PicFace picFace=new PicFace(new File(urlzb));
 		faces=picFace.getFaces();
 		int size = 0;
 		size = faces.size();
@@ -185,40 +218,7 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 		}
 	}
 	
-	function judge(){
-		count = <%=session.getAttribute("coursesNum")%>;
-
-		//var testimg = "images/test.jpg";
-		//document.getElementById("myCanvas").style.backgroundImage="url("+urlpic+")";
-		if ( count == 1 ){//当天有一节课
-			
-			<% ArrayList<CourseInfo> course = new ArrayList<CourseInfo>();
-			  Object temp1 = session.getAttribute("coursesInfo");
-			  course = (ArrayList<CourseInfo>) temp1;
-			  String cname = course.get(0).getCname();
-			  url = (String)session.getAttribute("picUrl");%>
-
-			var coursename = <%=cname%>;
-			document.getElementById("courseTeacher").innerHTML= coursename;
-
-			
-			var urlpic = <%=url%>;
-			if(urlpic==null){
-				document.getElementById("tips").innerHTML="还未开始点名或者图片上传不成功，请耐心等候";
-				}else{
-					document.getElementById("myCanvas").style.backgroundImage="url("+urlpic+")";
-					}
-			
-		}else if ( count > 1){//课程冲突
-			
-			document.location.href="indextoerror.jsp";
-			
-		}else if ( count == -1 ){//当天无课
-			
-		
-			document.location.href="indextoerror.jsp";
-		}
-	}
+	
 	//注销
 	function logout(){
 		window.location.href="login_logout";

@@ -59,8 +59,8 @@ public class PictureHelper {
 		/*
 		 * 测试部分
 		 */
-		String savePath = "teacher\\"+tno,
-				filePath = "teacher\\"+tno+"\\"+date+".jpg";
+		String savePath = "teacher//"+tno,
+				filePath = "teacher//"+tno+"//"+date+".jpg";
 		return filePath;
 		//String test = PictureHelper.class.getResource("/").getPath();
 		

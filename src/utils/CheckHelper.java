@@ -26,10 +26,7 @@ public class CheckHelper {
 		return false;//在列表里找不到此人，则返回签到失败
 	}
 
-<<<<<<< HEAD
-	
-=======
->>>>>>> 7b7da8bf971664bf8cdc3a67c7a072ebb900bd58
+
 	/**
 	 * 在数据库内的缺勤次数上加一
 	 * @return
@@ -38,8 +35,5 @@ public class CheckHelper {
 		DBHelper.addAbsenceNum(sno, cno);
 	}
 	
-<<<<<<< HEAD
-	
-=======
->>>>>>> 7b7da8bf971664bf8cdc3a67c7a072ebb900bd58
+
 }
