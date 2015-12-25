@@ -13,7 +13,7 @@
 <link rel="stylesheet" type="text/css" href="css/wown.css" />
 <link rel="stylesheet" type="text/css" href="css/processbar.css" />
 <link rel="stylesheet" href="css/header.css" type="text/css" media="all" />
-<link rel="stylesheet" href="css/caicai.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/daohang.css" type="text/css" media="all" />
 <script language="JavaScript" type="text/javascript">
 <%ArrayList list1;
 CourseInfo course;%>
@@ -21,24 +21,18 @@ function judge(){
 	<%
 	list1 = (ArrayList) session.getAttribute("coursesInfo");
 	course=(CourseInfo)list1.get(0);%>
-document.getElementById("courseN").innerHTML =
-<%=course.getCname()%>
-;
-document.getElementById("teacherN").innerHTML =
-<%=session.getAttribute("name")%>
-;
 	var count = <%=session.getAttribute("classNum")%>;
 	if(count!=1)
 	{ 
 		$("#start").hide();
 		$("#now").hide();
 	};
-
-	
-	session.get(id),
-	<%List<StudentInfo> studentInfo = DBHelper.getStudentInfoForAClassByCnoTno((String)session.getAttribute("id"),(String)session.getAttribute("ccid"));
+	<%List<StudentInfo> studentInfo = DBHelper.getStudentInfoForAClassByCnoTno(course.getCno(),(String)session.getAttribute("id"));
 	int length = studentInfo.size();
 	%>
+	//需要获取的参数:总行数，每列的值，进读条在程序中生成html语句传过来字符串,字符串格式入下
+	document.all.table1.innerHTML = "";
+	var mytable = document.getElementById("myTable");
 	//获取课程数
 	var getTr = <%=length%>;
 <%for (int i = 0; i < length; i++) {%>
@@ -72,14 +66,12 @@ document.getElementById("teacherN").innerHTML =
 	%>
 	//第三列
 	newc = newl.insertCell();
-	newc.innerHTML = <%=str%>;
+	newc.innerHTML = '<%=str%>';
 
 	mytable.appendChild(tr);
 	<%}%>
 
 }
-<%List<StudentInfo> list = new ArrayList<StudentInfo>();
-			list = (List<StudentInfo>) session.getAttribute("absenceList");%>
 	function start() {
 		window.location.href = "teacher.index.jsp";
 	}
@@ -96,7 +88,7 @@ document.getElementById("teacherN").innerHTML =
 </head>
 
 
-<body onload="getValue();">
+<body onload="judge();">
 	<div class="container">
 		<div class="logo">
 			<a href="index.html"><img src="images/logo.png"
@@ -106,7 +98,7 @@ document.getElementById("teacherN").innerHTML =
 
 			<ul class="navigatoin">
 				<li><img src="./images/tx.png" class="studentimg" alt="" /> <label
-					class="studentname" id="teacherN"></label></li>
+					class="studentname"><%=session.getAttribute("name")%></label></li>
 				<li><a href="" class="active">设置</a>
 			</ul>
 			<div class="clearfix"></div>
@@ -128,7 +120,7 @@ document.getElementById("teacherN").innerHTML =
 							src="images/bbb_04.jpg"/>
 			</div>
 			<div class="div2">
-				<h1 style="color: #000000; align-content: center;" id="courseN"></h1>
+				<h1 style="color: #000000; align-content: center;" ><%=course.getCname()%></h1>
 			</div>
 
 			<div class="div2" onclick="start()" id="start">开始点名</div>
@@ -144,9 +136,8 @@ document.getElementById("teacherN").innerHTML =
 				<tr>
 					<td>学号</td>
 					<td>姓名</td>
-					<td>缺课情况<font size="2pt" color="#8D8D8D">&nbsp;&nbsp;&nbsp;(缺勤数/最大缺勤数)</font></td>
+					<td>缺课情况<font size="2pt" color="#8D8D8D">&nbsp;&nbsp;(缺勤数/最大缺勤数)</font></td>
 				</tr>
-				
 			</tbody>
 		</table>
 	</div>

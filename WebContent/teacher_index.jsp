@@ -21,6 +21,7 @@
 			m = 0;
 			s = 0;
 			window.location.href = "timeUp.jsp";
+			$("#now").show();
 		} else {
 			m = parseInt(c / 60);
 			s = c - 60 * m;
@@ -28,6 +29,7 @@
 			document.getElementById('sec').innerHTML = s + "秒";
 			c = c - 1;
 			t = setTimeout("timedCount()", 1000);
+			$("#now").hide();
 		}
 	}
 	function getValue() {
@@ -35,11 +37,6 @@
 			CourseInfo course;
 			list = (ArrayList) session.getAttribute("coursesInfo");
 			course=(CourseInfo)list.get(0);%>
-	document.getElementById("courseN").innerHTML =
-<%=course.getCname()%>
-	;
-		document.getElementById("teacherN").innerHTML =
-<%=session.getAttribute("name")%>
 	;
 	}
 	function start() {
@@ -70,7 +67,7 @@
 
 			<ul class="navigatoin">
 				<li><img src="./images/tx.png" class="studentimg" alt="" /> <label
-					class="studentname" id="teacherN"></label></li>
+					class="studentname"><%=session.getAttribute("name")%></label></li>
 				<li><a href="" class="active">注销</a></li>
 			</ul>
 			<div class="clearfix"></div>
@@ -91,12 +88,12 @@
 					src="images/bbb_03.jpg" /><img src="images/bbb_04.jpg" />
 			</div>
 			<div class="div2">
-				<h1 style="color: #000000; align-content: center;" id="courseN"></h1>
+				<h1 style="color: #000000; align-content: center;" ><%=course.getCname()%></h1>
 			</div>
 
-			<div class="div2" onclick="start()">开始点名</div>
+			<div class="div2" onclick="start()" id="start">开始点名</div>
 			<div class="div2" onclick="set()">点名设置</div>
-			<div class="div2" onclick="record()">本堂课点名记录</div>
+			<div class="div2" onclick="record()" id="now">本堂课点名记录</div>
 			<div class="div2" onclick="recordTotal()">本学期点名记录</div>
 		</div>
 	</div>

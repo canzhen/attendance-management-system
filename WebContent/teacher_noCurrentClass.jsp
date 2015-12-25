@@ -20,8 +20,8 @@
  <% List<CourseInfo> list=new ArrayList<CourseInfo>();
  list=(List<CourseInfo>)session.getAttribute("coursesInfo");%>
  function jump() {
-	<%session.putValue("ccid", list.get(i).getCno());%>
-	window.location.href="setting.jsp";
+	
+	window.location.href="recordTotal.jsp";
 }
 </script>
 </head>
@@ -38,7 +38,7 @@
 
              <ul class="navigatoin">
                 <li><img src="./images/tx.png" class="studentimg" alt=""/><label class="studentname"><%=session.getAttribute("name")%> </label></li>
-                            <li><a href="" class="active">设置</a>
+                            <li><a href="" class="active">注销</a>
 
             </ul>
         <div class="clearfix"> </div>
@@ -59,6 +59,7 @@
 							<a href="#"class="b-link-stripe b-animate-go" onclick="jump()">
 								<h1 style="margin: auto; color: #000000;"><%=list.get(i).getCname() %></h1>
 								<h4 style="margin: auto; color: #3071A9;"><%=list.get(i).getTime() %></h4>
+								<h4 style="margin: auto; color: #3071A9;"><%=list.get(i).getCno()%></h4>
 								 <div class="b-wrapper"><h2 class="b-animate b-from-left    b-delay03 ">点名</h2>
 								  <p class="b-animate b-from-left    b-delay03 ">view</p>
 								</div>
@@ -67,78 +68,10 @@
 					</div>
 					</div>
 					<%} %>
-					<form method="post" id="form"hidden="hidden">
+					<form method="post" id="form" hidden="hidden">
 					<input id="cnoN" type="text"/>
 					<input type="submit"></form>
-				<!--  <div id="portfoliolist">
-					<div class="portfolio icon mix_all" style="display: inline-block; opacity: 1;">
-						<div class="portfolio-wrapper wow bounceIn capt" data-wow-delay="0.4s">		
-							<a href="single.html" class="b-link-stripe b-animate-go">
-								<h1 style="margin: auto; color: #000000;">分布式计算</h1>
-								<h4 style="margin: auto; color: #3071A9;">1-16周</h2>
-								<h4 style="margin: auto; color: #3071A9;">曾立刚</h2>
-								 <div class="b-wrapper"><h2 class="b-animate b-from-left    b-delay03 ">点名</h2>
-								  <p class="b-animate b-from-left    b-delay03 ">View</p>
-								</div>
-							</a>
-		                </div>
-					</div>
-					</div><div id="portfoliolist">
-					<div class="portfolio icon mix_all" style="display: inline-block; opacity: 1;">
-						<div class="portfolio-wrapper wow bounceIn capt" data-wow-delay="0.4s">		
-							<a href="single.html" class="b-link-stripe b-animate-go">
-								<h1 style="margin: auto; color: #000000;">商务谈判</h1>
-								<h4 style="margin: auto; color: #3071A9;">9-12周</h2>
-								<h4 style="margin: auto; color: #3071A9;">程辉</h2>
-								 <div class="b-wrapper"><h2 class="b-animate b-from-left    b-delay03 ">点名</h2>
-								  <p class="b-animate b-from-left    b-delay03 ">View</p>
-								</div>
-							</a>
-		                </div>
-					</div>
-					</div><div id="portfoliolist">
-					<div class="portfolio icon mix_all" style="display: inline-block; opacity: 1;">
-						<div class="portfolio-wrapper wow bounceIn capt" data-wow-delay="0.4s">		
-							<a href="single.html" class="b-link-stripe b-animate-go">
-								<h1 style="margin: auto; color: #000000;">系统分析</h1>
-								<h4 style="margin: auto; color: #3071A9;">1-16周</h2>
-								<h4 style="margin: auto; color: #3071A9;">张红延</h2>
-								 <div class="b-wrapper"><h2 class="b-animate b-from-left    b-delay03 ">点名</h2>
-								  <p class="b-animate b-from-left    b-delay03 ">View</p>
-								</div>
-							</a>
-		                </div>
-					</div>
-					</div>
-					<div id="portfoliolist">
-					<div class="portfolio icon mix_all"  style="display: inline-block; opacity: 1;">
-						<div class="portfolio-wrapper wow bounceIn capt" data-wow-delay="0.4s">		
-							<a href="single.html" class="b-link-stripe b-animate-go">
-								
-								<h1 style="margin: auto; color: #000000;">软件测试</h1>
-								<h4 style="margin: auto; color: #3071A9;">1-16周</h2>
-								<h4 style="margin: auto; color: #3071A9;">王洪亮</h2>
-								 <div class="b-wrapper"><h2 class="b-animate b-from-left    b-delay03 ">点名</h2>
-								  <p class="b-animate b-from-left    b-delay03 ">View</p>
-								</div>
-							</a>
-		                </div>
-					</div>
-					</div>
-					<div id="portfoliolist">
-					<div class="portfolio icon mix_all" style="display: inline-block; opacity: 1;">
-						<div class="portfolio-wrapper wow bounceIn capt" data-wow-delay="0.4s">		
-							<a href="single.html" class="b-link-stripe b-animate-go">
-								<h1 style="margin: auto; color: #000000;">大型数据库</h1>
-								<h4 style="margin: auto; color: #3071A9;">1-16周</h2>
-								<h4 style="margin: auto; color: #3071A9;">李辉</h2>
-								 <div class="b-wrapper"><h2 class="b-animate b-from-left    b-delay03 ">点名</h2>
-								  <p class="b-animate b-from-left    b-delay03 ">View</p>
-								</div>
-							</a>
-		                </div>
-					</div>-->	
-				</div>
+				
 				<!-- Script for gallery Here -->
 				<script type="text/javascript" src="./js/jquery.mixitup.min.js"></script>
 					<script type="text/javascript">
