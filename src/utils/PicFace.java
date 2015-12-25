@@ -70,7 +70,6 @@ public class PicFace{
 				face.setWidth(width);
 				face.setlXInPic(x-width/2);
 				face.setlYInPic(y-hight/2);
-				face.setSno(sno);
 				faces.add(face);
 			}
 		} catch (JSONException e) {
@@ -88,7 +87,6 @@ public class PicFace{
 				if(sx==x&&sy==y){	
 					System.out.println("add:"+sno);
 					result.getJSONArray("face").getJSONObject(i).put("tag", sno);
-					faces.get(i).setSno(sno);
 					break;
 				}
 			}
@@ -105,7 +103,6 @@ public class PicFace{
 				if(no.equals(sno)){
 					System.out.println("delete:"+sno);
 					result.getJSONArray("face").getJSONObject(i).put("tag", "");
-					faces.get(i).setSno("");
 					break;
 				}
 			}
