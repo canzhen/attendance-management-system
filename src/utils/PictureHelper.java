@@ -52,8 +52,15 @@ public class PictureHelper {
 		/*获取当前系统时间*/
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH");//设置日期格式
 		String date = df.format(new Date());//获取当前日期
-		String savePath = Values.save_pic_path+tno,
-				filePath = Values.save_pic_path+tno+"\\"+date+".jpg";
+		/*
+		 * 测试部分
+		 */
+		tno = "11111111";
+		/*
+		 * 测试部分
+		 */
+		String savePath = "teacher\\"+tno,
+				filePath = "teacher\\"+tno+"\\"+date+".jpg";
 		
 		pic = new File(filePath);
 		if (!pic.exists())

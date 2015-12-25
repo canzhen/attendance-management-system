@@ -68,7 +68,7 @@ public class studentAction extends MyActionSupport{
 				 * 判断老师是否已经将点名的图片上传，
 				 * 若已经上传，则放在session里传过去
 				 */
-				session.put("picUrl", PictureHelper.getPicUrl(DBHelper.getTnoBySnoCno(sno, cno)))
+				session.put("picUrl", PictureHelper.getPicUrl(DBHelper.getTnoBySnoCno(sno, cno)));
 			}else if ( count > 1){//课程冲突，返回SUCCESS，由界面判断处理
 				session.put("coursesInfo", courses);//课程冲突，将所有课传入，便于页面显示
 			}else if ( count == -1 ){//当天无课，返回SUCCESS，由界面判断处理
