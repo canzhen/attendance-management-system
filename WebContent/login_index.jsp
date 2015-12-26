@@ -36,8 +36,11 @@
 			} else if (identity == "teacher") {
 				//进入老师的界面
 				document.location.href="teacher_index";
-		}
-
+			}else if (identity == "manager") {
+			//进入老师的界面
+				document.location.href="admin_index";
+			}
+	
 		}
 	}
 </script>
