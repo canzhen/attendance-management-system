@@ -47,10 +47,14 @@ public class Values {
 	/**
 	 * 记录每节课的学生信息
 	 */
+<<<<<<< HEAD
 //<<<<<<< HEAD
 //	public static HashMap studentsInfo_for_each_class = new HashMap<String,ArrayList<StudentInfo>>();
 //=======
 //	//public static HashMap studentsInfo_for_each_class = new HashMap<String,ArrayList<StudentInfo>>();
 //>>>>>>> 92a36c551259c41e33c65c096b1e52ee6e30d36c
+=======
+	//public static HashMap studentsInfo_for_each_class = new HashMap<String,ArrayList<StudentInfo>>();
+>>>>>>> 8b7c6820e5cc21911fec43bbb6e5f4ec426bc00a
 
 }

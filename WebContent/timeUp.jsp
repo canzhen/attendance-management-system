@@ -30,7 +30,7 @@ function record(){
 	function getValue() {
 	
 		document.all.table1.innerHTML = "";
-        <% CourseInfo course = (CourseInfo)session.getAttribute("coursesInfo"); %>
+        <% CourseInfo course = ((List<CourseInfo>)session.getAttribute("coursesInfo")).get(0); %>
 	    var mytable = document.getElementById("myTable");
 		//动态创建表格
 <%List<StudentInfo> studentInfo=DBHelper.getStudentInfoForAClassByCnoTno((String)session.getAttribute((String)session.getAttribute("id")),course.getCno());%>

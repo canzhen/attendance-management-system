@@ -26,15 +26,19 @@ public class TimerHelper {
 		timer = new Timer();
 	}
 	
-	public static int getDaojishi(String sno,String cno){
-		String tno = DBHelper.getTnoBySnoCno(sno, cno);
+	public static int getDaojishi(String sno,String cno,String tno){
+		if ( tno == null )
+			tno = DBHelper.getTnoBySnoCno(sno, cno);
 		int check_time = DBHelper.getCourseDetails(tno, cno).getCheckTime();
 		check_time *= 60;
 		Date start_date = (Date) FileHelper.deserializeStartDate(tno);
 		Date current_date = new Date();
 		int seconds = ((int) (current_date.getTime() - start_date.getTime()))/1000;
 		seconds = check_time - seconds;
-		return seconds;
+		if (seconds < 0)
+			return 0;
+		else
+			return seconds;
 	}
 	
 	//这是启动计时器的方法

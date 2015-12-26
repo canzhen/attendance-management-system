@@ -115,6 +115,12 @@ public class loginAction extends MyActionSupport{
 		session.put("identity",null);
 		session.put("id", null);
 		session.put("name", null);
+		session.put("url", null);
+		session.put("count", null);
+		session.put("coursesInfo", null);
+		session.put("coursesNum", null);
+		session.put("daojishi", null);
+		session.put("ifChecked", null);
 		return SUCCESS;
 	}
 	

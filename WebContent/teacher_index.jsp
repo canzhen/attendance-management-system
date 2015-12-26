@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	import="utils.*" import="java.util.*" import="pic.entity.*"
-	import="db.entity.*" pageEncoding="UTF-8"%>
+	import="db.entity.*" import="db.util.*" 
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -9,15 +10,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="text/javascript" src="jquery/jquery.js"></script>
 <script language="JavaScript" type="text/javascript">
-	var c = 60 *
-<%=session.getAttribute("daojishi")%>;
+	var c = 
+<%=TimerHelper.getDaojishi(
+		null,(String)session.getAttribute("cno"),(String)session.getAttribute("id"))%>;
 	//10分钟
 	var t;
 	var m;
 	var s;
 
 	function timedCount() {
-		if (c == 0) {
+		if (c <= 0) {
 			m = 0;
 			s = 0;
 			window.location.href = "timeUp.jsp";
@@ -88,7 +90,7 @@
 					src="images/bbb_03.jpg" /><img src="images/bbb_04.jpg" />
 			</div>
 			<div class="div2">
-				<h1 style="color: #000000; align-content: center;" ><%=course.getCname()%></h1>
+				<h1 style="color: #000000; align-content: center;margin-bottom: 0.5em;margin-top: 0.5em" ><%=course.getCname()%></h1>
 			</div>
 
 			<div class="div2" onclick="start()" id="start">开始点名</div>
@@ -112,14 +114,19 @@
 			</s:form>
 		</div>
 
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本次点名时间为10分钟！
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本次点名时间为
+		<%=
+			DBHelper.getCourseDetails((String)session.getAttribute("id"), 
+				(String)session.getAttribute("cno")).getCheckTime()
+		%>
+		分钟！
 		<div id="CountMsg" class="HotDate" style="margin-top: 0.7em">
 			<span>还剩 </span> <span id="min">00分</span> <span id="sec">00秒</span>
 		</div>
 
 		<img src="" id="img0" width="800" height="350"
-			style="margin-bottom: 2em; margin-top: 1.5em" />
-
+			style="margin-bottom: 2em; margin-top: 1em" />
+		<input class="check_submit" type="button" value="确定" onclick="timedCount()" style="margin-left: 40em"/>
 
 	</div>
 	<script>

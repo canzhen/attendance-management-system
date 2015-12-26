@@ -57,14 +57,27 @@ public class studentAction extends MyActionSupport{
 				return NOCURRENTCLASS;
 			}else if ( count == 1 ){//当天有一节课，返回SUCCESS
 				String cno = courses.get(0).getCno();
+				String tno = courses.get(0).getTno();
 				session.put("cno", cno);
-				session.put("tno", courses.get(0).getTno());
+				session.put("tno", tno );
 				session.put("coursesInfo", courses);//传入当前课程的类，包含具体信息
 				/*
 				 * 判断老师是否已经将点名的图片上传，
 				 * 若已经上传，则放在session里传过去
 				 */
 				session.put("picUrl", PictureHelper.getPicUrl(DBHelper.getTnoBySnoCno(sno, cno)));
+				/*
+				 * 0为没签到，1为已经签到
+				 */
+				ArrayList<StudentInfo> list = FileHelper.deserializeStudentsInfo(tno);
+				for (int i=0; i < list.size(); i++){
+					if ( list.get(i).getSno().equals(sno)){
+						session.put("ifChecked", 1);
+						break;
+					}
+				}
+				session.put("ifChecked", 0);
+				
 			}else if ( count > 1){//课程冲突，返回SUCCESS，由界面判断处理
 				session.put("coursesInfo", courses);//课程冲突，将所有课传入，便于页面显示
 			}else if ( count == -1 ){//当天无课，返回SUCCESS，由界面判断处理
