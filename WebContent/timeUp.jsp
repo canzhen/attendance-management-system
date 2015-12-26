@@ -32,8 +32,6 @@ function record(){
 		document.all.table1.innerHTML = "";
         <% CourseInfo course = (CourseInfo)session.getAttribute("coursesInfo"); %>
 	    var mytable = document.getElementById("myTable");
-		document.getElementById("courseN").innerHTML =
-        <%=course.getCname()%>;
 		//动态创建表格
 <%List<StudentInfo> studentInfo=DBHelper.getStudentInfoForAClassByCnoTno((String)session.getAttribute((String)session.getAttribute("id")),course.getCno());%>
 	<%for (int i = 0; i <studentInfo.size(); i++){%>
@@ -44,13 +42,13 @@ function record(){
 			//第一列
 			newc = newl.insertCell();
 			newc.innerHTML =
-<%=studentInfo.get(i).getSno()%>
+'<%=studentInfo.get(i).getSno()%>'
 	;
 
 			//第二列
 			newc = newl.insertCell();
 			newc.innerHTML =
-<%=studentInfo.get(i).getSname()%>
+'<%=studentInfo.get(i).getSname()%>'
 	;
 
 			mytable.appendChild(tr);
@@ -92,7 +90,7 @@ function record(){
 					src="images/bbb_03.jpg" /><img src="images/bbb_04.jpg" />
 			</div>
 			<div class="div2">
-				<h1 style="color: #000000; align-content: center;" id="courseN"></h1>
+				<h1 style="color: #000000; align-content: center;" id="courseN"><%=course.getCname()%></h1>
 			</div>
 			<div class="div2" onclick="start()" id="start">开始点名</div>
 			<div class="div2" onclick="set()">点名设置</div>

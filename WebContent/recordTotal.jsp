@@ -20,7 +20,7 @@ CourseInfo course;%>
 function judge(){
 	<%
 	list1 = (ArrayList) session.getAttribute("coursesInfo");
-	course=(CourseInfo)list1.get(0);%>
+	course=(CourseInfo)list1.get((int) session.getAttribute("ccid"));%>
 	var count = <%=session.getAttribute("classNum")%>;
 	if(count!=1)
 	{ 
