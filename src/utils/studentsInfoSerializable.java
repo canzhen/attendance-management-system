@@ -31,7 +31,6 @@ public class studentsInfoSerializable implements Serializable {
 	
 	private void writeObject(ObjectOutputStream s)
             throws IOException {
-        //s.defaultWriteObject();
         s.writeInt(size);
         for (int i = 0; i < studentsInfo.size(); i++){
         	s.writeObject(studentsInfo.get(i));
@@ -41,7 +40,6 @@ public class studentsInfoSerializable implements Serializable {
     @SuppressWarnings("unchecked")
 	private void readObject(ObjectInputStream s)
             throws IOException, ClassNotFoundException {
-    	//s.defaultReadObject();
     	studentsInfo = new ArrayList<StudentInfo>();
     	int size = s.readInt();
     	for (int i = 0; i < size; i++){
