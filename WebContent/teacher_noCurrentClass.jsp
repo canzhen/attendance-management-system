@@ -229,7 +229,7 @@ var length = 0;
 						</div>
 					</div>
 				</div>
-<s:form accesskey="" action="teacher_gotoAClass" id="form1"  method="post">
+<s:form accesskey="" hidden="hidden"action="teacher_gotoAClass" id="form1"  method="post">
 <s:textfield id="ccid" name="ccid"></s:textfield></s:form>
 				<!-- Script for gallery Here -->
 				<script type="text/javascript" src="./js/jquery.mixitup.min.js"></script>
