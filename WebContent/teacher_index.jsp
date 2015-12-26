@@ -113,7 +113,7 @@
 		</div>
 
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本次点名时间为10分钟！
-		<div id="CountMsg" class="HotDate">
+		<div id="CountMsg" class="HotDate" style="margin-top: 0.7em">
 			<span>还剩 </span> <span id="min">00分</span> <span id="sec">00秒</span>
 		</div>
 

@@ -17,17 +17,27 @@
  -->
 <script language="JavaScript" type="text/javascript">
 	
-<%int i = 0;%>
-	
-<%List<CourseInfo> list = new ArrayList<CourseInfo>();
-			list = (List<CourseInfo>) session.getAttribute("coursesInfo");%>
+<%int i = 0;
+List<CourseInfo> list = new ArrayList<CourseInfo>();
+		list = (List<CourseInfo>) session.getAttribute("coursesInfo");
+		List<CourseInfo> listN=new ArrayList<CourseInfo>();%>
+	function getValue(){
+		<%
+		CourseInfo course=new CourseInfo();
+		course=null;
+		for(int m=0;m<list.size();m++){
+			listN.add(list.get(m));
+		}%>
+	}
+
 	function jump() {
-		document.getElementById("form").submit();
-		window.location.href = "recordTotal.jsp";
+		<!--document.getElementById("form").submit();
+		-->
+	window.location.href = "recordTotal.jsp";
 	}
 </script>
 </head>
-<body>
+<body onload="getValue()">
 	<div class="header">
 		<div class="header-top">
 			<div class="container">
@@ -52,7 +62,120 @@
 						alt="" /></a>
 					<div class="clearfix"></div>
 				</div>
+				<div id="portfoliolist">
+					<div class="portfolio icon mix_all"
+						style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn capt"
+							data-wow-delay="0.4s">
+							<a  href="#" onclick="jump()"class="b-link-stripe b-animate-go">
 
+								<h1 style="margin: auto; color: #000000;"><%=listN.get(0).getCname() %></h1>
+								<h4 style="margin: auto; color: #3071A9;">
+									<%=listN.get(0).getTime() %>
+									</h4>
+										<div class="b-wrapper">
+											<h2 class="b-animate b-from-left    b-delay03 ">点名</h2>
+											<p class="b-animate b-from-left    b-delay03 ">View</p>
+										</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div id="portfoliolist">
+					<div class="portfolio icon mix_all"
+						style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn capt"
+							data-wow-delay="0.4s">
+							<a  href="#" onclick="jump()" class="b-link-stripe b-animate-go">
+
+								<h1 style="margin: auto; color: #000000;"><%=listN.get(1).getCname() %></h1>
+								<h4 style="margin: auto; color: #3071A9;">
+									<%=listN.get(1).getTime() %>
+									</h4>
+										<div class="b-wrapper">
+											<h2 class="b-animate b-from-left    b-delay03 ">点名</h2>
+											<p class="b-animate b-from-left    b-delay03 ">View</p>
+										</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div id="portfoliolist">
+					<div class="portfolio icon mix_all"
+						style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn capt"
+							data-wow-delay="0.4s">
+							<a href="#" onclick="jump()"class="b-link-stripe b-animate-go">
+
+								<h1 style="margin: auto; color: #000000;"><%=listN.get(2).getCname() %></h1>
+								<h4 style="margin: auto; color: #3071A9;">
+									<%=listN.get(2).getTime() %>
+									</h4>
+										<div class="b-wrapper">
+											<h2 class="b-animate b-from-left    b-delay03 ">点名</h2>
+											<p class="b-animate b-from-left    b-delay03 ">View</p>
+										</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div id="portfoliolist">
+					<div class="portfolio icon mix_all"
+						style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn capt"
+							data-wow-delay="0.4s">
+							<a  href="#" onclick="jump()" class="b-link-stripe b-animate-go">
+
+								<h1 style="margin: auto; color: #000000;"><%=listN.get(3).getCname() %></h1>
+								<h4 style="margin: auto; color: #3071A9;">
+									<%=listN.get(3).getTime() %>
+									</h4>
+										<div class="b-wrapper">
+											<h2 class="b-animate b-from-left    b-delay03 ">点名</h2>
+											<p class="b-animate b-from-left    b-delay03 ">View</p>
+										</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div id="portfoliolist">
+					<div class="portfolio icon mix_all"
+						style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn capt"
+							data-wow-delay="0.4s">
+							<a  href="#" onclick="jump()"class="b-link-stripe b-animate-go">
+
+								<h1 style="margin: auto; color: #000000;"><%=listN.get(4).getCname() %></h1>
+								<h4 style="margin: auto; color: #3071A9;">
+									<%=listN.get(4).getTime() %>
+									</h4>
+										<div class="b-wrapper">
+											<h2 class="b-animate b-from-left    b-delay03 ">点名</h2>
+											<p class="b-animate b-from-left    b-delay03 ">View</p>
+										</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div id="portfoliolist">
+					<div class="portfolio icon mix_all"
+						style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn capt"
+							data-wow-delay="0.4s">
+							<a href="#" onclick="jump()"class="b-link-stripe b-animate-go">
+
+								<h1 style="margin: auto; color: #000000;"><%=listN.get(5).getCname() %></h1>
+								<h4 style="margin: auto; color: #3071A9;">
+									<%=listN.get(5).getTime() %>
+									</h4>
+										<div class="b-wrapper">
+											<h2 class="b-animate b-from-left    b-delay03 ">点名</h2>
+											<p class="b-animate b-from-left    b-delay03 ">View</p>
+										</div>
+							</a>
+						</div>
+					</div>
+				</div>
 				<div class="portfolio">
 					<div class="portfolio-info">
 						<div class="container">
@@ -69,7 +192,7 @@
 											<h1 style="margin: auto; color: #000000;"><%=list.get(i).getCname()%></h1>
 											<h4 style="margin: auto; color: #3071A9;"><%=list.get(i).getTime()%></h4>
 											<h4 style="margin: auto; color: #3071A9;"><%=list.get(i).getCno()%></h4>
-											<s:form method="post" action="teacher_gotoAClass.action" id="form"
+											<s:form method="post" action="teacher_gotoAClass" id="form"
 												hidden="hidden">
 												<input id="cnoN" name="ccid" type="text" value="<%=i%>" />
 												<input type="submit">

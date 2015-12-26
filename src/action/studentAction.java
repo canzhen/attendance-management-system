@@ -78,12 +78,10 @@ public class studentAction extends MyActionSupport{
 		String tno = (String)session.get("tno");
 		List<StudentInfo> studentsInfo = null;
 		if ( (studentsInfo = (List<StudentInfo>) Values.studentsInfo_for_each_class.get(tno)) == null){
-			session.put("checkStatus", 0);//0表示不在点名时间
 		}else{
-			session.put("checkStatus", 1);
 			CheckHelper.checkIn(studentsInfo, sno);
 		}
-		
+		session.put("checkStatus", 1);
 		return INFO;
 	}
 	

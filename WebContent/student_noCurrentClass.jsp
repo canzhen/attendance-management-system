@@ -111,10 +111,7 @@
 		ScrollImgLeft();
 
 	}
-	//注销
-	function logout(){
-		document.location.href="login_logout";
-	}
+	
 
 </script>
 <body onload="getValue();">
@@ -129,9 +126,21 @@
 					<div class="menu">
 						<span class="menu"> </span>
 						<ul class="navigatoin">
+<<<<<<< HEAD
 							<li><img src="images/tx.png" class="studentimg" alt=""  width="32" height="32"/><label
+=======
+<<<<<<< HEAD
+							<li><img src="images/default.png" class="studentimg" alt=""  width="28" height="28"/><label
+=======
+<<<<<<< HEAD
+							<li><img src="images/tx.png" class="studentimg" alt="" width="32px" height="32px"/><label
+=======
+							<li><img src="images/tx.png" class="studentimg" alt=""  width="32" height="32"/><label
+>>>>>>> da1b2efefc3a3c7a43dc40c0193ab29d265c5291
+>>>>>>> 58f82da4c4fad0f74e5b6516c1d5409940e6d635
+>>>>>>> 16938526d731b803e6a4f3003129ec74545facea
 								class="studentname" id="stuname">张三</label></li>
-							<li><a href="" class="active" onclick="logout()">设置</a>
+							<li><a href="login_logout" class="active" >注销</a>
 						</ul>
 						<div class="clearfix"></div>
 

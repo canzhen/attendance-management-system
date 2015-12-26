@@ -5,7 +5,7 @@
 }
 ul.navigatoin li a.active {
 	padding-bottom: true;
-	font-family: 微软雅黑;
+	font-family: ΢���ź�;
 	color: #8D8D8D;
 }
 .daohang {
@@ -31,7 +31,7 @@ ul.navigatoin li a.active {
 }
 .btn-primary {
 	color: #FFF;
-	background-color: #1B242F;
+	background-color: #7BBBE2;
 	border-color: #357EBD;
 }
 .btn {
@@ -54,7 +54,7 @@ ul.navigatoin li a.active {
 	color: #FFF;
 }
 .login_font_title {
-	font-family: 微软雅黑;
+	font-family: ΢���ź�;
 	font-size: 20pt;
 	color: #8D8D8D;
 }
@@ -68,7 +68,7 @@ ul.navigatoin li a.active {
 	cursor: pointer;
 	font-weight: 500;
 	outline: none;
-	font-family: "微软雅黑";
+	font-family: "΢���ź�";
 	padding: 12px 10px;
 	width: 100px;
 	font-size: 18px;
@@ -94,7 +94,7 @@ img {
 	border: 0;
 }
 body {
-	font: 12px/180% "微软雅黑";
+	font: 12px/180% "΢���ź�";
 }
 a,
 a:hover {
@@ -175,7 +175,7 @@ a:hover {
 }
 	.setting p{
 		margin-bottom: 10px;
-		font-family: "微软雅黑";
+		font-family: "΢���ź�";
 		font-size: 10pt;
 		color: #000000;
 	}
