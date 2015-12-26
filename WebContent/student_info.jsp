@@ -14,29 +14,31 @@
 <body>
 <script>
 var name;
-var str="签到成功";
+var str;
+var checkStatus = 0;
 window.onload = function() {
 	name = "<%=session.getAttribute("name")%>";
 	document.getElementById("stuname").innerText=name;
 	count = <%=session.getAttribute("coursesNum")%>;
-	
-	if ( count > 1){//课程冲突，返回SUCCESS，由界面判断处理
-			//session.put("coursesInfo", courses);//课程冲突，将所有课传入，便于页面显示
-			
+	checkStatus = <%=session.getAttribute("checkStatus")%>;
+	//签到成功
+	if(checkStatus == 1)
+		{
+			str = "签到成功"
+		}else{
+				if ( count > 1){//课程冲突，返回SUCCESS，由界面判断处理
+					//session.put("coursesInfo", courses);//课程冲突，将所有课传入，便于页面显示						
+				str = "上课时间冲突,不能签到";
+			}else if ( count == -1 ){//当天无课，返回SUCCESS，由界面判断处理
+					//session.put("coursesInfo", "这周不属于上课周，放假或者为自习周，无课");
 				
-		str = "上课时间冲突,不能签到";
-	}else if ( count == -1 ){//当天无课，返回SUCCESS，由界面判断处理
-			//session.put("coursesInfo", "这周不属于上课周，放假或者为自习周，无课");
-		
-		str = "这周不属于上课周，放假或者为自习周，无课";
-			
-	}
+				str = "这周不属于上课周，放假或者为自习周，无课";
+					
+			}
+		}
+	
 
 	document.getElementById("tips").innerHTML=str;
-}
-//注销
-function logout(){
-	document.location.href="login_logout";
 }
 
 </script>
@@ -52,9 +54,9 @@ function logout(){
 					<div class="menu">
 						<span class="menu"> </span>
 						<ul class="navigatoin">
-							<li><img src="images/default.png" class="studentimg" alt="" width="32" height="32"/><label
+							<li><img src="images/default.png" class="studentimg" alt="" width="28" height="28"/><label
 								class="studentname" id="stuname"></label></li>
-							<li><a href="" class="active" onclick="logout()">注销</a>
+							<li><a href="login_logout" class="active">注销</a>
 						</ul>
 						<div class="clearfix"></div>
 

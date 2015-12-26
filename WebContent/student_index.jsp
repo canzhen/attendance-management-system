@@ -70,7 +70,7 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 		var canvas = document.getElementById('myCanvas');
 		if (canvas.getContext && count == 1) {
 			var ctx = canvas.getContext('2d');
-
+			ctx.lineWidth = 3;
 			ctx.strokeStyle = '#ff0000';
 			initData();
 			//左上角的x，y坐标，长宽
@@ -219,11 +219,6 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 	}
 	
 	
-	//注销
-	function logout(){
-		document.location.href="login_logout";
-	}
-
 	
 	function cancleFunction(){
 		init();
@@ -241,9 +236,9 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 					<div class="menu">
 						<span class="menu"> </span>
 						<ul class="navigatoin">
-							<li><img src="images/default.png" class="studentimg" alt="" width="32" height="32"/><label
+							<li><img src="images/default.png" class="studentimg" alt="" width="28" height="28"/><label
 								class="studentname" id="stuname"></label></li>
-							<li><a href="" class="active" onclick="logout()">注销</a>
+							<li><a href="login_logout" class="active" >注销</a>
 						</ul>
 						<div class="clearfix"></div>
 
