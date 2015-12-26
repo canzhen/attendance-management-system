@@ -108,7 +108,7 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 			if(urlpic==null){
 				document.getElementById("tips").innerHTML="还未开始点名或者图片上传不成功，请耐心等候";
 			}else{
-					document.getElementById("myCanvas").style.backgroundImage="url(teacher\11111114\2015-12-26,09.jpg)";
+					document.getElementById("myCanvas").style.backgroundImage="url("+urlpic+")";
 			}
 			
 		}else if ( count > 1){//课程冲突
@@ -220,7 +220,7 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 	
 	//注销
 	function logout(){
-		window.location.href="login_logout";
+		document.location.href="login_logout";
 	}
 
 	function submitFunction(){
@@ -265,7 +265,8 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 				class="check_coursefont"></label>
 		</div>
 		<div id="CountMsg" class="HotDate">
-			<span>还剩 </span> <span id="min">00分</span> <span id="sec">00秒</span>
+			<span>还剩 </span> <span id="min"></span> 
+			<span id="sec">00秒</span>
 		</div>
 		<div class="check_tip" id="tips">请在图中找出并选择你自己，确定提交</div>
 		<div class="check_peopleimg">

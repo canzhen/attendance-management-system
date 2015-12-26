@@ -108,6 +108,7 @@ public class teacherAction extends MyActionSupport{
 		//String path =  ServletActionContext.getServletContext().getRealPath("/");
 		if (pic != null)
 			PictureHelper.savePic(pic,(String)session.get("id"));
+		start_checking();
 		return SUCCESS;
 	}
 	
@@ -119,9 +120,10 @@ public class teacherAction extends MyActionSupport{
 	
 	public String start_checking(){
 		Values.start_check_time.put(tno, new Date());//在Values里给该老师的上课时间赋值
-		if ( studentsInfo == null )
+		if ( studentsInfo == null ){
 			studentsInfo = DBHelper.getStudentInfoForAClassByCnoTno(tno, (String)session.get("cno"));
-		Values.studentsInfo_for_each_class.put(tno, studentsInfo);
+			Values.studentsInfo_for_each_class.put(tno, studentsInfo);
+		}
 		TimerHelper.startTimer(new StopCheckingTimerTask(tno), 
 				DBHelper.getCourseDetails(tno, (String)session.get("cno")).getCheckTime());
 		return SUCCESS;

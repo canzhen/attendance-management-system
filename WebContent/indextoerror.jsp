@@ -33,7 +33,7 @@ window.onload = function() {
 }
 //注销
 function logout(){
-	window.location.href="login_logout";
+	document.location.href="login_logout";
 }
 
 </script>

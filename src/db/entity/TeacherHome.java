@@ -26,7 +26,10 @@ public class TeacherHome {
 
 	protected SessionFactory getSessionFactory() {
 		try {
-			return (SessionFactory) new Configuration().configure().buildSessionFactory();
+			if (sessionFactory==null)
+				return (SessionFactory) new Configuration().configure().buildSessionFactory();
+			else
+				return (SessionFactory) new InitialContext().lookup("SessionFactory");
 		} catch (Exception e) {
 			log.error("Could not locate SessionFactory in JNDI", e);
 			throw new IllegalStateException("Could not locate SessionFactory in JNDI");

@@ -26,7 +26,7 @@ public class TimerHelper {
 		timer = new Timer();
 	}
 	
-	public int getDaojishi(String sno,String cno){
+	public static int getDaojishi(String sno,String cno){
 		String tno = DBHelper.getTnoBySnoCno(sno, cno);
 		int check_time = DBHelper.getCourseDetails(tno, cno).getCheckTime();
 		check_time *= 60;
