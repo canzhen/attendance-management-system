@@ -1,6 +1,12 @@
 package db.entity;
 
-public class StudentInfo {
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class StudentInfo implements Serializable{
 	private String sno;
 	private String sname;
 	private Integer absenceNum;	
@@ -31,5 +37,22 @@ public class StudentInfo {
 	public void setChecked(boolean isChecked) {
 		this.isChecked = isChecked;
 	}
+	
+	private void writeObject(ObjectOutputStream s)
+            throws IOException {
+        s.defaultWriteObject();
+        s.writeBytes(sno);
+        s.writeBytes(sname);
+        s.writeInt(absenceNum);
+        s.writeBoolean(isChecked);
+    }
+    private void readObject(ObjectInputStream s)
+            throws IOException, ClassNotFoundException {
+    	s.defaultReadObject();
+    	sno = (String) s.readObject();
+        sname = (String) s.readObject();
+        absenceNum = (int)s.readInt();
+        isChecked = (boolean)s.readBoolean();
+    }
 
 }

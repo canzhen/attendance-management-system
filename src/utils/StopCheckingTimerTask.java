@@ -21,6 +21,7 @@ public class StopCheckingTimerTask extends TimerTask{
 	public void execute(){
 		Values.start_check_time.remove(tno);//在Values里去掉给该老师的点名时间
 		Values.studentsInfo_for_each_class.remove(tno);//在Values里去掉该节课的学生信息
+		
 	}
 	
 	@Override
