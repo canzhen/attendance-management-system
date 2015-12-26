@@ -24,6 +24,7 @@ import db.util.DBHelper;
 
 public class teacherAction extends MyActionSupport{
 	File pic;//用于获取教师上传的图片
+	String ccid;//用于保存无课时的课程列表的index
 	String picContentType;
 	String picFileName;
 	String courseNo="";//当前所在页面的课程id
@@ -129,6 +130,11 @@ public class teacherAction extends MyActionSupport{
 		return SUCCESS;
 	}
 
+	public String gotoAClass(){
+		session.put("ccid", ccid);
+		return NOCURRENTCLASS;
+	}
+	
 	public File getPic() {
 		return pic;
 	}
