@@ -129,11 +129,7 @@
 					<div class="menu">
 						<span class="menu"> </span>
 						<ul class="navigatoin">
-<<<<<<< HEAD
-							<li><img src="images/tx.png" class="studentimg" alt="" width="32px" height="32px"/><label
-=======
 							<li><img src="images/tx.png" class="studentimg" alt=""  width="32" height="32"/><label
->>>>>>> da1b2efefc3a3c7a43dc40c0193ab29d265c5291
 								class="studentname" id="stuname">张三</label></li>
 							<li><a href="" class="active" onclick="logout()">设置</a>
 						</ul>
