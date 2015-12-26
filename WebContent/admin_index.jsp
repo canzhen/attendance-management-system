@@ -27,7 +27,7 @@
 			<ul class="navigatoin">
 				<li><img src="./images/tx.png" class="studentimg" alt="" /> <label
 					class="studentname">管理员</label></li>
-				<li><a href="" class="active">设置</a></li>
+				<li><a href="login_logout"  class="active">设置</a></li>
 			</ul>
 			<div class="clearfix"></div>
 		</div>

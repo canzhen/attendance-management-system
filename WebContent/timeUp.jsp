@@ -69,7 +69,7 @@ function record(){
 			<ul class="navigatoin">
 				<li><img src="./images/tx.png" class="studentimg" alt="" width="32px" height="32px"/><label
 					class="studentname"><%=session.getAttribute("name")%> </label></li>
-				<li><a href="" class="active">注销</a></li>
+				<li><a href="login_logout"  class="active">注销</a></li>
 
 			</ul>
 			<div class="clearfix"></div>
