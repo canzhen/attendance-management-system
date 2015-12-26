@@ -30,7 +30,7 @@ public class Values {
 	/**
 	 * 教师上传图片的路径
 	 */
-	public static String save_pic_path = "D:\\传真是爱学习的传真\\专业课-javaEE\\作业\\大作业\\AttendanceManagement\\WebContent\\teacher\\";
+	public static String save_pic_path = "C:\\teacher\\";
 	
 	public static int index = 1;
 	
