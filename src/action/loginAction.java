@@ -26,7 +26,7 @@ public class loginAction extends MyActionSupport{
 	 * 密码
 	 */
 	private String pwd="";
-
+	
 	/**
 	 * 错误信息
 	 */

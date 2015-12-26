@@ -22,22 +22,10 @@ public class PictureHelper {
 				filePath = Values.save_pic_path+tno+"\\"+date+".jpg";
 		
 		if ( pic != null ){
-			try {
-				DataInputStream in = new DataInputStream(new FileInputStream(pic));
-				File saveFile = new File(savePath);
-				if ( !saveFile.exists())
-					saveFile.mkdirs();
-				DataOutputStream out = new DataOutputStream(new FileOutputStream(filePath));
-				/*将参数savePath，即将截取的图片的存储在本地地址赋值给out输出流所指定的地址*/
-	            byte[] buffer = new byte[4096];
-	            int count = 0;
-	            while ((count = in.read(buffer)) > 0)/*将输入流以字节的形式读取并写入buffer中*/
-	                out.write(buffer, 0, count);
-	            out.close();/*后面三行为关闭输入输出流以及网络资源的固定格式*/
-	            in.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			savePicIntoAPath(pic,filePath,savePath);
+			savePath = "c:\\teacher\\"+tno;
+			filePath = "c:\\teacher\\"+tno+"\\"+date+".jpg";
+			savePicIntoAPath(pic,filePath,savePath);
 		}
 	}
 	
@@ -55,18 +43,39 @@ public class PictureHelper {
 		/*
 		 * 测试部分
 		 */
-		tno = "11111111";
+		//tno = "11111111";
 		/*
 		 * 测试部分
 		 */
-		String savePath = "teacher//"+tno,
+		String diskPath = Values.save_pic_path+tno+"\\"+date+".jpg",
 				filePath = "teacher//"+tno+"//"+date+".jpg";
-		return filePath;
+		//return filePath;
 		//String test = PictureHelper.class.getResource("/").getPath();
 		
-		//pic = new File(filePath);
-		//if (!pic.exists())
-		//	return null;
-		//else return filePath;
+		pic = new File(diskPath);
+		if (!pic.exists())
+			return null;
+		else return filePath;
 	} 
+	
+	private static void savePicIntoAPath(File pic,String filePath,String savePath){
+		try {
+			DataInputStream in = new DataInputStream(new FileInputStream(pic));
+			File saveFile = new File(savePath);
+			if ( !saveFile.exists())
+				saveFile.mkdirs();
+			DataOutputStream out = new DataOutputStream(new FileOutputStream(filePath));
+			/*将参数savePath，即将截取的图片的存储在本地地址赋值给out输出流所指定的地址*/
+            byte[] buffer = new byte[4096];
+            int count = 0;
+            while ((count = in.read(buffer)) > 0)/*将输入流以字节的形式读取并写入buffer中*/
+                out.write(buffer, 0, count);
+            out.close();/*后面三行为关闭输入输出流以及网络资源的固定格式*/
+            in.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 }

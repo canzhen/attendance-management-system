@@ -107,17 +107,18 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 			var urlpic = "<%=url%>";
 			if(urlpic==null){
 				document.getElementById("tips").innerHTML="还未开始点名或者图片上传不成功，请耐心等候";
-				}else{
-					document.getElementById("myCanvas").style.backgroundImage="url(teacher/11111111/2015-12-26,08.jpg)";
-					}
+			}else{
+					document.getElementById("myCanvas").style.backgroundImage="url(teacher\11111114\2015-12-26,09.jpg)";
+			}
 			
 		}else if ( count > 1){//课程冲突
+			
 			
 			document.location.href="indextoerror.jsp";
 			
 		}else if ( count == -1 ){//当天无课
 			
-		
+			
 			document.location.href="indextoerror.jsp";
 		}
 	}
@@ -132,8 +133,8 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 		faces=picFace.getFaces();
 		int size = 0;
 		size = faces.size();
-		session.putValue("facesList",faces);
-		session.putValue("picface", picFace); %>
+		//session.putValue("facesList",faces);
+		//session.putValue("picface", picFace); %>
 		//初始化二维数组
 		size=<%=size%>;
 		for(var m=0;m<size;m++){
@@ -166,9 +167,7 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 			//添加事件响应   
 			canvas.addEventListener('click', function(e) {
 				p = getEventPosition(e);
-
 				reDraw(p, ctx);
-
 			}, false);
 		}
 	}
@@ -243,7 +242,7 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 					<div class="menu">
 						<span class="menu"> </span>
 						<ul class="navigatoin">
-							<li><img src="images/tx.png" class="studentimg" alt="" /><label
+							<li><img src="images/default.png" class="studentimg" alt="" /><label
 								class="studentname" id="stuname"></label></li>
 							<li><a href="" class="active" onclick="logout()">注销</a>
 						</ul>

@@ -3,7 +3,9 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 2015-12-16 20:34:33 by Hibernate Tools 4.3.1.Final -->
 <hibernate-mapping>
-    <class name="db.entity.Teacher" table="teacher" catalog="amdb" optimistic-lock="version">
+    <class name="db.entity.Teacher" table="teacher" catalog="amdb" optimistic-lock="version"
+        dynamic-update="true" 
+		dynamic-insert="true">
         <id name="tno" type="string">
             <column name="tno" length="8" />
             <generator class="assigned" />
@@ -13,6 +15,9 @@
         </property>
         <property name="tpwd" type="string">
             <column name="tpwd" length="20" not-null="true" />
+        </property>
+        <property name="avatar" type="string">
+            <column name="avatar" length="20" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>
