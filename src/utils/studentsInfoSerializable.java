@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import db.entity.StudentInfo;
 
 public class studentsInfoSerializable implements Serializable {
-	ArrayList<StudentInfo> studentsInfo = null;
-	int size = 0;
+	ArrayList<StudentInfo> studentsInfo;
+	int size;
 
 
 	public ArrayList<StudentInfo> getStudentsInfo() {

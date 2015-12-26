@@ -41,8 +41,8 @@ public class StudentInfo implements Serializable{
 	private void writeObject(ObjectOutputStream s)
             throws IOException {
         s.defaultWriteObject();
-        s.writeBytes(sno);
-        s.writeBytes(sname);
+        s.writeObject(sno);
+        s.writeObject(sname);
         s.writeInt(absenceNum);
         s.writeBoolean(isChecked);
     }

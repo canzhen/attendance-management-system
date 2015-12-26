@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="css/header.css" />
 <link rel="stylesheet" type="text/css" href="css/wown.css" />
-<title>Insert title here</title>
+<title>签到</title>
 </head>
 
 <script type="text/javascript">
@@ -38,9 +38,8 @@ var FaceJS = function(sno,cX,cY,lXInPic,lYInPic,width,hight){
 <%String url = "";%>
 //声明arr数组
 var arr = new Array();
-var c = 60 *<%=TimerHelper.getDaojishi((String)
-
-		session.getAttribute("id"),(String)session.getAttribute("cno"))%>;
+var c = <%=TimerHelper.getDaojishi(
+		(String)session.getAttribute("id"),(String)session.getAttribute("cno"))%>;
 			//10分钟
 			var t;
 			var m;
@@ -54,12 +53,8 @@ var c = 60 *<%=TimerHelper.getDaojishi((String)
 				} else {
 					m = parseInt(c / 60);
 					s = c - 60 * m;
-					document.getElementById('min').innerHTML = 
-
-		m + "分";
-					document.getElementById('sec').innerHTML = 
-
-		s + "秒";
+					document.getElementById('min').innerHTML = m + "分";
+					document.getElementById('sec').innerHTML =  s + "秒";
 					c = c - 1;
 					t = setTimeout("timedCount()", 1000);
 				}
@@ -76,6 +71,9 @@ var c = 60 *<%=TimerHelper.getDaojishi((String)
 		var canvas = document.getElementById('myCanvas');
 		//获取画布成功，当前有课，获取了url正在点名  才开始分析脸画框
 		if (canvas.getContext && count == 1 && urlpic!=null) {
+			
+			timedCount();
+			
 			var ctx = canvas.getContext('2d');
 			ctx.lineWidth = 3;
 			ctx.strokeStyle = '#ff0000';
@@ -266,7 +264,7 @@ var c = 60 *<%=TimerHelper.getDaojishi((String)
 				class="check_coursefont"></label>
 		</div>
 		<div id="CountMsg" class="HotDate">
-			<span>还剩 </span> <span id="min"></span> 
+			<span>还剩 </span> <span id="min">00分</span> 
 			<span id="sec">00秒</span>
 		</div>
 		<div class="check_tip" id="tips"></div>
