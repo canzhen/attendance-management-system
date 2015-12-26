@@ -19,6 +19,7 @@ public class MyActionSupport extends ActionSupport{
 	 * 当前时间段没有课
 	 */
 	public static String NOCURRENTCLASS="no_current_class";
+	public static String INFO="info";
 	protected ActionContext context = ActionContext.getContext();
 	
 	/**

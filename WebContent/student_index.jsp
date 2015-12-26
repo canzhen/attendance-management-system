@@ -38,7 +38,7 @@ var FaceJS = function(sno,cX,cY,lXInPic,lYInPic,width,hight){
 //声明arr数组
 var arr = new Array();
 
-var c = 60 *<%=session.getAttribute("daojishi")%>;
+var c = 60 *<%=TimerHelper.getDaojishi((String)session.getAttribute("id"),(String)session.getAttribute("cno"))%>;
 	//10分钟
 	var t;
 	var m;
@@ -108,18 +108,18 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 			if(urlpic==null){
 				document.getElementById("tips").innerHTML="还未开始点名或者图片上传不成功，请耐心等候";
 			}else{
-					document.getElementById("myCanvas").style.backgroundImage="url(teacher\11111114\2015-12-26,09.jpg)";
+					document.getElementById("myCanvas").style.backgroundImage="url("+urlpic+")";
 			}
 			
 		}else if ( count > 1){//课程冲突
 			
 			
-			document.location.href="indextoerror.jsp";
+			document.location.href="student_info.jsp";
 			
 		}else if ( count == -1 ){//当天无课
 			
 			
-			document.location.href="indextoerror.jsp";
+			document.location.href="student_info.jsp";
 		}
 	}
 	//初始化数组数据
@@ -132,7 +132,8 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 		PicFace picFace=new PicFace(new File(urlzb));
 		faces=picFace.getFaces();
 		int size = 0;
-		size = faces.size();
+		if(faces!=null)
+			size = faces.size();
 		//session.putValue("facesList",faces);
 		//session.putValue("picface", picFace); %>
 		//初始化二维数组
@@ -220,12 +221,10 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 	
 	//注销
 	function logout(){
-		window.location.href="login_logout";
+		document.location.href="login_logout";
 	}
 
-	function submitFunction(){
-		alert("签到成功");
-	}
+	
 	function cancleFunction(){
 		init();
 	}
@@ -242,7 +241,7 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 					<div class="menu">
 						<span class="menu"> </span>
 						<ul class="navigatoin">
-							<li><img src="images/default.png" class="studentimg" alt="" /><label
+							<li><img src="images/default.png" class="studentimg" alt="" width="32" height="32"/><label
 								class="studentname" id="stuname"></label></li>
 							<li><a href="" class="active" onclick="logout()">注销</a>
 						</ul>
@@ -265,7 +264,8 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 				class="check_coursefont"></label>
 		</div>
 		<div id="CountMsg" class="HotDate">
-			<span>还剩 </span> <span id="min">00分</span> <span id="sec">00秒</span>
+			<span>还剩 </span> <span id="min"></span> 
+			<span id="sec">00秒</span>
 		</div>
 		<div class="check_tip" id="tips">请在图中找出并选择你自己，确定提交</div>
 		<div class="check_peopleimg">

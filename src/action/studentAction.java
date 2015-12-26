@@ -84,7 +84,7 @@ public class studentAction extends MyActionSupport{
 			CheckHelper.checkIn(studentsInfo, sno);
 		}
 		
-		return SUCCESS;
+		return INFO;
 	}
 	
 	public String getMsg() {

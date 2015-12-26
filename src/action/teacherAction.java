@@ -24,6 +24,7 @@ import db.util.DBHelper;
 
 public class teacherAction extends MyActionSupport{
 	File pic;//用于获取教师上传的图片
+	String ccid;//用于保存无课时的课程列表的index
 	String picContentType;
 	String picFileName;
 	String courseNo="";//当前所在页面的课程id
@@ -108,6 +109,7 @@ public class teacherAction extends MyActionSupport{
 		//String path =  ServletActionContext.getServletContext().getRealPath("/");
 		if (pic != null)
 			PictureHelper.savePic(pic,(String)session.get("id"));
+		start_checking();
 		return SUCCESS;
 	}
 	
@@ -119,14 +121,20 @@ public class teacherAction extends MyActionSupport{
 	
 	public String start_checking(){
 		Values.start_check_time.put(tno, new Date());//在Values里给该老师的上课时间赋值
-		if ( studentsInfo == null )
-			studentsInfo = DBHelper.getStudentInfoForAClassByCnoTno(tno, (String)session.get("cno"));
-		Values.studentsInfo_for_each_class.put(tno, studentsInfo);
+		if ( studentsInfo == null ){
+			studentsInfo = DBHelper.getStudentInfoForAClassByCnoTno((String)session.get("cno"),tno);
+			Values.studentsInfo_for_each_class.put(tno, studentsInfo);
+		}
 		TimerHelper.startTimer(new StopCheckingTimerTask(tno), 
 				DBHelper.getCourseDetails(tno, (String)session.get("cno")).getCheckTime());
 		return SUCCESS;
 	}
 
+	public String gotoAClass(){
+		session.put("ccid", ccid);
+		return NOCURRENTCLASS;
+	}
+	
 	public File getPic() {
 		return pic;
 	}
