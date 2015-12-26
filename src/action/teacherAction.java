@@ -132,8 +132,8 @@ public class teacherAction extends MyActionSupport{
 	}
 
 	public String gotoAClass(){
-		session.put("ccid", ccid);
-		return NOCURRENTCLASS;
+		session.put("ccid", new Integer(ccid));
+		return CLASSINFO;
 	}
 	
 	public File getPic() {

@@ -33,7 +33,7 @@ function set() {
 	window.location.href="setting.jsp";
 }
 function recordTotal() {
-	window.location.href="recordTotal.jsp";
+	window.location.href="classInfo.jsp";
 }
 function record(){
 	window.location.href="timeUp.jsp";

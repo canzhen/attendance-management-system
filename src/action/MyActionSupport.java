@@ -20,6 +20,7 @@ public class MyActionSupport extends ActionSupport{
 	 */
 	public static String NOCURRENTCLASS="no_current_class";
 	public static String INFO="info";
+	public static String CLASSINFO="classinfo";
 	protected ActionContext context = ActionContext.getContext();
 	
 	/**

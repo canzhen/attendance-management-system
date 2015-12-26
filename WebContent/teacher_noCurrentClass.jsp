@@ -17,24 +17,33 @@
  -->
 <script language="JavaScript" type="text/javascript">
 	
-<%int i = 0;
-List<CourseInfo> list = new ArrayList<CourseInfo>();
-		list = (List<CourseInfo>) session.getAttribute("coursesInfo");
-		List<CourseInfo> listN=new ArrayList<CourseInfo>();%>
-	function getValue(){
-		<%
-		CourseInfo course=new CourseInfo();
-		course=null;
-		for(int m=0;m<list.size();m++){
-			listN.add(list.get(m));
-		}%>
+var length = 0;
+<%List<CourseInfo> list = new ArrayList<CourseInfo>();
+			list = (List<CourseInfo>) session.getAttribute("coursesInfo");
+			List<CourseInfo> listN = new ArrayList<CourseInfo>();%>
+	function getValue() {
+<%CourseInfo course = new CourseInfo();
+			course.setAbsenceNum(0);
+			course.setCheckTime(0);
+			course.setCname("");
+			course.setCno("");
+			course.setMaxAbsence(0);
+			course.setTime("");
+			course.setTno("");
+			
+			int m=0;
+			for (; m < list.size(); m++) {
+				listN.add(list.get(m));
+			}
+			for(m=list.size();m<6;m++){
+				listN.add(course);
+			}
+			%>
+			length = <%=list.size()%>;
 	}
+	
 
-	function jump() {
-		<!--document.getElementById("form").submit();
-		-->
-	window.location.href = "recordTotal.jsp";
-	}
+
 </script>
 </head>
 <body onload="getValue()">
@@ -53,6 +62,7 @@ List<CourseInfo> list = new ArrayList<CourseInfo>();
 							width="32px" height="32px" /><label class="studentname"><%=session.getAttribute("name")%>
 						</label></li>
 						<li><a href="" class="active">注销</a>
+						
 					</ul>
 					<div class="clearfix"></div>
 				</div>
@@ -67,235 +77,219 @@ List<CourseInfo> list = new ArrayList<CourseInfo>();
 						style="display: inline-block; opacity: 1;">
 						<div class="portfolio-wrapper wow bounceIn capt"
 							data-wow-delay="0.4s">
-							<a  href="#" onclick="jump()"class="b-link-stripe b-animate-go">
-
-								<h1 style="margin: auto; color: #000000;"><%=listN.get(0).getCname() %></h1>
-								<h4 style="margin: auto; color: #3071A9;">
-									<%=listN.get(0).getTime() %>
-									</h4>
-										<div class="b-wrapper">
-											<h2 class="b-animate b-from-left    b-delay03 ">点名</h2>
-											<p class="b-animate b-from-left    b-delay03 ">View</p>
-										</div>
-							</a>
-						</div>
-					</div>
-				</div>
-				<div id="portfoliolist">
-					<div class="portfolio icon mix_all"
-						style="display: inline-block; opacity: 1;">
-						<div class="portfolio-wrapper wow bounceIn capt"
-							data-wow-delay="0.4s">
-							<a  href="#" onclick="jump()" class="b-link-stripe b-animate-go">
-
-								<h1 style="margin: auto; color: #000000;"><%=listN.get(1).getCname() %></h1>
-								<h4 style="margin: auto; color: #3071A9;">
-									<%=listN.get(1).getTime() %>
-									</h4>
-										<div class="b-wrapper">
-											<h2 class="b-animate b-from-left    b-delay03 ">点名</h2>
-											<p class="b-animate b-from-left    b-delay03 ">View</p>
-										</div>
-							</a>
-						</div>
-					</div>
-				</div>
-				<div id="portfoliolist">
-					<div class="portfolio icon mix_all"
-						style="display: inline-block; opacity: 1;">
-						<div class="portfolio-wrapper wow bounceIn capt"
-							data-wow-delay="0.4s">
-							<a href="#" onclick="jump()"class="b-link-stripe b-animate-go">
-
-								<h1 style="margin: auto; color: #000000;"><%=listN.get(2).getCname() %></h1>
-								<h4 style="margin: auto; color: #3071A9;">
-									<%=listN.get(2).getTime() %>
-									</h4>
-										<div class="b-wrapper">
-											<h2 class="b-animate b-from-left    b-delay03 ">点名</h2>
-											<p class="b-animate b-from-left    b-delay03 ">View</p>
-										</div>
-							</a>
-						</div>
-					</div>
-				</div>
-				<div id="portfoliolist">
-					<div class="portfolio icon mix_all"
-						style="display: inline-block; opacity: 1;">
-						<div class="portfolio-wrapper wow bounceIn capt"
-							data-wow-delay="0.4s">
-							<a  href="#" onclick="jump()" class="b-link-stripe b-animate-go">
-
-								<h1 style="margin: auto; color: #000000;"><%=listN.get(3).getCname() %></h1>
-								<h4 style="margin: auto; color: #3071A9;">
-									<%=listN.get(3).getTime() %>
-									</h4>
-										<div class="b-wrapper">
-											<h2 class="b-animate b-from-left    b-delay03 ">点名</h2>
-											<p class="b-animate b-from-left    b-delay03 ">View</p>
-										</div>
-							</a>
-						</div>
-					</div>
-				</div>
-				<div id="portfoliolist">
-					<div class="portfolio icon mix_all"
-						style="display: inline-block; opacity: 1;">
-						<div class="portfolio-wrapper wow bounceIn capt"
-							data-wow-delay="0.4s">
-							<a  href="#" onclick="jump()"class="b-link-stripe b-animate-go">
-
-								<h1 style="margin: auto; color: #000000;"><%=listN.get(4).getCname() %></h1>
-								<h4 style="margin: auto; color: #3071A9;">
-									<%=listN.get(4).getTime() %>
-									</h4>
-										<div class="b-wrapper">
-											<h2 class="b-animate b-from-left    b-delay03 ">点名</h2>
-											<p class="b-animate b-from-left    b-delay03 ">View</p>
-										</div>
-							</a>
-						</div>
-					</div>
-				</div>
-				<div id="portfoliolist">
-					<div class="portfolio icon mix_all"
-						style="display: inline-block; opacity: 1;">
-						<div class="portfolio-wrapper wow bounceIn capt"
-							data-wow-delay="0.4s">
-							<a href="#" onclick="jump()"class="b-link-stripe b-animate-go">
-
-								<h1 style="margin: auto; color: #000000;"><%=listN.get(5).getCname() %></h1>
-								<h4 style="margin: auto; color: #3071A9;">
-									<%=listN.get(5).getTime() %>
-									</h4>
-										<div class="b-wrapper">
-											<h2 class="b-animate b-from-left    b-delay03 ">点名</h2>
-											<p class="b-animate b-from-left    b-delay03 ">View</p>
-										</div>
-							</a>
-						</div>
-					</div>
-				</div>
-				<div class="portfolio">
-					<div class="portfolio-info">
-						<div class="container">
-							<%
-								for (; i < list.size(); i++) {
-							%>
-							<div id="portfoliolist">
-								<div class="portfolio icon mix_all"
-									style="display: inline-block; opacity: 1;">
-									<div class="portfolio-wrapper wow bounceIn capt"
-										data-wow-delay="0.4s" onclick="jump(i)">
-										<a href="#" class="b-link-stripe b-animate-go"
-											onclick="jump()">
-											<h1 style="margin: auto; color: #000000;"><%=list.get(i).getCname()%></h1>
-											<h4 style="margin: auto; color: #3071A9;"><%=list.get(i).getTime()%></h4>
-											<h4 style="margin: auto; color: #3071A9;"><%=list.get(i).getCno()%></h4>
-											<s:form method="post" action="teacher_gotoAClass" id="form"
-												hidden="hidden">
-												<input id="cnoN" name="ccid" type="text" value="<%=i%>" />
-												<input type="submit">
-											</s:form>
-											<div class="b-wrapper">
-												<h2 class="b-animate b-from-left    b-delay03 ">点名</h2>
-												<p class="b-animate b-from-left    b-delay03 ">view</p>
-											</div>
-										</a>
-									</div>
-								</div>
-							</div>
-							<%
-								}
-							%>
-
-							<!-- Script for gallery Here -->
-							<script type="text/javascript" src="./js/jquery.mixitup.min.js"></script>
-							<script type="text/javascript">
-								$(function() {
-
-									var filterList = {
-
-										init : function() {
-
-											// MixItUp plugin
-											// http://mixitup.io
-											$('#portfoliolist')
-													.mixitup(
-															{
-																targetSelector : '.portfolio',
-																filterSelector : '.filter',
-																effects : [ 'fade ' ],
-																easing : 'snap',
-																// call the hover effect
-																onMixEnd : filterList
-																		.hoverEffect()
-															});
-
-										},
-
-										hoverEffect : function() {
-
-											// Simple parallax effect
-											$('#portfoliolist .portfolio')
-													.hover(
-															function() {
-																$(this)
-																		.find(
-																				'.label')
-																		.stop()
-																		.animate(
-																				{
-																					bottom : 0
-																				},
-																				200,
-																				'easeOutQuad');
-																$(this)
-																		.find(
-																				'img')
-																		.stop()
-																		.animate(
-																				{
-																					top : -30
-																				},
-																				500,
-																				'easeOutQuad');
-															},
-															function() {
-																$(this)
-																		.find(
-																				'.label')
-																		.stop()
-																		.animate(
-																				{
-																					bottom : -40
-																				},
-																				200,
-																				'easeInQuad');
-																$(this)
-																		.find(
-																				'img')
-																		.stop()
-																		.animate(
-																				{
-																					top : 0
-																				},
-																				300,
-																				'easeOutQuad');
-															});
-
+							<a onclick="jumpZ()" class="b-link-stripe b-animate-go">
+								<script type="text/javascript">
+									function jumpZ() {
+										if (length > 0) {
+											document.getElementById("ccid").value = "0";
+											document.getElementById("form1").submit();
 										}
-
-									};
-
-									// Run the show!
-									filterList.init();
-								});
-							</script>
-							<!-- Gallery Script Ends -->
-							<div class="clearfix"></div>
+									}
+								</script>
+								<h1 style="margin: auto; color: #000000;"><%=listN.get(0).getCname()%></h1>
+								<h4 style="margin: auto; color: #3071A9;">
+									<%=listN.get(0).getTime()%>
+								</h4>
+								<div class="b-wrapper">
+									<h2 class="b-animate b-from-left    b-delay03 ">点名</h2>
+									<p class="b-animate b-from-left    b-delay03 ">View</p>
+								</div>
+							</a>
 						</div>
 					</div>
 				</div>
+				<div id="portfoliolist">
+					<div class="portfolio icon mix_all"
+						style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn capt"
+							data-wow-delay="0.4s">
+							<a href="#" onclick="jumpF()" class="b-link-stripe b-animate-go">
+								<script type="text/javascript">
+									function jumpF() {
+										if (length > 1) {
+											document.getElementById("ccid").value = "1";
+											document.getElementById("form1").submit();
+									}
+									}
+								</script>
+								<h1 style="margin: auto; color: #000000;"><%=listN.get(1).getCname()%></h1>
+								<h4 style="margin: auto; color: #3071A9;">
+									<%=listN.get(1).getTime()%>
+								</h4>
+								<div class="b-wrapper">
+									<h2 class="b-animate b-from-left    b-delay03 ">点名</h2>
+									<p class="b-animate b-from-left    b-delay03 ">View</p>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div id="portfoliolist">
+					<div class="portfolio icon mix_all"
+						style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn capt"
+							data-wow-delay="0.4s">
+							<a href="#" onclick="jumpS()" class="b-link-stripe b-animate-go">
+								<script type="text/javascript">
+									function jumpS() {
+										if (length > 2) {
+											document.getElementById("ccid").value = "2";
+											document.getElementById("form1").submit();
+									}
+									}
+								</script>
+								<h1 style="margin: auto; color: #000000;"><%=listN.get(2).getCname()%></h1>
+								<h4 style="margin: auto; color: #3071A9;">
+									<%=listN.get(2).getTime()%>
+								</h4>
+								<div class="b-wrapper">
+									<h2 class="b-animate b-from-left    b-delay03 ">点名</h2>
+									<p class="b-animate b-from-left    b-delay03 ">View</p>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div id="portfoliolist">
+					<div class="portfolio icon mix_all"
+						style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn capt"
+							data-wow-delay="0.4s">
+							<a href="#" onclick="jump3()" class="b-link-stripe b-animate-go">
+								<script type="text/javascript">
+									function jump3() {
+										if (length > 3) {
+											document.getElementById("ccid").value = "3";
+											document.getElementById("form1").submit();
+							
+									}
+									}
+								</script>
+								<h1 style="margin: auto; color: #000000;"><%=listN.get(3).getCname()%></h1>
+								<h4 style="margin: auto; color: #3071A9;">
+									<%=listN.get(3).getTime()%>
+								</h4>
+								<div class="b-wrapper">
+									<h2 class="b-animate b-from-left    b-delay03 ">点名</h2>
+									<p class="b-animate b-from-left    b-delay03 ">View</p>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div id="portfoliolist">
+					<div class="portfolio icon mix_all"
+						style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn capt"
+							data-wow-delay="0.4s">
+							<a href="#" onclick="jump4()" class="b-link-stripe b-animate-go">
+								<script type="text/javascript">
+									function jump4() {
+										if (length > 4) {
+											document.getElementById("ccid").value = "4";
+											document.getElementById("form1").submit();
+									}
+									}
+								</script>
+								<h1 style="margin: auto; color: #000000;"><%=listN.get(4).getCname()%></h1>
+								<h4 style="margin: auto; color: #3071A9;">
+									<%=listN.get(4).getTime()%>
+								</h4>
+								<div class="b-wrapper">
+									<h2 class="b-animate b-from-left    b-delay03 ">点名</h2>
+									<p class="b-animate b-from-left    b-delay03 ">View</p>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div id="portfoliolist">
+					<div class="portfolio icon mix_all"
+						style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper wow bounceIn capt"
+							data-wow-delay="0.4s">
+							<a href="#" onclick="jump5()" class="b-link-stripe b-animate-go">
+								<script type="text/javascript">
+									function jump5() {
+										if (length >5) {
+											document.getElementById("ccid").value = "5";
+											document.getElementById("form1").submit();
+									}
+									}
+								</script>
+								<h1 style="margin: auto; color: #000000;"><%=listN.get(5).getCname()%></h1>
+								<h4 style="margin: auto; color: #3071A9;">
+									<%=listN.get(5).getTime()%>
+								</h4>
+								<div class="b-wrapper">
+									<h2 class="b-animate b-from-left    b-delay03 ">点名</h2>
+									<p class="b-animate b-from-left    b-delay03 ">View</p>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+<s:form accesskey="" action="teacher_gotoAClass" id="form1"  method="post">
+<s:textfield id="ccid" name="ccid"></s:textfield></s:form>
+				<!-- Script for gallery Here -->
+				<script type="text/javascript" src="./js/jquery.mixitup.min.js"></script>
+				<script type="text/javascript">
+					$(function() {
+
+						var filterList = {
+
+							init : function() {
+
+								// MixItUp plugin
+								// http://mixitup.io
+								$('#portfoliolist').mixitup({
+									targetSelector : '.portfolio',
+									filterSelector : '.filter',
+									effects : [ 'fade ' ],
+									easing : 'snap',
+									// call the hover effect
+									onMixEnd : filterList.hoverEffect()
+								});
+
+							},
+
+							hoverEffect : function() {
+
+								// Simple parallax effect
+								$('#portfoliolist .portfolio').hover(
+										function() {
+											$(this).find('.label').stop()
+													.animate({
+														bottom : 0
+													}, 200, 'easeOutQuad');
+											$(this).find('img').stop().animate(
+													{
+														top : -30
+													}, 500, 'easeOutQuad');
+										},
+										function() {
+											$(this).find('.label').stop()
+													.animate({
+														bottom : -40
+													}, 200, 'easeInQuad');
+											$(this).find('img').stop().animate(
+													{
+														top : 0
+													}, 300, 'easeOutQuad');
+										});
+
+							}
+
+						};
+
+						// Run the show!
+						filterList.init();
+					});
+				</script>
+				<!-- Gallery Script Ends -->
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

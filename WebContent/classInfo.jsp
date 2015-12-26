@@ -20,8 +20,9 @@ CourseInfo course;%>
 function judge(){
 	<%
 	list1 = (ArrayList) session.getAttribute("coursesInfo");
-	course=(CourseInfo)list1.get((int) session.getAttribute("ccid"));%>
-	var count = <%=session.getAttribute("classNum")%>;
+	int index=(int) session.getAttribute("ccid");
+	course=(CourseInfo)list1.get(index);%>
+	var count = <%=session.getAttribute("coursesNum")%>;
 	if(count!=1)
 	{ 
 		$("#start").hide();
@@ -79,7 +80,7 @@ function judge(){
 		window.location.href = "setting.jsp";
 	}
 	function recordTotal() {
-		window.location.href = "recordTotal.jsp";
+		window.location.href = "classInfo.jsp";
 	}
 	function record() {
 		window.location.href = "timeUp.jsp";
