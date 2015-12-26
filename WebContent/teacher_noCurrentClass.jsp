@@ -19,7 +19,7 @@
  <%int i=0;%>
  <% List<CourseInfo> list=new ArrayList<CourseInfo>();
  list=(List<CourseInfo>)session.getAttribute("coursesInfo");%>
- function jump() {
+ function jump(iid) {
 	
 	window.location.href="recordTotal.jsp";
 }
@@ -37,7 +37,7 @@
         <div class="header-right">
 
              <ul class="navigatoin">
-                <li><img src="./images/tx.png" class="studentimg" alt=""/><label class="studentname"><%=session.getAttribute("name")%> </label></li>
+                <li><img src="./images/tx.png" class="studentimg" alt=""width="32px" height="32px"/><label class="studentname"><%=session.getAttribute("name")%> </label></li>
                             <li><a href="" class="active">注销</a>
 
             </ul>
@@ -56,7 +56,7 @@
 				<div id="portfoliolist">
 					<div class="portfolio icon mix_all"  style="display: inline-block; opacity: 1;">
 						<div class="portfolio-wrapper wow bounceIn capt" data-wow-delay="0.4s" onclick="jump(i)">		
-							<a href="#"class="b-link-stripe b-animate-go" onclick="jump()">
+							<a href="#"class="b-link-stripe b-animate-go" onclick="jump('<%=i%>')">
 								<h1 style="margin: auto; color: #000000;"><%=list.get(i).getCname() %></h1>
 								<h4 style="margin: auto; color: #3071A9;"><%=list.get(i).getTime() %></h4>
 								<h4 style="margin: auto; color: #3071A9;"><%=list.get(i).getCno()%></h4>
