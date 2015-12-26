@@ -110,6 +110,7 @@ public class loginAction extends MyActionSupport{
 	}
 	
 	public String logout(){
+		msg = "登出成功！";
 		Map session = getSession();
 		session.put("identity",null);
 		session.put("id", null);

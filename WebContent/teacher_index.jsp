@@ -66,7 +66,7 @@
 		<div class="header-right">
 
 			<ul class="navigatoin">
-				<li><img src="./images/tx.png" class="studentimg" alt="" /> <label
+				<li><img src="./images/tx.png" class="studentimg" alt="" width="32px" height="32px"/> <label
 					class="studentname"><%=session.getAttribute("name")%></label></li>
 				<li><a href="" class="active">注销</a></li>
 			</ul>

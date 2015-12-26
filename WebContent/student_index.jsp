@@ -38,7 +38,7 @@ var FaceJS = function(sno,cX,cY,lXInPic,lYInPic,width,hight){
 //声明arr数组
 var arr = new Array();
 
-var c = 60 *<%=session.getAttribute("daojishi")%>;
+var c = 60 *<%=TimerHelper.getDaojishi((String)session.getAttribute("id"),(String)session.getAttribute("cno"))%>;
 	//10分钟
 	var t;
 	var m;

@@ -66,7 +66,7 @@ function judge(){
 	%>
 	//第三列
 	newc = newl.insertCell();
-	newc.innerHTML = '<%=str%>';
+	newc.innerHTML = <%=str%>;
 
 	mytable.appendChild(tr);
 	<%}%>
@@ -88,7 +88,7 @@ function judge(){
 </head>
 
 
-<body onload="judge();">
+<body onload="judge()">
 	<div class="container">
 		<div class="logo">
 			<a href="index.html"><img src="images/logo.png"
@@ -97,7 +97,7 @@ function judge(){
 		<div class="header-right">
 
 			<ul class="navigatoin">
-				<li><img src="./images/tx.png" class="studentimg" alt="" /> <label
+				<li><img src="./images/tx.png" class="studentimg" alt="" width="32px" height="32px"/> <label
 					class="studentname"><%=session.getAttribute("name")%></label></li>
 				<li><a href="" class="active">设置</a>
 			</ul>
