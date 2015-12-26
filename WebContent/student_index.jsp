@@ -18,6 +18,7 @@ var count = 0;
 var id;
 var name;
 var size = 0;
+var urlpic;
 var Pic = function(x,y,width,height){
 this.x = x;
 this.y = y;
@@ -37,30 +38,35 @@ var FaceJS = function(sno,cX,cY,lXInPic,lYInPic,width,hight){
 <%String url = "";%>
 //声明arr数组
 var arr = new Array();
+var c = 60 *<%=TimerHelper.getDaojishi((String)
 
-var c = 60 *<%=TimerHelper.getDaojishi((String)session.getAttribute("id"),(String)session.getAttribute("cno"))%>;
-	//10分钟
-	var t;
-	var m;
-	var s;
+		session.getAttribute("id"),(String)session.getAttribute("cno"))%>;
+			//10分钟
+			var t;
+			var m;
+			var s;
 
-	function timedCount() {
-		if (c == 0) {
-			m = 0;
-			s = 0;
-			window.location.href = "timeUp.jsp";
-		} else {
-			m = parseInt(c / 60);
-			s = c - 60 * m;
-			document.getElementById('min').innerHTML = m + "分";
-			document.getElementById('sec').innerHTML = s + "秒";
-			c = c - 1;
-			t = setTimeout("timedCount()", 1000);
-		}
-	}
+			function timedCount() {
+				if (c == 0) {
+					m = 0;
+					s = 0;
+					window.location.href = "timeUp.jsp";
+				} else {
+					m = parseInt(c / 60);
+					s = c - 60 * m;
+					document.getElementById('min').innerHTML = 
+
+		m + "分";
+					document.getElementById('sec').innerHTML = 
+
+		s + "秒";
+					c = c - 1;
+					t = setTimeout("timedCount()", 1000);
+				}
+			}
 	//初始化
 	window.onload = function() {
-		//判断是否开始点名
+		//判断是否有课，冲突，不在上课周
 		judge();
 		
 		id = <%=session.getAttribute("id")%>;
@@ -68,7 +74,8 @@ var c = 60 *<%=TimerHelper.getDaojishi((String)session.getAttribute("id"),(Strin
 		document.getElementById("stuname").innerText=name;
 		
 		var canvas = document.getElementById('myCanvas');
-		if (canvas.getContext && count == 1) {
+		//获取画布成功，当前有课，获取了url正在点名  才开始分析脸画框
+		if (canvas.getContext && count == 1 && urlpic!=null) {
 			var ctx = canvas.getContext('2d');
 			ctx.lineWidth = 3;
 			ctx.strokeStyle = '#ff0000';
@@ -90,8 +97,7 @@ var c = 60 *<%=TimerHelper.getDaojishi((String)session.getAttribute("id"),(Strin
 	function judge(){
 		count = <%=session.getAttribute("coursesNum")%>;
 
-		//var testimg = "images/test.jpg";
-		//document.getElementById("myCanvas").style.backgroundImage="url("+urlpic+")";
+	
 		if ( count == 1 ){//当天有一节课
 			
 			<% ArrayList<CourseInfo> course = new ArrayList<CourseInfo>();
@@ -104,11 +110,12 @@ var c = 60 *<%=TimerHelper.getDaojishi((String)session.getAttribute("id"),(Strin
 			document.getElementById("courseTeacher").innerHTML= coursename;
 
 			
-			var urlpic = "<%=url%>";
-			if(urlpic==null){
-				document.getElementById("tips").innerHTML="还未开始点名或者图片上传不成功，请耐心等候";
+			urlpic = "<%=url%>";
+			if(urlpic=="null"){
+				document.getElementById("tips").innerHTML="还未开始点名或者点名已结束或者图片上传不成功，请耐心等候";
 			}else{
-					document.getElementById("myCanvas").style.backgroundImage="url("+urlpic+")";
+				document.getElementById("tips").innerHTML="请在图中找出并选择你自己，确定提交";
+				document.getElementById("myCanvas").style.backgroundImage="url("+urlpic+")";
 			}
 			
 		}else if ( count > 1){//课程冲突
@@ -262,7 +269,7 @@ var c = 60 *<%=TimerHelper.getDaojishi((String)session.getAttribute("id"),(Strin
 			<span>还剩 </span> <span id="min"></span> 
 			<span id="sec">00秒</span>
 		</div>
-		<div class="check_tip" id="tips">请在图中找出并选择你自己，确定提交</div>
+		<div class="check_tip" id="tips"></div>
 		<div class="check_peopleimg">
 			<canvas id="myCanvas" width="800" height="400"
 				style="background:url();background-size:100% 100%">

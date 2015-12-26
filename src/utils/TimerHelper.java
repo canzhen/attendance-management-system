@@ -30,7 +30,7 @@ public class TimerHelper {
 		String tno = DBHelper.getTnoBySnoCno(sno, cno);
 		int check_time = DBHelper.getCourseDetails(tno, cno).getCheckTime();
 		check_time *= 60;
-		Date start_date = (Date) Values.start_check_time.get(tno);
+		Date start_date = (Date) FileHelper.deserializeStartDate(tno);
 		Date current_date = new Date();
 		int seconds = ((int) (current_date.getTime() - start_date.getTime()))/1000;
 		seconds = check_time - seconds;

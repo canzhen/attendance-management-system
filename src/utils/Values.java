@@ -30,7 +30,11 @@ public class Values {
 	/**
 	 * 教师上传图片的路径
 	 */
-	public static String save_pic_path = "C:\\teacher\\";
+	public static String save_pic_path = "D:\\传真是爱学习的传真\\专业课-javaEE\\作业\\大作业\\AttendanceManagement\\WebContent\\teacher\\";
+	
+	public static String save_studentsInfo_path = "C:\\studentsInfoSerializable\\";
+	
+	public static String save_startDate_path = "C:\\startDateSerializable\\";
 	
 	public static int index = 1;
 	
@@ -39,10 +43,14 @@ public class Values {
 	/**
 	 * 记录每节课老师的开始点名时间
 	 */
-	public static HashMap start_check_time = new HashMap<String,Date>();
+	//public static HashMap start_check_time = new HashMap<String,Date>();
 	/**
 	 * 记录每节课的学生信息
 	 */
+<<<<<<< HEAD
 	public static HashMap studentsInfo_for_each_class = new HashMap<String,ArrayList<StudentInfo>>();
+=======
+	//public static HashMap studentsInfo_for_each_class = new HashMap<String,ArrayList<StudentInfo>>();
+>>>>>>> 92a36c551259c41e33c65c096b1e52ee6e30d36c
 
 }
