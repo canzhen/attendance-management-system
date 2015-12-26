@@ -10,10 +10,10 @@ import db.entity.ScHome;
 import db.entity.ScId;
 import db.util.DBHelper;
 
-public class StopingCheckingTimerTask extends TimerTask{
+public class StopCheckingTimerTask extends TimerTask{
 	private String tno = "";
 	
-	public StopingCheckingTimerTask(String tno){
+	public StopCheckingTimerTask(String tno){
 		this.tno = tno;
 	}
 	

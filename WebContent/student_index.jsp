@@ -108,7 +108,7 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 			if(urlpic==null){
 				document.getElementById("tips").innerHTML="还未开始点名或者图片上传不成功，请耐心等候";
 				}else{
-					document.getElementById("myCanvas").style.backgroundImage="url(teacher/11111111/test.jpg)";
+					document.getElementById("myCanvas").style.backgroundImage="url(teacher/11111111/2015-12-26,08.jpg)";
 					}
 			
 		}else if ( count > 1){//课程冲突
@@ -244,7 +244,7 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 						<span class="menu"> </span>
 						<ul class="navigatoin">
 							<li><img src="images/tx.png" class="studentimg" alt="" /><label
-								class="studentname" id="stuname">张三</label></li>
+								class="studentname" id="stuname"></label></li>
 							<li><a href="" class="active" onclick="logout()">注销</a>
 						</ul>
 						<div class="clearfix"></div>

@@ -8,7 +8,7 @@ import java.util.Map;
 import utils.CheckHelper;
 import utils.PicFace;
 import utils.PictureHelper;
-import utils.StopingCheckingTimerTask;
+import utils.StopCheckingTimerTask;
 import utils.Values;
 import db.entity.Course;
 import db.entity.CourseInfo;

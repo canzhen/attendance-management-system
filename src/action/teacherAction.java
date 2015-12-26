@@ -15,6 +15,8 @@ import java.util.Map;
 import org.apache.struts2.ServletActionContext;
 
 import utils.PictureHelper;
+import utils.StopCheckingTimerTask;
+import utils.TimerHelper;
 import utils.Values;
 import db.entity.CourseInfo;
 import db.entity.StudentInfo;
@@ -120,6 +122,8 @@ public class teacherAction extends MyActionSupport{
 		if ( studentsInfo == null )
 			studentsInfo = DBHelper.getStudentInfoForAClassByCnoTno(tno, (String)session.get("cno"));
 		Values.studentsInfo_for_each_class.put(tno, studentsInfo);
+		TimerHelper.startTimer(new StopCheckingTimerTask(tno), 
+				DBHelper.getCourseDetails(tno, (String)session.get("cno")).getCheckTime());
 		return SUCCESS;
 	}
 

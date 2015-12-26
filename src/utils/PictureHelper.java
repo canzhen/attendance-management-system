@@ -16,7 +16,7 @@ public class PictureHelper {
 	
 	public static void savePic(File pic, String tno){
 		/*获取当前系统时间*/
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH");//设置日期格式
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd,HH");//设置日期格式
 		String date = df.format(new Date());//获取当前日期
 		String savePath = Values.save_pic_path+tno,
 				filePath = Values.save_pic_path+tno+"\\"+date+".jpg";
@@ -50,7 +50,7 @@ public class PictureHelper {
 	public static String getPicUrl(String tno){
 		File pic = null;
 		/*获取当前系统时间*/
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH");//设置日期格式
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd,HH");//设置日期格式
 		String date = df.format(new Date());//获取当前日期
 		/*
 		 * 测试部分
