@@ -129,7 +129,7 @@
 					<div class="menu">
 						<span class="menu"> </span>
 						<ul class="navigatoin">
-							<li><img src="images/tx.png" class="studentimg" alt="" /><label
+							<li><img src="images/tx.png" class="studentimg" alt=""  width="32" height="32"/><label
 								class="studentname" id="stuname">张三</label></li>
 							<li><a href="" class="active" onclick="logout()">设置</a>
 						</ul>

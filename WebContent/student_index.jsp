@@ -114,12 +114,12 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 		}else if ( count > 1){//课程冲突
 			
 			
-			document.location.href="indextoerror.jsp";
+			document.location.href="student_info.jsp";
 			
 		}else if ( count == -1 ){//当天无课
 			
 			
-			document.location.href="indextoerror.jsp";
+			document.location.href="student_info.jsp";
 		}
 	}
 	//初始化数组数据
@@ -132,7 +132,8 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 		PicFace picFace=new PicFace(new File(urlzb));
 		faces=picFace.getFaces();
 		int size = 0;
-		size = faces.size();
+		if(faces!=null)
+			size = faces.size();
 		//session.putValue("facesList",faces);
 		//session.putValue("picface", picFace); %>
 		//初始化二维数组
@@ -223,9 +224,7 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 		document.location.href="login_logout";
 	}
 
-	function submitFunction(){
-		alert("签到成功");
-	}
+	
 	function cancleFunction(){
 		init();
 	}
@@ -242,7 +241,7 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 					<div class="menu">
 						<span class="menu"> </span>
 						<ul class="navigatoin">
-							<li><img src="images/default.png" class="studentimg" alt="" /><label
+							<li><img src="images/default.png" class="studentimg" alt="" width="32" height="32"/><label
 								class="studentname" id="stuname"></label></li>
 							<li><a href="" class="active" onclick="logout()">注销</a>
 						</ul>
