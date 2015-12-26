@@ -8,9 +8,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <script type="text/javascript" src="jquery/jquery.js"></script>
-<link rel="stylesheet" href="./css/header.css" type="text/css"
+<link rel="stylesheet" href="css/header.css" type="text/css"
 	media="all" />
-<link rel="stylesheet" href="css/caicai.css" type="text/css" media="all" />
+<link rel="stylesheet" href="css/daohang.css" type="text/css" media="all" />
 <script language="JavaScript" type="text/javascript">
 
 </script>
