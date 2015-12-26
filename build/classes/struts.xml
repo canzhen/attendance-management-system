@@ -47,7 +47,8 @@
             <!-- <result name="index">/jsp/{1}_index.jsp</result> -->
             <result name="error">/jsp/err/error.jsp</result>
             <result name="info">{1}_info.jsp</result>
-           <result name="welcome">/welcome.jsp</result>
+           	<result name="welcome">/welcome.jsp</result>
+           	<result name="classinfo">/classInfo.jsp</result>
             <result name="no_current_class">/{1}_noCurrentClass.jsp</result>
         </action>
                
