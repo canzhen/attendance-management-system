@@ -14,6 +14,7 @@ import java.util.Map;
 
 import org.apache.struts2.ServletActionContext;
 
+import utils.FileHelper;
 import utils.PictureHelper;
 import utils.StopCheckingTimerTask;
 import utils.TimerHelper;
@@ -32,8 +33,8 @@ public class teacherAction extends MyActionSupport{
 	String check_time="";//点名时间
 	Map session = getSession();//获取session
 	String tno = (String) session.get("id");//获取教工号
-	List<CourseInfo> courses = new ArrayList<CourseInfo>();//课程链表，保存当前时间老师的课程信息
-	List<StudentInfo> studentsInfo = null;//如果此时有课，保存此时的课的所有学生的信息
+	ArrayList<CourseInfo> courses = new ArrayList<CourseInfo>();//课程链表，保存当前时间老师的课程信息
+	ArrayList<StudentInfo> studentsInfo = null;//如果此时有课，保存此时的课的所有学生的信息
 
 	/**
 	 * 在返回页面之前，需要从数据库中比对，查找当前要上的课，
@@ -120,10 +121,10 @@ public class teacherAction extends MyActionSupport{
 	}
 	
 	public String start_checking(){
-		Values.start_check_time.put(tno, new Date());//在Values里给该老师的上课时间赋值
+		FileHelper.serializeStartDate(new Date(), tno);//给该老师的上课时间赋值
 		if ( studentsInfo == null ){
 			studentsInfo = DBHelper.getStudentInfoForAClassByCnoTno((String)session.get("cno"),tno);
-			Values.studentsInfo_for_each_class.put(tno, studentsInfo);
+			FileHelper.serializeStudentsInfo(studentsInfo, tno);
 		}
 		TimerHelper.startTimer(new StopCheckingTimerTask(tno), 
 				DBHelper.getCourseDetails(tno, (String)session.get("cno")).getCheckTime());

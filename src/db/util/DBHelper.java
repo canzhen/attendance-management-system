@@ -274,8 +274,8 @@ public class DBHelper {
 	 * 获取当前课程的所有没到的学生的学号、姓名和缺勤数
 	 * @return 学生信息的列表
 	 */
-	public static List<StudentInfo> getStudentInfoForAClassByCnoTno(String cno,String tno){
-		List<StudentInfo> result = new ArrayList<StudentInfo>();
+	public static ArrayList<StudentInfo> getStudentInfoForAClassByCnoTno(String cno,String tno){
+		ArrayList<StudentInfo> result = new ArrayList<StudentInfo>();
 		ScHome schome = new ScHome();
 		Transaction tran = schome.createTransaction();
 		List<Sc> students =schome.findByCnoTno(cno, tno);

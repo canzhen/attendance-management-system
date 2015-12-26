@@ -45,7 +45,7 @@ public class studentsInfoSerializable implements Serializable {
     	studentsInfo = new ArrayList<StudentInfo>();
     	int size = s.readInt();
     	for (int i = 0; i < size; i++){
-    		studentsInfo.add((ArrayList<StudentInfo>)s.readObject());
+    		studentsInfo.add((StudentInfo)s.readObject());
     	}
     }
 

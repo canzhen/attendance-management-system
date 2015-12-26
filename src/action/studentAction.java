@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import utils.CheckHelper;
+import utils.FileHelper;
 import utils.PicFace;
 import utils.PictureHelper;
 import utils.StopCheckingTimerTask;
@@ -21,7 +22,7 @@ public class studentAction extends MyActionSupport{
 	String index="";
 	Map session = getSession();
 	String sno = (String) session.get("id");//获取学号
-	List<CourseInfo> courses = new ArrayList<CourseInfo>();//课程链表，保存当前时间学生的课程信息
+	ArrayList<CourseInfo> courses = new ArrayList<CourseInfo>();//课程链表，保存当前时间学生的课程信息
 
 	/**
 	 * 在返回页面之前，需要从数据库中比对，查找当前要上的课，
@@ -76,11 +77,9 @@ public class studentAction extends MyActionSupport{
 	
 	public String addFace(){
 		String tno = (String)session.get("tno");
-		List<StudentInfo> studentsInfo = null;
-		if ( (studentsInfo = (List<StudentInfo>) Values.studentsInfo_for_each_class.get(tno)) == null){
-		}else{
-			CheckHelper.checkIn(studentsInfo, sno);
-		}
+		ArrayList<StudentInfo> studentsInfo = FileHelper.deserializeStudentsInfo(tno);
+		CheckHelper.checkIn(studentsInfo, sno);
+		FileHelper.serializeStudentsInfo(studentsInfo, tno);
 		session.put("checkStatus", 1);
 		return INFO;
 	}
