@@ -9,6 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
@@ -150,10 +151,14 @@ public class ScHome {
 	
 	public List findByCnoTno(String cno,String tno){
 		String hql = "from Sc sc where sc.id.cno=:cno and sc.tno=:tno";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		Session session = sessionFactory.getCurrentSession();
+		Transaction tran = session.beginTransaction();
+		Query query = session.createQuery(hql);
 		query.setParameter("cno",cno);
 		query.setParameter("tno", tno);
 		List result = query.list();
+		tran.commit();
+		session.close();
 		if (result == null){
 			log.debug("get successful, no instance found");
 		} else {

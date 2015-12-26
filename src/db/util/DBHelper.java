@@ -277,9 +277,9 @@ public class DBHelper {
 	public static List<StudentInfo> getStudentInfoForAClassByCnoTno(String cno,String tno){
 		List<StudentInfo> result = new ArrayList<StudentInfo>();
 		ScHome schome = new ScHome();
-		Transaction tran = schome.createTransaction();
+		//Transaction tran = schome.createTransaction();
 		List<Sc> students =schome.findByCnoTno(cno, tno);
-		tran.commit();
+		//tran.commit();
 		StudentInfo tempInfo = new StudentInfo();
 		Sc tempSc = new Sc();
 		Student tempStudent = new Student();

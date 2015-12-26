@@ -264,7 +264,8 @@ var c = 60 *<%=session.getAttribute("daojishi")%>;
 				class="check_coursefont"></label>
 		</div>
 		<div id="CountMsg" class="HotDate">
-			<span>还剩 </span> <span id="min">00分</span> <span id="sec">00秒</span>
+			<span>还剩 </span> <span id="min"></span> 
+			<span id="sec">00秒</span>
 		</div>
 		<div class="check_tip" id="tips">请在图中找出并选择你自己，确定提交</div>
 		<div class="check_peopleimg">
