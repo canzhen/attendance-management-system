@@ -4,7 +4,7 @@ Source Host     : localhost:3306
 Source Database : amdb
 Target Host     : localhost:3306
 Target Database : amdb
-Date: 2015-12-25 20:12:22
+Date: 2015-12-26 10:09:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,7 +28,7 @@ CREATE TABLE `tc` (
 -- ----------------------------
 INSERT INTO `tc` VALUES ('11111112', 'cs001', '0', '13', '2', '11', '10');
 INSERT INTO `tc` VALUES ('11111113', 'cs002', '0', '13', '2', '11', '10');
-INSERT INTO `tc` VALUES ('11111114', 'cs001', '0', '25', '2', '11', '10');
-INSERT INTO `tc` VALUES ('11111114', 'cs002', '2', '25', '7', '10', '10');
-INSERT INTO `tc` VALUES ('11111115', 'cs001', '2', '26', '6', '10', '10');
+INSERT INTO `tc` VALUES ('11111114', 'cs001', '0', '26', '2', '11', '10');
+INSERT INTO `tc` VALUES ('11111114', 'cs002', '2', '25', '6', '10', '10');
+INSERT INTO `tc` VALUES ('11111115', 'cs001', '2', '26', '7', '10', '10');
 INSERT INTO `tc` VALUES ('11111115', 'cs003', '2', '26', '6', '10', '10');

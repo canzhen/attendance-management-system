@@ -4,7 +4,7 @@ Source Host     : localhost:3306
 Source Database : amdb
 Target Host     : localhost:3306
 Target Database : amdb
-Date: 2015-12-25 20:12:14
+Date: 2015-12-26 10:09:19
 */
 
 SET FOREIGN_KEY_CHECKS=0;

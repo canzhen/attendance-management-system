@@ -4,7 +4,7 @@ Source Host     : localhost:3306
 Source Database : amdb
 Target Host     : localhost:3306
 Target Database : amdb
-Date: 2015-12-25 20:12:28
+Date: 2015-12-26 10:09:22
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,11 +23,11 @@ CREATE TABLE `sc` (
 -- ----------------------------
 -- Records of sc
 -- ----------------------------
-INSERT INTO `sc` VALUES ('13301081', 'cs001', '1111114', '4');
-INSERT INTO `sc` VALUES ('13301081', 'cs002', '1111113', '4');
-INSERT INTO `sc` VALUES ('13301081', 'cs003', '1111115', '8');
-INSERT INTO `sc` VALUES ('13301085', 'cs001', '1111114', '2');
-INSERT INTO `sc` VALUES ('13301087', 'cs001', '1111114', '2');
-INSERT INTO `sc` VALUES ('13301087', 'cs002', '1111114', '3');
-INSERT INTO `sc` VALUES ('13301089', 'cs001', '1111115', '2');
-INSERT INTO `sc` VALUES ('13301089', 'cs002', '1111113', '0');
+INSERT INTO `sc` VALUES ('13301081', 'cs001', '11111114', '4');
+INSERT INTO `sc` VALUES ('13301085', 'cs001', '11111114', '2');
+INSERT INTO `sc` VALUES ('13301085', 'cs002', '11111113', '4');
+INSERT INTO `sc` VALUES ('13301085', 'cs003', '11111115', '8');
+INSERT INTO `sc` VALUES ('13301087', 'cs001', '11111114', '2');
+INSERT INTO `sc` VALUES ('13301087', 'cs002', '11111114', '3');
+INSERT INTO `sc` VALUES ('13301089', 'cs001', '11111115', '2');
+INSERT INTO `sc` VALUES ('13301089', 'cs002', '11111113', '0');
