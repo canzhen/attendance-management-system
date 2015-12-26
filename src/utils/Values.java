@@ -43,6 +43,6 @@ public class Values {
 	/**
 	 * 记录每节课的学生信息
 	 */
-	public static HashMap studentsInfo_for_each_class = new HashMap<String,ArrayList<StudentInfo>>();
+	public static HashMap studentsInfo_for_each_class = new HashMap<String,>();
 
 }

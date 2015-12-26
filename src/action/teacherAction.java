@@ -175,5 +175,13 @@ public class teacherAction extends MyActionSupport{
 	public void setCheck_time(String check_time) {
 		this.check_time = check_time;
 	}
+	
+	public String getCcid() {
+		return ccid;
+	}
+
+	public void setCcid(String ccid) {
+		this.ccid = ccid;
+	}
 
 }
