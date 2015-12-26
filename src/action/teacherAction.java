@@ -121,7 +121,7 @@ public class teacherAction extends MyActionSupport{
 	public String start_checking(){
 		Values.start_check_time.put(tno, new Date());//在Values里给该老师的上课时间赋值
 		if ( studentsInfo == null ){
-			studentsInfo = DBHelper.getStudentInfoForAClassByCnoTno(tno, (String)session.get("cno"));
+			studentsInfo = DBHelper.getStudentInfoForAClassByCnoTno((String)session.get("cno"),tno);
 			Values.studentsInfo_for_each_class.put(tno, studentsInfo);
 		}
 		TimerHelper.startTimer(new StopCheckingTimerTask(tno), 

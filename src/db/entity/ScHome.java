@@ -151,14 +151,10 @@ public class ScHome {
 	
 	public List findByCnoTno(String cno,String tno){
 		String hql = "from Sc sc where sc.id.cno=:cno and sc.tno=:tno";
-		Session session = sessionFactory.getCurrentSession();
-		Transaction tran = session.beginTransaction();
-		Query query = session.createQuery(hql);
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter("cno",cno);
 		query.setParameter("tno", tno);
 		List result = query.list();
-		tran.commit();
-		session.close();
 		if (result == null){
 			log.debug("get successful, no instance found");
 		} else {
