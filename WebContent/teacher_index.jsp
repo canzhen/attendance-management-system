@@ -113,7 +113,7 @@
 
 			</s:form>
 		</div>
-
+		
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本次点名时间为
 		<%=
 			DBHelper.getCourseDetails((String)session.getAttribute("id"), 
@@ -121,9 +121,9 @@
 		%>
 		分钟！
 		<div id="CountMsg" class="HotDate" style="margin-top: 0.7em">
-			<span>还剩 </span> <span id="min">00分</span> <span id="sec">00秒</span>
+			<span>&nbsp;还剩 </span> <span id="min">00分</span> <span id="sec">00秒</span>
 		</div>
-
+		
 		<img src="" id="img0" width="800" height="350"
 			style="margin-bottom: 2em; margin-top: 1em" />
 		<input class="check_submit" type="button" value="确定" onclick="timedCount()" style="margin-left: 40em"/>
