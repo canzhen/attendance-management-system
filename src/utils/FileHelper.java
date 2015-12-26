@@ -17,7 +17,10 @@ public class FileHelper {
 		try {
 			 oos = new ObjectOutputStream(
 					new FileOutputStream(Values.save_studentsInfo_path+tno));
-			oos.writeObject(studentsInfo);
+			studentsInfoSerializable temp = new studentsInfoSerializable();
+			temp.setStudentsInfo(studentsInfo);
+			temp.setSize(studentsInfo.size());
+			oos.writeObject(temp);
 			oos.flush();//缓冲流
 			oos.close();//关闭流
 		} catch (IOException e) {
@@ -31,7 +34,8 @@ public class FileHelper {
 		ArrayList<StudentInfo> studentsInfo = null;
 		try {
 			oin = new ObjectInputStream(new FileInputStream(Values.save_studentsInfo_path+tno));
-			studentsInfo = (ArrayList<StudentInfo>)oin.readObject();
+			studentsInfoSerializable temp = (studentsInfoSerializable)oin.readObject();
+			studentsInfo = temp.getStudentsInfo();
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
