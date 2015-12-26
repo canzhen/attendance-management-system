@@ -39,7 +39,7 @@ var FaceJS = function(sno,cX,cY,lXInPic,lYInPic,width,hight){
 //声明arr数组
 var arr = new Array();
 var c = <%=TimerHelper.getDaojishi(
-		(String)session.getAttribute("id"),(String)session.getAttribute("cno"))%>;
+		(String)session.getAttribute("id"),(String)session.getAttribute("cno"),null)%>;
 			//10分钟
 			var t;
 			var m;
@@ -49,7 +49,7 @@ var c = <%=TimerHelper.getDaojishi(
 				if (c == 0) {
 					m = 0;
 					s = 0;
-					window.location.href = "timeUp.jsp";
+					window.location.href = "student_info.jsp";
 				} else {
 					m = parseInt(c / 60);
 					s = c - 60 * m;

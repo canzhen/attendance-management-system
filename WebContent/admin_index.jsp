@@ -62,7 +62,7 @@
 		style="margin-top: 30px; font-size: 10pt; font-family: '微软雅黑'; color: #000000;" action="admin_setStartDate"
 			method="post">
 		<p>开学日期：<input type="text" name="date"/></p>
-		<input type="submit" value="保存" style="margin-top: 10px;"/>
+		<input type="submit"  value="保存" style="margin-top: 10px;"/>
 
 	</form>
 </body>
