@@ -88,7 +88,7 @@
 					src="images/bbb_03.jpg" /><img src="images/bbb_04.jpg" />
 			</div>
 			<div class="div2">
-				<h1 style="color: #000000; align-content: center;" ><%=course.getCname()%></h1>
+				<h1 style="color: #000000; align-content: center;margin-bottom: 0.5em;margin-top: 0.5em" ><%=course.getCname()%></h1>
 			</div>
 
 			<div class="div2" onclick="start()" id="start">开始点名</div>

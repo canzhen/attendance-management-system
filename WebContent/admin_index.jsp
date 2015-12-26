@@ -26,7 +26,7 @@
 
 			<ul class="navigatoin">
 				<li><img src="./images/tx.png" class="studentimg" alt="" /> <label
-					class="studentname">张三</label></li>
+					class="studentname">管理员</label></li>
 				<li><a href="" class="active">设置</a></li>
 			</ul>
 			<div class="clearfix"></div>
@@ -59,7 +59,7 @@
 	</div>
 
 	<form class="setting"
-		style="margin-top: 30px; font-size: 10pt; font-family: '微软雅黑'; color: #000000;" action="<%=request.getContextPath()%>/login.action"
+		style="margin-top: 30px; font-size: 10pt; font-family: '微软雅黑'; color: #000000;" action="admin_setStartDate"
 			method="post">
 		<p>开学日期：<input type="text" name="date"/></p>
 		<input type="submit" value="保存" style="margin-top: 10px;"/>

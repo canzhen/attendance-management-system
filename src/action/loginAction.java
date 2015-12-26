@@ -120,6 +120,7 @@ public class loginAction extends MyActionSupport{
 		session.put("coursesInfo", null);
 		session.put("coursesNum", null);
 		session.put("daojishi", null);
+		session.put("ifChecked", null);
 		return SUCCESS;
 	}
 	

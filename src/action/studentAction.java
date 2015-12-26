@@ -71,7 +71,7 @@ public class studentAction extends MyActionSupport{
 				 */
 				ArrayList<StudentInfo> list = FileHelper.deserializeStudentsInfo(tno);
 				for (int i=0; i < list.size(); i++){
-					if (  list.get(i).getSno().equals(sno)){
+					if ( list.get(i).getSno().equals(sno)){
 						session.put("ifChecked", 1);
 						break;
 					}
