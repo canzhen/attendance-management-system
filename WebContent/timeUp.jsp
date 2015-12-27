@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="css/daohang.css" type="text/css" media="all" />
 <script type="text/javascript">
 function start() {
-	window.location.href="teacher.index.jsp";
+	window.location.href="teacher_index.jsp";
 }
 function set() {
 	window.location.href="setting.jsp";
@@ -33,8 +33,8 @@ function record(){
         <% CourseInfo course = ((List<CourseInfo>)session.getAttribute("coursesInfo")).get(0); %>
 	    var mytable = document.getElementById("myTable");
 		//动态创建表格
-<%List<StudentInfo> studentInfo=DBHelper.getStudentInfoForAClassByCnoTno((String)session.getAttribute((String)session.getAttribute("id")),course.getCno());%>
-	<%for (int i = 0; i <studentInfo.size(); i++){%>
+<%ArrayList<StudentInfo> studentInfo=FileHelper.deserializeStudentsInfo((String)session.getAttribute("id"));
+		for (int i = 0; i <studentInfo.size(); i++){%>
 			var tr = document.createElement("tr");
 			var td = document.createElement("td");
 			var newl, newc;
@@ -42,14 +42,18 @@ function record(){
 			//第一列
 			newc = newl.insertCell();
 			newc.innerHTML =
-'<%=studentInfo.get(i).getSno()%>'
+			'<%=studentInfo.get(i).getSname()%>'
 	;
 
 			//第二列
 			newc = newl.insertCell();
-			newc.innerHTML =
-'<%=studentInfo.get(i).getSname()%>'
-	;
+			
+<%if( studentInfo.get(i).isChecked()){%>
+			newc.innerHTML ="已到";
+	<%}else{%>
+			newc.innerHTML ="缺勤";
+	<%	}%>
+	
 
 			mytable.appendChild(tr);
 		<%}%>
@@ -99,14 +103,14 @@ function record(){
 		</div>
 	</div>
 	<h1 style="margin-top: 2em;">
-		本次课缺勤记录
+		本次课出勤记录
 		</h1>
 		<div class="table-c">
 			<table id="myTable">
 				<tbody>
 					<tr>
-						<td>学号</td>
 						<td>姓名</td>
+						<td>是否出勤</td>
 					</tr>
 				</tbody>
 			</table>

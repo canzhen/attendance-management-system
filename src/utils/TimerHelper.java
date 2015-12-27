@@ -29,10 +29,13 @@ public class TimerHelper {
 	public static int getDaojishi(String sno,String cno,String tno){
 		if ( tno == null )
 			tno = DBHelper.getTnoBySnoCno(sno, cno);
+		if ( DBHelper.getCourseDetails(tno, cno).getCheckTime()== null)
+			return -1;
 		int check_time = DBHelper.getCourseDetails(tno, cno).getCheckTime();
 		check_time *= 60;
 		Date start_date = (Date) FileHelper.deserializeStartDate(tno);
-		if (start_date == null) return -1;
+		if (start_date == null) 
+			return -1;
 		Date current_date = new Date();
 		int seconds = ((int) (current_date.getTime() - start_date.getTime()))/1000;
 		seconds = check_time - seconds;

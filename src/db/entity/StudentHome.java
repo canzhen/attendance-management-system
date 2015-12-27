@@ -24,9 +24,9 @@ public class StudentHome {
 
 	protected SessionFactory getSessionFactory() {
 		try {
-			if(sessionFactory!=null)
-				return (SessionFactory) new InitialContext().lookup("SessionFactory");
-			else
+			//if(sessionFactory!=null)
+			//	return (SessionFactory) new InitialContext().lookup("SessionFactory");
+			//else
 				return (SessionFactory) new Configuration().configure().buildSessionFactory();
 		} catch (Exception e) {
 			log.error("Could not locate SessionFactory in JNDI", e);

@@ -10,7 +10,6 @@
 
 <script type="text/javascript" src="jquery/jquery.js"></script>
 
-<link rel="stylesheet" type="text/css" href="css/wown.css" />
 <link rel="stylesheet" type="text/css" href="css/processbar.css" />
 <link rel="stylesheet" href="css/header.css" type="text/css" media="all" />
 <link rel="stylesheet" href="css/daohang.css" type="text/css" media="all" />
@@ -74,7 +73,7 @@ function judge(){
 
 }
 	function start() {
-		window.location.href = "teacher.index.jsp";
+		window.location.href = "teacher_index.jsp";
 	}
 	function set() {
 		window.location.href = "setting.jsp";
@@ -100,7 +99,7 @@ function judge(){
 			<ul class="navigatoin">
 				<li><img src="./images/tx.png" class="studentimg" alt="" width="32px" height="32px"/> <label
 					class="studentname"><%=session.getAttribute("name")%></label></li>
-				<li><a href="" class="active">设置</a>
+				<li><a href="login_logout" class="active">注销</a>
 			</ul>
 			<div class="clearfix"></div>
 		</div>
@@ -131,13 +130,13 @@ function judge(){
 		</div>
 	</div>
 
-	<div class="table-c">
+	<div class="table-cai">
 		<table id="myTable">
 			<tbody>
 				<tr>
 					<td>学号</td>
 					<td>姓名</td>
-					<td>缺课情况<font size="2pt" color="#8D8D8D">&nbsp;&nbsp;(缺勤数/最大缺勤数)</font></td>
+					<td>&nbsp;&nbsp;&nbsp;缺课情况<font size="2pt" color="#8D8D8D">&nbsp;(缺勤数/最大缺勤数)</font></td>
 				</tr>
 			</tbody>
 		</table>

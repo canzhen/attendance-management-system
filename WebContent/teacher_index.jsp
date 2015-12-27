@@ -104,13 +104,9 @@
 			<!--<span>Upload</span>-->
 			<!-- <input type="file" class="upload" name="myFile" id="file0" /> -->
 			<s:form action="teacher_savePic" method="POST" enctype="multipart/form-data">
-
 				<s:fielderror />
-
 				<s:file name="pic" id="file0" />
-
 				<s:submit />
-
 			</s:form>
 		</div>
 		
@@ -126,7 +122,7 @@
 		
 		<img src="" id="img0" width="800" height="350"
 			style="margin-bottom: 2em; margin-top: 1em" />
-		<input class="check_submit" type="button" value="确定" onclick="timedCount()" style="margin-left: 40em"/>
+		<input class="check_submit" type="button" value="开始计时" onclick="timedCount()" style="margin-left: 40em"/>
 
 	</div>
 	<script>

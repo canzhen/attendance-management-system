@@ -27,7 +27,7 @@ function judge(){
 	};
 }
 function start() {
-	window.location.href="teacher.index.jsp";
+	window.location.href="teacher_index.jsp";
 }
 function set() {
 	window.location.href="setting.jsp";

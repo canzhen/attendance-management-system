@@ -61,11 +61,14 @@ body {
     font-size: 15pt;
 }
 
+
 .table-c table td {
     border-left: 1px solid #000;
     border-bottom: 1px solid #000;
     padding: 10px 10px 10px 10px;
 }
+
+
 
 .check_coursefont {
     margin-top: 3em;

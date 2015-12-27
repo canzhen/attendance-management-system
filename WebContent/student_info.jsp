@@ -14,7 +14,7 @@
 <body>
 <script>
 var name;
-var str = "时间到，签到结束";
+var str = "签到未开始或者签到结束";
 var checkStatus = 0;
 var ifChecked = 0;
 window.onload = function() {
