@@ -14,17 +14,17 @@ import db.util.DBHelper;
 
 public class PictureHelper {
 	
-	public static void savePic(File pic, String tno){
+	public static void savePic(String path,File pic, String tno){
 		/*获取当前系统时间*/
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd,HH");//设置日期格式
 		String date = df.format(new Date());//获取当前日期
-		String savePath = Values.save_pic_path+tno,
-				filePath = Values.save_pic_path+tno+"\\"+date+".jpg";
+		String savePath = path+tno,
+				filePath = path+tno+"\\"+date+".jpg";
 		
 		if ( pic != null ){
 			savePicIntoAPath(pic,filePath,savePath);
-			savePath = "c:\\teacher\\"+tno;
-			filePath = "c:\\teacher\\"+tno+"\\"+date+".jpg";
+			//savePath = "c:\\teacher\\"+tno;
+			//filePath = "c:\\teacher\\"+tno+"\\"+date+".jpg";
 			savePicIntoAPath(pic,filePath,savePath);
 		}
 	}
@@ -35,27 +35,18 @@ public class PictureHelper {
 	 * @param tno
 	 * @return
 	 */
-	public static String getPicUrl(String tno){
+	public static String getPicUrl(String path,String tno){
 		File pic = null;
 		/*获取当前系统时间*/
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd,HH");//设置日期格式
 		String date = df.format(new Date());//获取当前日期
-		/*
-		 * 测试部分
-		 */
-		//tno = "11111111";
-		/*
-		 * 测试部分
-		 */
-		String diskPath = Values.save_pic_path+tno+"\\"+date+".jpg",
-				filePath = "teacher//"+tno+"//"+date+".jpg";
-		//return filePath;
-		//String test = PictureHelper.class.getResource("/").getPath();
+		String diskPath = path+tno+"\\"+date+".jpg",
+				filePath = tno+"//"+date+".jpg";
 		
 		pic = new File(diskPath);
 		if (!pic.exists())
 			return null;
-		else return filePath;
+		return filePath;
 	} 
 	
 	private static void savePicIntoAPath(File pic,String filePath,String savePath){

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.struts2.ServletActionContext;
+
 import utils.CheckHelper;
 import utils.FileHelper;
 import utils.PicFace;
@@ -65,7 +67,11 @@ public class studentAction extends MyActionSupport{
 				 * 判断老师是否已经将点名的图片上传，
 				 * 若已经上传，则放在session里传过去
 				 */
-				session.put("picUrl", PictureHelper.getPicUrl(DBHelper.getTnoBySnoCno(sno, cno)));
+				String servletPath = ServletActionContext.getServletContext().getRealPath("/");
+				String url = PictureHelper.getPicUrl(
+						servletPath,DBHelper.getTnoBySnoCno(sno, cno));
+				session.put("picUrl", url);
+				session.put("absolutePicUrl", servletPath+url);
 				/*
 				 * 0为没签到，1为已经签到
 				 */

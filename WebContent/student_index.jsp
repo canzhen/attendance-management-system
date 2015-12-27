@@ -131,8 +131,8 @@ var c = <%=TimerHelper.getDaojishi(
 	function initData() {		
 		<% 
 		List<FaceEntity> faces=new ArrayList<FaceEntity>();
-		String urlzb = (String)session.getAttribute("picUrl");
-		urlzb = "c:\\"+urlzb;
+		String urlzb = (String)session.getAttribute("absolutePicUrl");
+		//urlzb = "c:\\"+urlzb;
 
 		PicFace picFace=new PicFace(new File(urlzb));
 		faces=picFace.getFaces();
