@@ -4,7 +4,7 @@ Source Host     : localhost:3306
 Source Database : amdb
 Target Host     : localhost:3306
 Target Database : amdb
-Date: 2015-12-26 10:09:32
+Date: 2015-12-27 21:05:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,6 +23,7 @@ CREATE TABLE `teacher` (
 -- ----------------------------
 -- Records of teacher
 -- ----------------------------
+INSERT INTO `teacher` VALUES ('00000000', '管理员', '111', 'default.png');
 INSERT INTO `teacher` VALUES ('11111111', '刘铎', '111', 'default.png');
 INSERT INTO `teacher` VALUES ('11111112', '袁岗', '111', 'default.png');
 INSERT INTO `teacher` VALUES ('11111113', '曾立刚', '111', 'default.png');
