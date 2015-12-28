@@ -86,7 +86,7 @@ function record(){
 		</div>
 
 	</div>
-
+<span >
 	<div class="daohang">
 		<div class="div1">
 			<div class="left_top">
@@ -102,6 +102,8 @@ function record(){
 			<div class="div2" onclick="recordTotal()">本学期点名记录</div>
 		</div>
 	</div>
+	</span>
+	<span>
 	<h1 style="margin-top: 2em;">
 		本次课出勤记录
 		</h1>
@@ -118,6 +120,7 @@ function record(){
 		<div id="table1">
 			<p>&nbsp;</p>
 		</div>
+		</span>
 </body>
 
 </html>
