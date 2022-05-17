@@ -2,11 +2,12 @@
 
 JavaEE期末大作业：[使用手册.pdf](https://github.com/canzhen/attendance-management-system/files/8704584/default.pdf)
 
-
-
+<br/>
 
 Server: Tomcat 8.0
+
 Database: Mysql
+
 字符集 UTF-8（Eclipse下配置请把所有默认字符集都改成UTF-8）
 
 ### 默认命名规则
